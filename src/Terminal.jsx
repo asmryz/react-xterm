@@ -31,12 +31,24 @@ const Terminal = () => {
     fitAddon.fit()
 
     // Watch for container resize (e.g., when divider is dragged)
+    let resizeTimeout
     const resizeObserver = new ResizeObserver(() => {
-      try {
-        fitAddon.fit()
-      } catch (err) {
-        console.error('Error fitting terminal:', err)
-      }
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        try {
+          fitAddon.fit()
+          // Send new dimensions to server
+          if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ 
+              type: 'resize', 
+              cols: term.cols, 
+              rows: term.rows 
+            }))
+          }
+        } catch (err) {
+          console.error('Error fitting terminal:', err)
+        }
+      }, 50)
     })
 
     if (terminalRef.current) {
@@ -121,6 +133,7 @@ const Terminal = () => {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize)
+      clearTimeout(resizeTimeout)
       resizeObserver.disconnect()
       ws.close()
       term.dispose()
