@@ -20,6 +20,32 @@
   padding: 20px;
 }
 
+.panel-content h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.command-link {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.command-link:hover {
+  background: #0056b3;
+}
+
+.command-link:active {
+  background: #003d82;
+}
+
 .divider {
   width: 4px;
   height: 100%;

@@ -1,13 +1,33 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { Terminal as XTerm } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import { WebLinksAddon } from 'xterm-addon-web-links'
 import 'xterm/css/xterm.css'
 
-const Terminal = () => {
+const Terminal = forwardRef((props, ref) => {
   const terminalRef = useRef(null)
+  const wsRef = useRef(null)
   const [status, setStatus] = React.useState('connecting')
   const [error, setError] = React.useState(null)
+
+  // Expose sendCommand method to parent component
+  useImperativeHandle(ref, () => ({
+    sendCommand: (command) => {
+      if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
+        console.error('WebSocket is not open')
+        return
+      }
+      try {
+        wsRef.current.send(JSON.stringify({ 
+          type: 'input', 
+          data: command + '\n' 
+        }))
+        console.log('Command sent:', command)
+      } catch (err) {
+        console.error('Error sending command:', err)
+      }
+    }
+  }))
 
   useEffect(() => {
     const term = new XTerm({
@@ -58,7 +78,8 @@ const Terminal = () => {
     // Setup WebSocket connection to terminal server
     // Use the same hostname as the current page (works with both localhost and IP)
     const wsUrl = `ws://${window.location.hostname}:3001`
-    let ws = new WebSocket(wsUrl)
+    const ws = new WebSocket(wsUrl)
+    wsRef.current = ws
 
     // Handle connection open
     ws.addEventListener('open', () => {
@@ -135,7 +156,9 @@ const Terminal = () => {
       window.removeEventListener('resize', handleResize)
       clearTimeout(resizeTimeout)
       resizeObserver.disconnect()
-      ws.close()
+      if (wsRef.current) {
+        wsRef.current.close()
+      }
       term.dispose()
     }
   }, [])
@@ -145,6 +168,8 @@ const Terminal = () => {
       <div className="terminal-container" ref={terminalRef} />
     </div>
   )
-}
+})
+
+Terminal.displayName = 'Terminal'
 
 export default Terminal
