@@ -1,37 +1,109 @@
+import 'dotenv/config';
 import express from 'express';
 import http from 'http';
+import https from 'https';
 import { WebSocketServer, WebSocket } from 'ws';
 import os from 'os';
 import pty from 'node-pty';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const app = express();
-const server = http.createServer(app);
+function getAllowedOrigins() {
+  const configured = process.env.ALLOWED_ORIGINS;
+  if (configured) {
+    return configured
+      .split(',')
+      .map((origin) => origin.trim())
+      .filter(Boolean);
+  }
 
-// Configure WebSocket server with CORS
+  return [];
+}
+
+function createHttpOrHttpsServer(app) {
+  const tlsKeyPath = process.env.TLS_KEY_PATH;
+  const tlsCertPath = process.env.TLS_CERT_PATH;
+  const tlsCaPath = process.env.TLS_CA_PATH;
+
+  if (!tlsKeyPath || !tlsCertPath) {
+    return { server: http.createServer(app), secure: false };
+  }
+
+  const tlsOptions = {
+    key: fs.readFileSync(path.resolve(tlsKeyPath)),
+    cert: fs.readFileSync(path.resolve(tlsCertPath))
+  };
+
+  if (tlsCaPath) {
+    tlsOptions.ca = fs.readFileSync(path.resolve(tlsCaPath));
+  }
+
+  return {
+    server: https.createServer(tlsOptions, app),
+    secure: true
+  };
+}
+
+const app = express();
+const { server, secure } = createHttpOrHttpsServer(app);
+const allowedOrigins = getAllowedOrigins();
+const allowNoOrigin = process.env.ALLOW_NO_ORIGIN === 'true';
+
+const isOriginAllowed = (origin) => {
+  if (!origin) {
+    return allowNoOrigin;
+  }
+
+  if (allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  // Default dev policy: allow browser origins from Vite dev server port.
+  if (!process.env.ALLOWED_ORIGINS) {
+    try {
+      const parsedOrigin = new URL(origin);
+      return (
+        (parsedOrigin.protocol === 'http:' || parsedOrigin.protocol === 'https:') &&
+        parsedOrigin.port === '9055'
+      );
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+};
+
+// Configure WebSocket server with strict origin validation.
 const wss = new WebSocketServer({ 
   server,
   verifyClient: (info) => {
-    // Allow connections from the Vite dev server (localhost and network)
     const origin = info.origin || info.req.headers.origin;
-    if (!origin) return true; // Allow connections without origin (like from localhost)
-    return origin.includes('localhost:9055') || origin.includes(':9055');
+    return isOriginAllowed(origin);
   }
 });
 
 // Serve static files from dist after build
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Enable CORS for the Express server
+// Mirror allowed origins for HTTP endpoints.
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:9055');
+  const origin = req.headers.origin;
+  if (isOriginAllowed(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
   next();
 });
 
@@ -89,5 +161,9 @@ wss.on('connection', (ws) => {
 
 const port = process.env.PORT || 3001;
 server.listen(port, '0.0.0.0', () => {
-  console.log(`Terminal server running on port ${port}`);
+  const wsScheme = secure ? 'wss' : 'ws';
+  console.log(`Terminal server running on port ${port} (${wsScheme})`);
+  if (!secure) {
+    console.warn('TLS is not configured. Set TLS_KEY_PATH and TLS_CERT_PATH to enable secure WebSocket (wss).');
+  }
 });

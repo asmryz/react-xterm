@@ -4,6 +4,26 @@ import { FitAddon } from 'xterm-addon-fit'
 import { WebLinksAddon } from 'xterm-addon-web-links'
 import 'xterm/css/xterm.css'
 
+const RECONNECT_DELAY_MS = 3000
+
+function getTerminalWebSocketUrl() {
+  // Allow explicit override via Vite env for reverse proxies/custom endpoints.
+  const configuredUrl = import.meta.env.VITE_TERMINAL_WS_URL
+  if (configuredUrl) {
+    return configuredUrl
+  }
+
+  if (import.meta.env.DEV) {
+    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
+    return `${protocol}://${window.location.host}/terminal-ws`
+  }
+
+  const forceSecureWs = import.meta.env.VITE_TERMINAL_WS_SECURE === 'true'
+  const isHttpsPage = window.location.protocol === 'https:'
+  const protocol = isHttpsPage || forceSecureWs ? 'wss' : 'ws'
+  return `${protocol}://${window.location.hostname}:3001`
+}
+
 const Terminal = forwardRef((props, ref) => {
   const terminalRef = useRef(null)
   const wsRef = useRef(null)
@@ -58,13 +78,7 @@ const Terminal = forwardRef((props, ref) => {
         try {
           fitAddon.fit()
           // Send new dimensions to server
-          if (ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ 
-              type: 'resize', 
-              cols: term.cols, 
-              rows: term.rows 
-            }))
-          }
+          sendResize()
         } catch (err) {
           console.error('Error fitting terminal:', err)
         }
@@ -75,75 +89,88 @@ const Terminal = forwardRef((props, ref) => {
       resizeObserver.observe(terminalRef.current)
     }
 
-    // Setup WebSocket connection to terminal server
-    // Use the same hostname as the current page (works with both localhost and IP)
-    const wsUrl = `ws://${window.location.hostname}:3001`
-    const ws = new WebSocket(wsUrl)
-    wsRef.current = ws
+    const wsUrl = getTerminalWebSocketUrl()
+    let reconnectTimer = null
+    let isDisposed = false
 
-    // Handle connection open
-    ws.addEventListener('open', () => {
-      setStatus('connected')
-      setError(null)
-      term.clear()
-      
-      // Send initial terminal dimensions
-      ws.send(JSON.stringify({ 
-        type: 'resize', 
-        cols: term.cols, 
-        rows: term.rows 
-      }))
-    })
-
-    // Handle incoming messages
-    ws.addEventListener('message', (ev) => {
-      try {
-        const msg = JSON.parse(ev.data)
-        if (msg.type === 'output') {
-          term.write(msg.data)
-        }
-      } catch (err) {
-        console.error('Failed to parse message:', err)
-        term.write(ev.data)
+    const sendResize = () => {
+      if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
+        return
       }
-    })
 
-    ws.addEventListener('error', (event) => {
-      console.error('WebSocket error:', event)
-      setError('Failed to connect to terminal server')
-      setStatus('error')
-    })
+      wsRef.current.send(JSON.stringify({
+        type: 'resize',
+        cols: term.cols,
+        rows: term.rows
+      }))
+    }
 
-    ws.addEventListener('close', () => {
-      setStatus('disconnected')
-      term.write('\r\n\nConnection closed. Attempting to reconnect...\r\n')
-      
-      // Attempt to reconnect after 3 seconds
-      setTimeout(() => {
-        if (ws.readyState === WebSocket.CLOSED) {
-          ws = new WebSocket(wsUrl)
-          setStatus('connecting')
+    const connect = () => {
+      if (isDisposed) {
+        return
+      }
+
+      const socket = new WebSocket(wsUrl)
+      wsRef.current = socket
+      setStatus('connecting')
+
+      socket.addEventListener('open', () => {
+        if (isDisposed) {
+          socket.close()
+          return
         }
-      }, 3000)
-    })
+
+        setStatus('connected')
+        setError(null)
+        term.clear()
+        sendResize()
+      })
+
+      socket.addEventListener('message', (ev) => {
+        try {
+          const msg = JSON.parse(ev.data)
+          if (msg.type === 'output') {
+            term.write(msg.data)
+          }
+        } catch (err) {
+          console.error('Failed to parse message:', err)
+          term.write(ev.data)
+        }
+      })
+
+      socket.addEventListener('error', (event) => {
+        console.error('WebSocket error:', event)
+        setError('Failed to connect to terminal server')
+        setStatus('error')
+      })
+
+      socket.addEventListener('close', () => {
+        if (isDisposed) {
+          return
+        }
+
+        setStatus('disconnected')
+        term.write('\r\n\nConnection closed. Attempting to reconnect...\r\n')
+
+        reconnectTimer = setTimeout(() => {
+          connect()
+        }, RECONNECT_DELAY_MS)
+      })
+    }
+
+    connect()
 
     // Handle terminal input
     term.onData(data => {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({ type: 'input', data }))
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        wsRef.current.send(JSON.stringify({ type: 'input', data }))
       }
     })
 
     // Handle window resize
     const handleResize = () => {
       fitAddon.fit()
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({ 
-          type: 'resize', 
-          cols: term.cols, 
-          rows: term.rows 
-        }))
-      }
+      sendResize()
     }
 
     window.addEventListener('resize', handleResize)
@@ -153,8 +180,10 @@ const Terminal = forwardRef((props, ref) => {
 
     // Cleanup
     return () => {
+      isDisposed = true
       window.removeEventListener('resize', handleResize)
       clearTimeout(resizeTimeout)
+      clearTimeout(reconnectTimer)
       resizeObserver.disconnect()
       if (wsRef.current) {
         wsRef.current.close()

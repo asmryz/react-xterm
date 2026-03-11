@@ -70,6 +70,9 @@ web_modules/
 .env.*
 !.env.example
 
+# local TLS artifacts
+TLS/
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
