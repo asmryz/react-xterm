@@ -7,7 +7,7 @@ export default function App() {
     const [dividerPos, setDividerPos] = useState(50)
     const [isDragging, setIsDragging] = useState(false)
     const [query, setQuery] = useState(
-        'SELECT id, code \nFROM clo;\n'
+        'SELECT * \nFROM course;\n'
     )
     const terminalRef = useRef(null)
     const [copied, setCopied] = useState(false)
