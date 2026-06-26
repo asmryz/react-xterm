@@ -1,23 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import fs from 'fs';
-import path from 'path';
-
-const tlsKeyPath = path.resolve('./TLS/server.key');
-const tlsCertPath = path.resolve('./TLS/server.crt');
-const hasDevTls = fs.existsSync(tlsKeyPath) && fs.existsSync(tlsCertPath);
+import mkcert from 'vite-plugin-mkcert';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    mkcert({
+      force: true, // Forces regeneration of the certificate to clear stale cached certs
+      hosts: ['localhost', '127.0.0.1'] // Add custom domain names here if you are using any
+    })
+  ],
   server: {
     port: 9055,
     host: true,
-    https: hasDevTls
-      ? {
-          key: fs.readFileSync(tlsKeyPath),
-          cert: fs.readFileSync(tlsCertPath)
-        }
-      : undefined,
+    https: true,
     proxy: {
       '/terminal-ws': {
         target: 'https://localhost:3001',

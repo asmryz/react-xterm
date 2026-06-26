@@ -26,11 +26,12 @@ function getTerminalWebSocketUrl() {
 
 const Terminal = forwardRef((props, ref) => {
   const terminalRef = useRef(null)
+  const termInstanceRef = useRef(null)
   const wsRef = useRef(null)
   const [status, setStatus] = React.useState('connecting')
   const [error, setError] = React.useState(null)
 
-  // Expose sendCommand method to parent component
+  // Expose methods to parent component
   useImperativeHandle(ref, () => ({
     sendCommand: (command) => {
       if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
@@ -46,6 +47,34 @@ const Terminal = forwardRef((props, ref) => {
       } catch (err) {
         console.error('Error sending command:', err)
       }
+    },
+    getTerminalText: () => {
+      if (!termInstanceRef.current) return ''
+      const term = termInstanceRef.current
+      const buffer = term.buffer.active
+      let text = ''
+      for (let i = 0; i < buffer.length; i++) {
+        const line = buffer.getLine(i)
+        if (line) {
+          text += line.translateToString(true) + '\n'
+        }
+      }
+      return text.trim()
+    },
+    clearTerminal: () => {
+      if (termInstanceRef.current) {
+        termInstanceRef.current.clear()
+      }
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        try {
+          wsRef.current.send(JSON.stringify({ 
+            type: 'input', 
+            data: '\x0c' 
+          }))
+        } catch (err) {
+          console.error('Error sending clear command:', err)
+        }
+      }
     }
   }))
 
@@ -59,6 +88,7 @@ const Terminal = forwardRef((props, ref) => {
       fontSize: 14,
       fontFamily: 'Menlo, Monaco, "Courier New", monospace'
     })
+    termInstanceRef.current = term
 
     const fitAddon = new FitAddon()
     const webLinks = new WebLinksAddon()
@@ -189,6 +219,7 @@ const Terminal = forwardRef((props, ref) => {
         wsRef.current.close()
       }
       term.dispose()
+      termInstanceRef.current = null
     }
   }, [])
 
