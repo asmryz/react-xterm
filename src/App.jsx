@@ -114,7 +114,7 @@ export default function App() {
                             Clear
                         </button>
                         <button className="btn btn-run" onClick={handleRunQuery}>
-                            <span className="play-icon">▶</span> Run Query
+                            <span className="play-icon">▶</span> Run
                         </button>
                     </div>
                 </div>

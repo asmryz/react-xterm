@@ -4,6 +4,12 @@ This is a minimal Vite + React demo that wraps xterm.js in a React component.
 
 Quick start:
 
+```bash
+sudo apt update
+sudo apt install -y mkcert libnss3-tools
+mkcert -install
+```
+
 1. Install dependencies
 
 ```bash
@@ -15,6 +21,12 @@ npm install
 ```bash
 npm run dev
 ```
+
+```bash
+\pset border 2
+\pset linestyle unicode
+\x auto
+``` 
 
 3. Open the printed URL (usually http://localhost:5173)
 
