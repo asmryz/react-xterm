@@ -1,16 +1,50 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Editor from '@monaco-editor/react'
 import Terminal from './Terminal'
+import Query from './Query'
 import './App.css'
 
+const initialTasks = [
+    {
+        id: 1,
+        label: 'Q1:',
+        text: 'Show all courses sorted cid wise. alonf with all CLOs and CSLO',
+        defaultSql: 'SELECT c.cid, c.code, c.title, cl.clo, cl.statment\nFROM course c\nLEFT JOIN clo cl ON c.cid = cl.cid\nORDER BY c.cid;'
+    },
+    {
+        id: 2,
+        label: 'Q2:',
+        text: 'List all courses with theory hours greater than 2',
+        defaultSql: 'SELECT * \nFROM course \nWHERE theory > 2;'
+    },
+    {
+        id: 3,
+        label: 'Q3:',
+        text: 'Find all CLOs for the course with cid = 1',
+        defaultSql: 'SELECT * \nFROM clo \nWHERE cid = 1;'
+    },
+    {
+        id: 4,
+        label: 'Q4:',
+        text: 'Count the total number of CLOs for each course',
+        defaultSql: 'SELECT cid, COUNT(*)\nFROM clo\nGROUP BY cid;'
+    },
+    {
+        id: 5,
+        label: 'Q5:',
+        text: 'List all courses that do not have any CLOs assigned',
+        defaultSql: 'SELECT * \nFROM course c\nWHERE NOT EXISTS (\n  SELECT 1 FROM clo cl WHERE cl.cid = c.cid\n);'
+    }
+]
+
 export default function App() {
-    const [dividerPos, setDividerPos] = useState(50)
+    const [dividerPos, setDividerPos] = useState(35)
     const [isDragging, setIsDragging] = useState(false)
-    const [query, setQuery] = useState(
-        'SELECT * \nFROM course;\n'
+    const [queries, setQueries] = useState(
+        initialTasks.map((t) => t.defaultSql)
     )
     const terminalRef = useRef(null)
     const [copied, setCopied] = useState(false)
+    const [activeIndex, setActiveIndex] = useState(0)
 
     const handleMouseDown = () => {
         setIsDragging(true)
@@ -20,9 +54,9 @@ export default function App() {
         setIsDragging(false)
     }
 
-    const handleRunQuery = () => {
+    const handleRunQuery = (index) => {
         if (terminalRef.current && terminalRef.current.sendCommand) {
-            const cleanQuery = query.trim()
+            const cleanQuery = queries[index].trim()
             if (cleanQuery) {
                 if (terminalRef.current.clearTerminal) {
                     terminalRef.current.clearTerminal()
@@ -32,8 +66,12 @@ export default function App() {
         }
     }
 
-    const handleClearQuery = () => {
-        setQuery('')
+    const handleQueryChange = (index, val) => {
+        setQueries((prev) => {
+            const updated = [...prev]
+            updated[index] = val
+            return updated
+        })
     }
 
     const handleCopyTerminalOutput = () => {
@@ -67,9 +105,9 @@ export default function App() {
         }
     }
 
-    const runQueryRef = useRef(handleRunQuery)
+    const runQueryRef = useRef(() => handleRunQuery(activeIndex))
     useEffect(() => {
-        runQueryRef.current = handleRunQuery
+        runQueryRef.current = () => handleRunQuery(activeIndex)
     })
 
     useEffect(() => {
@@ -109,34 +147,32 @@ export default function App() {
                         </svg>
                         <span>SQL QUERY EDITOR</span>
                     </div>
-                    <div className="header-actions">
-                        <button className="btn btn-clear" onClick={handleClearQuery}>
-                            Clear
-                        </button>
-                        <button className="btn btn-run" onClick={handleRunQuery}>
-                            <span className="play-icon">▶</span> Run
-                        </button>
-                    </div>
                 </div>
-                <div className="editor-container">
-                    <Editor
-                        height="100%"
-                        language="sql"
-                        theme="light"
-                        value={query}
-                        onChange={(val) => setQuery(val || '')}
-                        options={{
-                            minimap: { enabled: false },
-                            fontSize: 14,
-                            fontFamily: 'Menlo, Monaco, "Courier New", monospace',
-                            automaticLayout: true,
-                            scrollBeyondLastLine: false,
-                            tabSize: 2,
-                            wordWrap: 'on',
-                            lineNumbersMinChars: 3,
-                            padding: { top: 12, bottom: 12 }
-                        }}
-                    />
+                <div className="queries-scroll-container">
+                    {initialTasks.map((task, index) => (
+                        <div
+                            key={task.id}
+                            onClick={() => setActiveIndex(index)}
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                border: activeIndex === index ? '1px solid #3b82f6' : '1px solid #e2e8f0',
+                                borderRadius: '8px',
+                                overflow: 'hidden',
+                                backgroundColor: '#ffffff',
+                                boxShadow: activeIndex === index ? '0 4px 12px rgba(59, 130, 246, 0.08)' : '0 1px 3px rgba(0, 0, 0, 0.05)',
+                                transition: 'all 0.2s ease'
+                            }}
+                        >
+                            <Query
+                                label={task.label}
+                                text={task.text}
+                                value={queries[index]}
+                                onChange={(val) => handleQueryChange(index, val)}
+                                onRun={() => handleRunQuery(index)}
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
 

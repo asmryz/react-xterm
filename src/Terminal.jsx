@@ -80,7 +80,8 @@ const Terminal = forwardRef((props, ref) => {
 
   useEffect(() => {
     const term = new XTerm({
-      cursorBlink: true,
+      cursorBlink: false,
+      disableStdin: true,
       theme: {
         background: '#0f1724',
         foreground: '#e6eef6'
