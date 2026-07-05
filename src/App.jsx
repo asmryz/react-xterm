@@ -6,31 +6,31 @@ import './App.css'
 const initialTasks = [
     {
         id: 1,
-        label: 'Q1:',
+        label: '#1:',
         text: 'Show all courses sorted cid wise. alonf with all CLOs and CSLO',
         defaultSql: 'SELECT c.cid, c.code, c.title, cl.clo, cl.statment\nFROM course c\nLEFT JOIN clo cl ON c.cid = cl.cid\nORDER BY c.cid;'
     },
     {
         id: 2,
-        label: 'Q2:',
+        label: '#2:',
         text: 'List all courses with theory hours greater than 2',
         defaultSql: 'SELECT * \nFROM course \nWHERE theory > 2;'
     },
     {
         id: 3,
-        label: 'Q3:',
+        label: '#3:',
         text: 'Find all CLOs for the course with cid = 1',
         defaultSql: 'SELECT * \nFROM clo \nWHERE cid = 1;'
     },
     {
         id: 4,
-        label: 'Q4:',
+        label: '#4:',
         text: 'Count the total number of CLOs for each course',
         defaultSql: 'SELECT cid, COUNT(*)\nFROM clo\nGROUP BY cid;'
     },
     {
         id: 5,
-        label: 'Q5:',
+        label: '#5:',
         text: 'List all courses that do not have any CLOs assigned',
         defaultSql: 'SELECT * \nFROM course c\nWHERE NOT EXISTS (\n  SELECT 1 FROM clo cl WHERE cl.cid = c.cid\n);'
     }
@@ -153,16 +153,7 @@ export default function App() {
                         <div
                             key={task.id}
                             onClick={() => setActiveIndex(index)}
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                border: activeIndex === index ? '1px solid #3b82f6' : '1px solid #e2e8f0',
-                                borderRadius: '8px',
-                                overflow: 'hidden',
-                                backgroundColor: '#ffffff',
-                                boxShadow: activeIndex === index ? '0 4px 12px rgba(59, 130, 246, 0.08)' : '0 1px 3px rgba(0, 0, 0, 0.05)',
-                                transition: 'all 0.2s ease'
-                            }}
+                            className={`query-card ${activeIndex === index ? 'active' : ''}`}
                         >
                             <Query
                                 label={task.label}

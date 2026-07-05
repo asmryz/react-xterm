@@ -92,7 +92,7 @@
 .header-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -204,6 +204,45 @@
   gap: 16px;
   padding: 16px;
   background-color: #f8fafc;
+
+  /* Custom scrollbar */
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-track: #f1f5f9;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+@supports not (scrollbar-color: auto) {
+  .queries-scroll-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .queries-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+
+  .queries-scroll-container::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
+
+.query-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.query-card.active {
+  border: 1px solid #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
 }
 
 .terminal-content {
@@ -211,6 +250,7 @@
   flex: 1;
   overflow: hidden;
   background: var(--panel);
+  padding-left: 24px;
 }
 
 .divider {

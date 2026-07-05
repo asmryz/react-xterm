@@ -17,7 +17,7 @@ export default function Query({ label = 'QUERY:', text, value, onChange, onRun }
             </div>
             <div className="editor-container">
                 <Editor
-                    height="350px"
+                    height="150px"
                     language="sql"
                     theme="light"
                     value={value}
