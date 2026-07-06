@@ -3,38 +3,7 @@ import Terminal from './Terminal'
 import Query from './Query'
 import './App.css'
 
-const initialTasks = [
-    {
-        id: 1,
-        label: '#1:',
-        text: 'Show all courses sorted cid wise. alonf with all CLOs and CSLO',
-        defaultSql: 'SELECT c.cid, c.code, c.title, cl.clo, cl.statment\nFROM course c\nLEFT JOIN clo cl ON c.cid = cl.cid\nORDER BY c.cid;'
-    },
-    {
-        id: 2,
-        label: '#2:',
-        text: 'List all courses with theory hours greater than 2',
-        defaultSql: 'SELECT * \nFROM course \nWHERE theory > 2;'
-    },
-    {
-        id: 3,
-        label: '#3:',
-        text: 'Find all CLOs for the course with cid = 1',
-        defaultSql: 'SELECT * \nFROM clo \nWHERE cid = 1;'
-    },
-    {
-        id: 4,
-        label: '#4:',
-        text: 'Count the total number of CLOs for each course',
-        defaultSql: 'SELECT cid, COUNT(*)\nFROM clo\nGROUP BY cid;'
-    },
-    {
-        id: 5,
-        label: '#5:',
-        text: 'List all courses that do not have any CLOs assigned',
-        defaultSql: 'SELECT * \nFROM course c\nWHERE NOT EXISTS (\n  SELECT 1 FROM clo cl WHERE cl.cid = c.cid\n);'
-    }
-]
+
 
 export default function App() {
     // Auth and Step states
@@ -61,6 +30,27 @@ export default function App() {
     const [copied, setCopied] = useState(false)
     const [activeIndex, setActiveIndex] = useState(0)
 
+    const [submissionsOpen, setSubmissionsOpen] = useState(false)
+    const [submissions, setSubmissions] = useState([])
+    const [loadingSubmissions, setLoadingSubmissions] = useState(false)
+
+    const handleShowSubmissions = async () => {
+        if (!attemptId) return
+        setSubmissionsOpen(true)
+        setLoadingSubmissions(true)
+        try {
+            const res = await fetch(`/api/test/results?attid=${attemptId}`)
+            if (res.ok) {
+                const data = await res.json()
+                setSubmissions(data)
+            }
+        } catch (err) {
+            console.error('Failed to fetch submissions:', err)
+        } finally {
+            setLoadingSubmissions(false)
+        }
+    }
+
     const handleMouseDown = () => {
         setIsDragging(true)
     }
@@ -77,6 +67,32 @@ export default function App() {
                     terminalRef.current.clearTerminal()
                 }
                 terminalRef.current.sendCommand(cleanQuery)
+
+                // Capture output after execution and save/update in database
+                const qid = tasks[index]?.id
+                const attid = attemptId
+                if (qid && attid) {
+                    setTimeout(async () => {
+                        if (terminalRef.current && terminalRef.current.getTerminalText) {
+                            const rawText = terminalRef.current.getTerminalText()
+                            const cleanedOutput = rawText.replace(/^.*?[=-]#\s?/gm, '')
+                            try {
+                                await fetch('/api/test/save-result', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        attid,
+                                        qid,
+                                        query: cleanedOutput,
+                                        marks: 0
+                                    })
+                                })
+                            } catch (err) {
+                                console.error('Error saving query output:', err)
+                            }
+                        }
+                    }, 1000)
+                }
             }
         }
     }
@@ -369,7 +385,7 @@ export default function App() {
                             Go to Student Page
                         </a>
                     </div>
-                    
+
                     {/* Metrics row */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
                         <div style={{ background: '#fff', padding: '20px', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
@@ -599,6 +615,9 @@ export default function App() {
                         <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '600' }}>
                             {studentName} ({regNo})
                         </span>
+                        <button className="btn btn-clear" onClick={handleShowSubmissions}>
+                            Submission
+                        </button>
                         <button className="btn btn-clear" onClick={handleCopyTerminalOutput}>
                             {copied ? '✓ Copied' : 'Copy Output'}
                         </button>
@@ -609,6 +628,36 @@ export default function App() {
                 </div>
             </div>
             {renderAdminWidget()}
+            {submissionsOpen && (
+                <div className="submissions-modal-overlay" onClick={() => setSubmissionsOpen(false)}>
+                    <div className="submissions-modal" onClick={(e) => e.stopPropagation()}>
+                        <div className="submissions-modal-header">
+                            <h3>Submitted Queries & Terminal Outputs</h3>
+                            <button className="close-btn" onClick={() => setSubmissionsOpen(false)}>×</button>
+                        </div>
+                        <div className="submissions-modal-body">
+                            {loadingSubmissions ? (
+                                <div className="loading-spinner">Loading submissions...</div>
+                            ) : submissions.length === 0 ? (
+                                <div className="no-submissions">No queries submitted yet.</div>
+                            ) : (
+                                <div className="submissions-list">
+                                    {submissions.map((sub, idx) => (
+                                        <div key={idx} className="submission-item">
+                                            <div className="submission-question-title">
+                                                Question #{idx + 1}: {sub.question_text || 'Unknown Question'}
+                                            </div>
+                                            <pre className="submission-terminal-view">
+                                                {sub.query}
+                                            </pre>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

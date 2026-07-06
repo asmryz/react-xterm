@@ -42,16 +42,19 @@ CREATE TABLE IF NOT EXISTS attempt (
     attid SERIAL PRIMARY KEY,
     cid INT REFERENCES conduct(cid) ON DELETE CASCADE,
     regno VARCHAR(10) REFERENCES student(regno) ON DELETE CASCADE,
-    query TEXT
+    query TEXT,
+    UNIQUE (cid, regno)
 );
 
 -- 6. Table: result
 CREATE TABLE IF NOT EXISTS result (
     rid SERIAL PRIMARY KEY,
     attid INT REFERENCES attempt(attid) ON DELETE CASCADE,
+    qid INT REFERENCES query(qid) ON DELETE CASCADE,
     marks DECIMAL(5, 2),
     status VARCHAR(50),
-    query TEXT
+    query TEXT,
+    UNIQUE (attid, qid)
 );
 
 -- Seed initial data

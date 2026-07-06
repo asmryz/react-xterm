@@ -2,9 +2,9 @@
 -- PostgreSQL database dump
 --
 
-\restrict 6ksWJoOS8C3mDyWZOBpW1Hh3pQqbZrJYiwbXHSDgZ7RYvdmCoIvd93yt7ohRix5
+\restrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
 
--- Dumped from database version 18.1 (Debian 18.1-1.pgdg13+2)
+-- Dumped from database version 18.4 (Debian 18.4-1.pgdg13+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
@@ -27,9 +27,9 @@ DROP DATABASE IF EXISTS evaluation;
 CREATE DATABASE evaluation WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
 
 
-\unrestrict 6ksWJoOS8C3mDyWZOBpW1Hh3pQqbZrJYiwbXHSDgZ7RYvdmCoIvd93yt7ohRix5
+\unrestrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
 \connect evaluation
-\restrict 6ksWJoOS8C3mDyWZOBpW1Hh3pQqbZrJYiwbXHSDgZ7RYvdmCoIvd93yt7ohRix5
+\restrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -152,8 +152,9 @@ CREATE TABLE public.result (
     rid integer NOT NULL,
     attid integer,
     marks numeric(5,2),
-    status character varying(50),
-    query text
+    query text,
+    qid integer,
+    status character varying(50)
 );
 
 
@@ -258,12 +259,17 @@ ALTER TABLE ONLY public.test ALTER COLUMN testid SET DEFAULT nextval('public.tes
 -- Data for Name: attempt; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.attempt VALUES
+	(1, 4, '1732102', ''),
+	(2, 4, '1732102', '');
 
 
 --
 -- Data for Name: conduct; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.conduct VALUES
+	(4, 1, 'VG76K', 90, 'Spring', '2026');
 
 
 --
@@ -271,15 +277,163 @@ ALTER TABLE ONLY public.test ALTER COLUMN testid SET DEFAULT nextval('public.tes
 --
 
 INSERT INTO public.query VALUES
-	(1, 1, 'SELECT * FROM supplier WHERE city = ''London'';'),
-	(2, 1, 'SELECT pname, weight FROM part WHERE color = ''Red'';'),
-	(3, 1, 'SELECT jname, city FROM project WHERE city = ''Paris'';');
+	(4, 1, 'Display supplier name, part name, and quantity supplied.'),
+	(5, 1, 'Display project name, supplier name, part name, and quantity supplied.'),
+	(6, 1, 'Display the supplier name, project name, part name, quantity, supplier city, and project city only where the supplier and project are in different cities.'),
+	(7, 1, 'Display each supplier along with the total number of different parts supplied and the total quantity supplied.'),
+	(8, 1, 'Display the supplier and project pairs where the supplier has supplied more than one different part to the same project.');
 
 
 --
 -- Data for Name: result; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.result VALUES
+	(1, 1, NULL, NULL, NULL, NULL),
+	(2, 2, NULL, NULL, NULL, 'STARTED'),
+	(3, 2, 0.00, 'SELECT
+    s.sname,
+    p.pname,
+    sp.qty
+FROM supplier_part sp
+JOIN supplier s ON sp.sno = s.sno
+JOIN part p ON sp.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(6, 2, 0.00, 'SELECT
+    j.jname,
+    s.sname,
+    p.pname,
+    spj.qty
+FROM spj
+JOIN supplier s ON spj.sno = s.sno
+JOIN part p ON spj.pno = p.pno
+JOIN project j ON spj.jno = j.jno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(7, 2, 0.00, 'SELECT
+    s.sname,
+    p.pname,
+    j.jname,
+    spj.qty,
+    s.city AS supplier_city,
+    j.city AS project_city
+FROM spj
+JOIN supplier s ON spj.sno = s.sno
+JOIN part p ON spj.pno = p.pno
+JOIN project j ON spj.jno = j.jno
+WHERE s.city <> j.city
+ORDER BY s.sname, j.jname;
+┌───────┬───────┬─────────┬─────┬───────────────┬──────────────┐
+│ sname │ pname │  jname  │ qty │ supplier_city │ project_city │
+├───────┼───────┼─────────┼─────┼───────────────┼──────────────┤
+│ Adams │ Bolt  │ Display │ 200 │ Athens        │ Rome         │
+│ Adams │ Cog   │ Display │ 200 │ Athens        │ Rome         │
+│ Adams │ Cam   │ RAID    │ 500 │ Athens        │ London       │
+│ Adams │ Cam   │ Tape    │ 100 │ Athens        │ London       │
+│ Blake │ Screw │ Display │ 500 │ Paris         │ Rome         │
+│ Clark │ Cog   │ OCR     │ 300 │ London        │ Athens       │
+│ Jones │ Screw │ Console │ 500 │ Paris         │ Athens       │
+│ Jones │ Screw │ Display │ 200 │ Paris         │ Rome         │
+│ Jones │ Cam   │ Display │ 100 │ Paris         │ Rome         │
+│ Jones │ Screw │ EDS     │ 400 │ Paris         │ Oslo         │
+│ Jones │ Screw │ OCR     │ 200 │ Paris         │ Athens       │
+│ Jones │ Screw │ RAID    │ 600 │ Paris         │ London       │
+│ Jones │ Screw │ Tape    │ 800 │ Paris         │ London       │
+│ Smith │ Nut   │ Console │ 700 │ London        │ Athens       │
+│ Smith │ Nut   │ Sorter  │ 200 │ London        │ Paris        │
+└───────┴───────┴─────────┴─────┴───────────────┴──────────────┘
+(15 rows)
+
+', 6, 'EXECUTED'),
+	(8, 2, 0.00, 'SELECT
+    s.sno,
+    s.sname,
+    COUNT(DISTINCT spj.pno) AS total_parts,
+    SUM(spj.qty) AS total_quantity
+FROM supplier s
+JOIN spj ON s.sno = spj.sno
+GROUP BY s.sno, s.sname
+ORDER BY total_quantity DESC;
+┌─────┬───────┬─────────────┬────────────────┐
+│ sno │ sname │ total_parts │ total_quantity │
+├─────┼───────┼─────────────┼────────────────┤
+│ S2  │ Jones │           2 │           3200 │
+│ S5  │ Adams │           6 │           3100 │
+│ S1  │ Smith │           1 │            900 │
+│ S3  │ Blake │           2 │            700 │
+│ S4  │ Clark │           1 │            600 │
+└─────┴───────┴─────────────┴────────────────┘
+(5 rows)
+
+', 7, 'EXECUTED'),
+	(9, 2, 0.00, 'SELECT
+    s.sname,
+    j.jname,
+    COUNT(DISTINCT spj.pno) AS different_parts,
+    SUM(spj.qty) AS total_quantity
+FROM spj
+JOIN supplier s ON spj.sno = s.sno
+JOIN project j ON spj.jno = j.jno
+GROUP BY s.sname, j.jname
+HAVING COUNT(DISTINCT spj.pno) > 1
+ORDER BY s.sname, j.jname;
+┌───────┬─────────┬─────────────────┬────────────────┐
+│ sname │  jname  │ different_parts │ total_quantity │
+├───────┼─────────┼─────────────────┼────────────────┤
+│ Adams │ Console │               6 │           2100 │
+│ Adams │ Display │               2 │            400 │
+│ Jones │ Display │               2 │            300 │
+└───────┴─────────┴─────────────────┴────────────────┘
+(3 rows)
+
+', 8, 'EXECUTED');
 
 
 --
@@ -1904,28 +2058,28 @@ INSERT INTO public.test VALUES
 -- Name: attempt_attid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.attempt_attid_seq', 1, false);
+SELECT pg_catalog.setval('public.attempt_attid_seq', 2, true);
 
 
 --
 -- Name: conduct_cid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.conduct_cid_seq', 3, true);
+SELECT pg_catalog.setval('public.conduct_cid_seq', 4, true);
 
 
 --
 -- Name: query_qid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.query_qid_seq', 3, true);
+SELECT pg_catalog.setval('public.query_qid_seq', 8, true);
 
 
 --
 -- Name: result_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.result_rid_seq', 1, false);
+SELECT pg_catalog.setval('public.result_rid_seq', 9, true);
 
 
 --
@@ -1984,6 +2138,14 @@ ALTER TABLE ONLY public.test
 
 
 --
+-- Name: result unique_attempt_query; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.result
+    ADD CONSTRAINT unique_attempt_query UNIQUE (attid, qid);
+
+
+--
 -- Name: attempt attempt_cid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2008,6 +2170,14 @@ ALTER TABLE ONLY public.conduct
 
 
 --
+-- Name: result query_qid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.result
+    ADD CONSTRAINT query_qid_fkey FOREIGN KEY (qid) REFERENCES public.query(qid) NOT VALID;
+
+
+--
 -- Name: query query_testid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2027,5 +2197,5 @@ ALTER TABLE ONLY public.result
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 6ksWJoOS8C3mDyWZOBpW1Hh3pQqbZrJYiwbXHSDgZ7RYvdmCoIvd93yt7ohRix5
+\unrestrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
 

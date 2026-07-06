@@ -6,7 +6,7 @@
     "scripts": {
         "build": "vite build",
         "preview": "vite preview",
-        "start:C": "vite --host 192.168.1.162 --port 9055",
+        "start:C": "vite --host 10.0.138.130 --port 9055",
         "start:S": "node --watch server.js",
         "dev": "concurrently pnpm:start:*"
     },

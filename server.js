@@ -15,6 +15,30 @@ const __dirname = dirname(__filename);
 
 import { db } from './db.js';
 
+// Ensure the schema is updated with the new columns and unique constraint
+(async () => {
+    try {
+        await db.query(`
+            ALTER TABLE result ADD COLUMN IF NOT EXISTS status VARCHAR(50);
+        `);
+        await db.query(`
+            ALTER TABLE result ADD COLUMN IF NOT EXISTS qid INT REFERENCES query(qid) ON DELETE CASCADE;
+        `);
+        await db.query(`
+            ALTER TABLE result ADD CONSTRAINT unique_attempt_query UNIQUE (attid, qid);
+        `);
+        await db.query(`
+            ALTER TABLE attempt ADD CONSTRAINT unique_attempt_cid_regno UNIQUE (cid, regno);
+        `);
+        console.log("Database schema migrations applied successfully.");
+    } catch (err) {
+        // Ignore constraint already exists error (code 42710)
+        if (err.code !== '42710') {
+            console.error("Error running database schema migration:", err);
+        }
+    }
+})();
+
 function getAllowedOrigins() {
     const configured = process.env.ALLOWED_ORIGINS;
     if (configured) {
@@ -251,7 +275,17 @@ app.post('/api/test/start', async (req, res) => {
         if (studentRes.rows.length === 0) {
             return res.status(404).json({ error: 'Student registration not found' });
         }
-        
+
+        // Check if an attempt for this student in this conduct session already exists
+        const existingAttempt = await db.query(
+            'SELECT attid FROM attempt WHERE cid = $1 AND LOWER(regno) = LOWER($2) LIMIT 1',
+            [cid, regNo.trim()]
+        );
+        if (existingAttempt.rows.length > 0) {
+            const attid = existingAttempt.rows[0].attid;
+            return res.json({ success: true, attid });
+        }
+
         const attemptRes = await db.query(
             'INSERT INTO attempt (cid, regno, query) VALUES ($1, $2, $3) RETURNING attid',
             [cid, regNo.trim(), '']
@@ -270,12 +304,55 @@ app.post('/api/test/start', async (req, res) => {
     }
 });
 
+app.post('/api/test/save-result', async (req, res) => {
+    const { attid, qid, query, marks } = req.body;
+    if (!attid || !qid) {
+        return res.status(400).json({ error: 'attid and qid are required' });
+    }
+    try {
+        const queryStr = `
+            INSERT INTO result (attid, qid, query, marks, status)
+            VALUES ($1, $2, $3, $4, 'EXECUTED')
+            ON CONFLICT (attid, qid)
+            DO UPDATE SET query = EXCLUDED.query, marks = EXCLUDED.marks, status = EXCLUDED.status
+            RETURNING *;
+        `;
+        const result = await db.query(queryStr, [
+            attid,
+            qid,
+            query || '',
+            marks !== undefined ? marks : 0
+        ]);
+        return res.json({ success: true, result: result.rows[0] });
+    } catch (err) {
+        console.error('Error saving result:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/test/results', async (req, res) => {
+    const { attid } = req.query;
+    if (!attid) {
+        return res.status(400).json({ error: 'attid is required' });
+    }
+    try {
+        const resultRes = await db.query(
+            "SELECT r.query, q.qid, q.query as question_text FROM result r LEFT JOIN query q ON r.qid = q.qid WHERE r.attid = $1 AND r.status = 'EXECUTED' ORDER BY q.qid",
+            [attid]
+        );
+        return res.json(resultRes.rows);
+    } catch (err) {
+        console.error('Error fetching test results:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 wss.on('connection', (ws) => {
     console.log('Client connected');
 
     // Create terminal with larger initial size - spawns a pg18-client container
-    const ptyProcess = pty.spawn('docker', ['run', '-it', '--rm', '--add-host=host.docker.internal:host-gateway', '-e', 'PGPASSWORD=Aa20195@1', 'pg18-client', 'psql', '-h', 'host.docker.internal', '-U', 'postgres', '-d', 'spj', '-P', 'pager=off'], {
+    const ptyProcess = pty.spawn('docker', ['run', '-it', '--rm', '--add-host=host.docker.internal:host-gateway', '-e', 'PGPASSWORD=Po@995886', 'pg18-client', 'psql', '-h', 'host.docker.internal', '-U', 'postgres', '-d', 'spj', '-P', 'pager=off'], {
         name: 'xterm-256color',
         cols: 120,
         rows: 40,
@@ -283,7 +360,7 @@ wss.on('connection', (ws) => {
         env: {
             ...process.env,
             TERM: 'xterm-256color',
-            PGPASSWORD: 'Aa20195@1'
+            PGPASSWORD: 'Po@995886'
         }
     });
 
