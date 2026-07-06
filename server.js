@@ -15,27 +15,27 @@ const __dirname = dirname(__filename);
 
 import { db } from './db.js';
 
-// Ensure the schema is updated with the new columns and unique constraint
+// Ensure the schema is updated with the new columns and unique constraints
 (async () => {
+    const runMigration = async (queryStr) => {
+        try {
+            await db.query(queryStr);
+        } catch (err) {
+            // Ignore constraint already exists (42710) and relation/index already exists (42P07)
+            if (err.code !== '42710' && err.code !== '42P07') {
+                console.error("Migration query failed:", queryStr.trim(), err);
+            }
+        }
+    };
+
     try {
-        await db.query(`
-            ALTER TABLE result ADD COLUMN IF NOT EXISTS status VARCHAR(50);
-        `);
-        await db.query(`
-            ALTER TABLE result ADD COLUMN IF NOT EXISTS qid INT REFERENCES query(qid) ON DELETE CASCADE;
-        `);
-        await db.query(`
-            ALTER TABLE result ADD CONSTRAINT unique_attempt_query UNIQUE (attid, qid);
-        `);
-        await db.query(`
-            ALTER TABLE attempt ADD CONSTRAINT unique_attempt_cid_regno UNIQUE (cid, regno);
-        `);
+        await runMigration(`ALTER TABLE result ADD COLUMN IF NOT EXISTS status VARCHAR(50);`);
+        await runMigration(`ALTER TABLE result ADD COLUMN IF NOT EXISTS qid INT REFERENCES query(qid) ON DELETE CASCADE;`);
+        await runMigration(`ALTER TABLE result ADD CONSTRAINT unique_attempt_query UNIQUE (attid, qid);`);
+        await runMigration(`ALTER TABLE attempt ADD CONSTRAINT unique_attempt_cid_regno UNIQUE (cid, regno);`);
         console.log("Database schema migrations applied successfully.");
     } catch (err) {
-        // Ignore constraint already exists error (code 42710)
-        if (err.code !== '42710') {
-            console.error("Error running database schema migration:", err);
-        }
+        console.error("Error running database schema migration:", err);
     }
 })();
 
