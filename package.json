@@ -6,7 +6,7 @@
     "scripts": {
         "build": "vite build",
         "preview": "vite preview",
-        "start:C": "vite --host 0.0.0.0 --port 9055",
+        "start:C": "vite --host 192.168.1.162 --port 9055",
         "start:S": "node --watch server.js",
         "dev": "concurrently pnpm:start:*"
     },
@@ -15,6 +15,7 @@
         "dotenv": "^17.3.1",
         "express": "^4.18.2",
         "node-pty": "^1.0.0",
+        "pg": "^8.11.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "ws": "^8.14.2",

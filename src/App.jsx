@@ -37,11 +37,26 @@ const initialTasks = [
 ]
 
 export default function App() {
+    // Auth and Step states
+    const [step, setStep] = useState('testId') // 'testId' | 'regNo' | 'start' | 'test'
+    const [testId, setTestId] = useState('')
+    const [regNo, setRegNo] = useState('')
+    const [studentName, setStudentName] = useState('')
+    const [isEnabled, setIsEnabled] = useState(false)
+    const [authError, setAuthError] = useState('')
+    const [inputVal, setInputVal] = useState('')
+    const [copiedText, setCopiedText] = useState(false)
+    const [attemptId, setAttemptId] = useState(null)
+
+    // Admin Controls floating state
+    const [adminOpen, setAdminOpen] = useState(false)
+    const [adminTests, setAdminTests] = useState({})
+
+    // Panel layout & queries state
     const [dividerPos, setDividerPos] = useState(35)
     const [isDragging, setIsDragging] = useState(false)
-    const [queries, setQueries] = useState(
-        initialTasks.map((t) => t.defaultSql)
-    )
+    const [tasks, setTasks] = useState([])
+    const [queries, setQueries] = useState([])
     const terminalRef = useRef(null)
     const [copied, setCopied] = useState(false)
     const [activeIndex, setActiveIndex] = useState(0)
@@ -112,7 +127,7 @@ export default function App() {
 
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (e.key === 'F5') {
+            if (e.key === 'F5' && step === 'test') {
                 e.preventDefault()
                 runQueryRef.current()
             }
@@ -121,19 +136,414 @@ export default function App() {
         return () => {
             window.removeEventListener('keydown', handleKeyDown)
         }
-    }, [])
+    }, [step])
 
     useEffect(() => {
         if (isDragging) {
             document.addEventListener('mousemove', handleMouseMove)
             document.addEventListener('mouseup', handleMouseUp)
             return () => {
+                document.removeMouseMoveListener = () => {
+                    document.removeEventListener('mousemove', handleMouseMove)
+                }
                 document.removeEventListener('mousemove', handleMouseMove)
                 document.removeEventListener('mouseup', handleMouseUp)
             }
         }
     }, [isDragging])
 
+    // API Handlers for verification
+    const handleVerifyTestId = async (e) => {
+        if (e) e.preventDefault()
+        if (!inputVal.trim()) return
+        setAuthError('')
+        try {
+            const res = await fetch('/api/test/validate-id', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ testId: inputVal.trim() })
+            })
+            if (res.ok) {
+                setTestId(inputVal.trim())
+                setInputVal('')
+                setStep('regNo')
+            } else {
+                const data = await res.json()
+                setAuthError(data.error || 'TestId not Found')
+            }
+        } catch (err) {
+            setAuthError('Connection Error')
+        }
+    }
+
+    const handleVerifyRegNo = async (e) => {
+        if (e) e.preventDefault()
+        if (!inputVal.trim()) return
+        setAuthError('')
+        try {
+            const res = await fetch('/api/test/validate-reg', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ testId, regNo: inputVal.trim() })
+            })
+            if (res.ok) {
+                const data = await res.json()
+                setRegNo(inputVal.trim())
+                setStudentName(data.studentName)
+                setInputVal('')
+                setStep('start')
+            } else {
+                const data = await res.json()
+                setAuthError(data.error || 'RegNo not Found')
+            }
+        } catch (err) {
+            setAuthError('Connection Error')
+        }
+    }
+
+    const checkTestStatus = async () => {
+        if (!testId || !regNo) return
+        try {
+            const res = await fetch(`/api/test/status?testId=${encodeURIComponent(testId)}&regNo=${encodeURIComponent(regNo)}`)
+            if (res.ok) {
+                const data = await res.json()
+                setIsEnabled(data.isEnabled)
+                if (data.studentName) {
+                    setStudentName(data.studentName)
+                }
+            }
+        } catch (err) {
+            console.error('Error checking status:', err)
+        }
+    }
+
+    // Polling logic when waiting to start
+    useEffect(() => {
+        if (step === 'start') {
+            checkTestStatus()
+            const interval = setInterval(checkTestStatus, 2000)
+            return () => clearInterval(interval)
+        }
+    }, [step, testId, regNo])
+
+    const fetchQueries = async (tId) => {
+        try {
+            const res = await fetch(`/api/test/queries?testId=${encodeURIComponent(tId)}`)
+            if (res.ok) {
+                const data = await res.json()
+                setTasks(data)
+                setQueries(data.map(t => t.defaultSql))
+            }
+        } catch (err) {
+            console.error('Error fetching queries:', err)
+        }
+    }
+
+    const handleStartTest = async () => {
+        try {
+            setAuthError('')
+            const res = await fetch('/api/test/start', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ testId, regNo })
+            })
+            if (res.ok) {
+                const data = await res.json()
+                setAttemptId(data.attid)
+                setStep('test')
+            } else {
+                const data = await res.json()
+                setAuthError(data.error || 'Failed to start test.')
+            }
+        } catch (err) {
+            setAuthError('Connection Error')
+        }
+    }
+
+    useEffect(() => {
+        if (step === 'test' && testId) {
+            fetchQueries(testId)
+        }
+    }, [step, testId])
+
+    // Admin Control Actions
+    const fetchAdminTests = async () => {
+        try {
+            const res = await fetch('/api/admin/tests')
+            if (res.ok) {
+                const data = await res.json()
+                setAdminTests(data)
+            }
+        } catch (err) {
+            console.error('Error fetching admin tests:', err)
+        }
+    }
+
+    const handleToggleTest = async (tId, currentEnabled) => {
+        try {
+            const res = await fetch('/api/admin/toggle', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ testId: tId, isEnabled: !currentEnabled })
+            })
+            if (res.ok) {
+                fetchAdminTests()
+                checkTestStatus()
+            }
+        } catch (err) {
+            console.error('Error toggling test:', err)
+        }
+    }
+
+    const isAdmin = window.location.pathname === '/admin'
+
+    useEffect(() => {
+        if (adminOpen || isAdmin) {
+            fetchAdminTests()
+            const interval = setInterval(fetchAdminTests, 3000)
+            return () => clearInterval(interval)
+        }
+    }, [adminOpen, isAdmin])
+
+    const handleCopyTestText = () => {
+        const textToCopy = queries.map((query, index) => {
+            const task = tasks[index]
+            return `--- ${task.label} ${task.text} ---\n${query}\n`
+        }).join('\n')
+
+        const fullText = `Student: ${studentName}\nReg No: ${regNo}\nTest ID: ${testId}\n\n${textToCopy}`
+
+        navigator.clipboard.writeText(fullText)
+            .then(() => {
+                setCopiedText(true)
+                setTimeout(() => setCopiedText(false), 2000)
+            })
+            .catch((err) => {
+                console.error('Failed to copy text: ', err)
+            })
+    }
+
+    const renderAdminWidget = () => {
+        return (
+            <div className="admin-widget" style={{ height: adminOpen ? 'auto' : '40px', overflow: 'hidden' }}>
+                <div className="admin-widget-header" onClick={() => setAdminOpen(!adminOpen)}>
+                    <span>⚙️ Admin Controls</span>
+                    <span>{adminOpen ? '▼' : '▲'}</span>
+                </div>
+                {adminOpen && (
+                    <div className="admin-widget-content">
+                        {Object.keys(adminTests).length === 0 ? (
+                            <div style={{ fontSize: '11px', color: '#6b7280' }}>Loading tests...</div>
+                        ) : (
+                            Object.entries(adminTests).map(([tId, test]) => (
+                                <div key={tId} className="admin-test-row">
+                                    <span style={{ fontWeight: '600' }}>{tId}</span>
+                                    <button
+                                        onClick={() => handleToggleTest(tId, test.isEnabled)}
+                                        className={`admin-toggle-btn ${test.isEnabled ? 'active' : ''}`}
+                                    >
+                                        {test.isEnabled ? 'Enabled' : 'Disabled'}
+                                    </button>
+                                </div>
+                            ))
+                        )}
+                        <div style={{ fontSize: '10px', color: '#6b7280', marginTop: '4px', textAlign: 'center' }}>
+                            Toggle status to test real-time activation
+                        </div>
+                    </div>
+                )}
+            </div>
+        )
+    }
+
+    if (isAdmin) {
+        return (
+            <div className="test-auth-container" style={{ flexDirection: 'column', height: '100vh', justifyContent: 'flex-start', padding: '40px', overflowY: 'auto' }}>
+                <div style={{ maxWidth: '800px', width: '100%', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+                        <div>
+                            <h1 style={{ margin: 0, fontSize: '28px', fontWeight: '800', color: '#0f172a' }}>Admin Dashboard</h1>
+                            <p style={{ margin: '4px 0 0 0', color: '#64748b', fontSize: '14px' }}>Control active tests and verify settings</p>
+                        </div>
+                        <a href="/" style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '8px', textDecoration: 'none', fontSize: '14px', fontWeight: '700' }}>
+                            Go to Student Page
+                        </a>
+                    </div>
+                    
+                    {/* Metrics row */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                        <div style={{ background: '#fff', padding: '20px', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
+                            <span style={{ fontSize: '11px', color: '#64748b', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Total Registered Tests</span>
+                            <h2 style={{ fontSize: '32px', margin: '8px 0 0 0', color: '#0f172a', fontWeight: '800' }}>
+                                {Object.keys(adminTests).length}
+                            </h2>
+                        </div>
+                        <div style={{ background: '#fff', padding: '20px', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
+                            <span style={{ fontSize: '11px', color: '#64748b', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Active Tests</span>
+                            <h2 style={{ fontSize: '32px', margin: '8px 0 0 0', color: '#10b981', fontWeight: '800' }}>
+                                {Object.values(adminTests).filter(t => t.isEnabled).length}
+                            </h2>
+                        </div>
+                    </div>
+
+                    {/* Test controller panel */}
+                    <div style={{ background: '#fff', padding: '30px', borderRadius: '16px', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 10px 25px rgba(0,0,0,0.03)' }}>
+                        <h3 style={{ margin: '0 0 20px 0', fontSize: '18px', color: '#0f172a', fontWeight: '700' }}>Test List & Toggles</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            {Object.keys(adminTests).length === 0 ? (
+                                <div style={{ color: '#64748b', textAlign: 'center', padding: '20px' }}>Loading tests...</div>
+                            ) : (
+                                Object.entries(adminTests).map(([tId, test]) => (
+                                    <div key={tId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px', borderRadius: '10px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                                        <div>
+                                            <strong style={{ fontSize: '16px', color: '#0f172a' }}>{tId}</strong>
+                                            <span style={{ display: 'block', fontSize: '12px', color: '#64748b', marginTop: '2px' }}>Status: {test.isEnabled ? 'Active' : 'Inactive'}</span>
+                                        </div>
+                                        <button
+                                            onClick={() => handleToggleTest(tId, test.isEnabled)}
+                                            style={{
+                                                background: test.isEnabled ? '#10b981' : '#64748b',
+                                                color: '#fff',
+                                                border: 'none',
+                                                padding: '8px 16px',
+                                                borderRadius: '6px',
+                                                fontWeight: '700',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s ease',
+                                                boxShadow: test.isEnabled ? '0 4px 10px rgba(16, 185, 129, 0.2)' : 'none'
+                                            }}
+                                        >
+                                            {test.isEnabled ? 'Disable' : 'Enable'}
+                                        </button>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    if (step === 'testId') {
+        return (
+            <div className="test-auth-container">
+                <div className="test-auth-card">
+                    <h2 className="test-auth-title">Online SQL Test</h2>
+                    <p className="test-auth-subtitle">Please enter your Test ID to continue</p>
+
+                    {authError && <div className="test-auth-error">{authError}</div>}
+
+                    <form onSubmit={handleVerifyTestId}>
+                        <div className="test-auth-group">
+                            <label className="test-auth-label">Test ID</label>
+                            <input
+                                type="text"
+                                className="test-auth-input"
+                                placeholder="e.g. T101"
+                                value={inputVal}
+                                onChange={(e) => setInputVal(e.target.value)}
+                                autoFocus
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="test-auth-btn">
+                            Next
+                        </button>
+                    </form>
+                </div>
+                {renderAdminWidget()}
+            </div>
+        )
+    }
+
+    if (step === 'regNo') {
+        return (
+            <div className="test-auth-container">
+                <div className="test-auth-card">
+                    <h2 className="test-auth-title">Student Registration</h2>
+                    <p className="test-auth-subtitle">Test ID: <strong style={{ color: '#60a5fa' }}>{testId}</strong></p>
+
+                    {authError && <div className="test-auth-error">{authError}</div>}
+
+                    <form onSubmit={handleVerifyRegNo}>
+                        <div className="test-auth-group">
+                            <label className="test-auth-label">Registration Number</label>
+                            <input
+                                type="text"
+                                className="test-auth-input"
+                                placeholder="e.g. 2022-CS-101"
+                                value={inputVal}
+                                onChange={(e) => setInputVal(e.target.value)}
+                                autoFocus
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="test-auth-btn">
+                            Verify & Continue
+                        </button>
+                    </form>
+                </div>
+                {renderAdminWidget()}
+            </div>
+        )
+    }
+
+    if (step === 'start') {
+        return (
+            <div className="test-auth-container">
+                <div className="test-auth-card">
+                    <h2 className="test-auth-title">Test Details</h2>
+                    <p className="test-auth-subtitle">Verify your details below</p>
+
+                    <div style={{ marginBottom: '24px' }}>
+                        <div className="test-auth-info-row">
+                            <span className="test-auth-info-label">Student Name</span>
+                            <span className="test-auth-info-value">{studentName}</span>
+                        </div>
+                        <div className="test-auth-info-row">
+                            <span className="test-auth-info-label">Registration No</span>
+                            <span className="test-auth-info-value">{regNo}</span>
+                        </div>
+                        <div className="test-auth-info-row">
+                            <span className="test-auth-info-label">Test ID</span>
+                            <span className="test-auth-info-value">{testId}</span>
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={handleStartTest}
+                        disabled={!isEnabled}
+                        className="test-auth-btn"
+                        style={{
+                            background: isEnabled
+                                ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                                : '#374151',
+                            boxShadow: isEnabled
+                                ? '0 4px 12px rgba(16, 185, 129, 0.25)'
+                                : 'none'
+                        }}
+                    >
+                        Start Test
+                    </button>
+
+                    {!isEnabled ? (
+                        <div className="test-auth-status-box">
+                            <div className="pulse-dot" />
+                            <span>Waiting for instructor to enable test...</span>
+                        </div>
+                    ) : (
+                        <div className="test-auth-status-box" style={{ borderColor: '#10b981', color: '#34d399', background: 'rgba(16, 185, 129, 0.08)' }}>
+                            <span>✓ Test is active. Click Start to begin!</span>
+                        </div>
+                    )}
+                </div>
+                {renderAdminWidget()}
+            </div>
+        )
+    }
+
+    // active test step
     return (
         <div className="app-container">
             <div className="left-panel" style={{ width: `${dividerPos}%` }}>
@@ -147,9 +557,14 @@ export default function App() {
                         </svg>
                         <span>SQL QUERY EDITOR</span>
                     </div>
+                    <div className="header-actions">
+                        <button className="btn btn-clear" onClick={handleCopyTestText}>
+                            {copiedText ? '✓ Copied' : 'CopY Text'}
+                        </button>
+                    </div>
                 </div>
                 <div className="queries-scroll-container">
-                    {initialTasks.map((task, index) => (
+                    {tasks.map((task, index) => (
                         <div
                             key={task.id}
                             onClick={() => setActiveIndex(index)}
@@ -180,7 +595,10 @@ export default function App() {
                         </svg>
                         <span>INTERACTIVE TERMINAL (PSQL)</span>
                     </div>
-                    <div className="header-actions">
+                    <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '600' }}>
+                            {studentName} ({regNo})
+                        </span>
                         <button className="btn btn-clear" onClick={handleCopyTerminalOutput}>
                             {copied ? '✓ Copied' : 'Copy Output'}
                         </button>
@@ -190,6 +608,7 @@ export default function App() {
                     <Terminal ref={terminalRef} />
                 </div>
             </div>
+            {renderAdminWidget()}
         </div>
     )
 }

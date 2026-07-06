@@ -13,6 +13,8 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+import { db } from './db.js';
+
 function getAllowedOrigins() {
     const configured = process.env.ALLOWED_ORIGINS;
     if (configured) {
@@ -107,11 +109,173 @@ app.use((req, res, next) => {
     next();
 });
 
+const activeTests = {};
+
+app.use(express.json());
+
+app.post('/api/test/validate-id', async (req, res) => {
+    const { testId } = req.body;
+    if (!testId) {
+        return res.status(400).json({ error: 'Test ID is required' });
+    }
+    try {
+        const queryStr = 'SELECT * FROM conduct WHERE LOWER(code) = LOWER($1) LIMIT 1';
+        const result = await db.query(queryStr, [testId.trim()]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'TestId not Found' });
+        }
+        return res.json({ success: true });
+    } catch (err) {
+        console.error('Error validating test ID:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/api/test/validate-reg', async (req, res) => {
+    const { testId, regNo } = req.body;
+    if (!testId || !regNo) {
+        return res.status(400).json({ error: 'Test ID and Registration Number are required' });
+    }
+    try {
+        const testRes = await db.query('SELECT 1 FROM conduct WHERE LOWER(code) = LOWER($1) LIMIT 1', [testId.trim()]);
+        if (testRes.rows.length === 0) {
+            return res.status(404).json({ error: 'TestId not Found' });
+        }
+        const studentRes = await db.query('SELECT * FROM student WHERE LOWER(regno) = LOWER($1) LIMIT 1', [regNo.trim()]);
+        if (studentRes.rows.length === 0) {
+            return res.status(404).json({ error: 'RegNo not Found' });
+        }
+        return res.json({ success: true, studentName: studentRes.rows[0].sname });
+    } catch (err) {
+        console.error('Error validating reg no:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/test/status', async (req, res) => {
+    const { testId, regNo } = req.query;
+    if (!testId || !regNo) {
+        return res.status(400).json({ error: 'Test ID and Registration Number are required' });
+    }
+    try {
+        const studentRes = await db.query('SELECT sname FROM student WHERE LOWER(regno) = LOWER($1) LIMIT 1', [regNo.trim()]);
+        if (studentRes.rows.length === 0) {
+            return res.status(404).json({ error: 'RegNo not Found' });
+        }
+        const studentName = studentRes.rows[0].sname;
+        const isEnabled = !!activeTests[testId.trim().toLowerCase()];
+        return res.json({
+            isEnabled,
+            studentName
+        });
+    } catch (err) {
+        console.error('Error checking test status:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/api/admin/toggle', async (req, res) => {
+    const { testId, isEnabled } = req.body;
+    if (!testId) {
+        return res.status(400).json({ error: 'Test ID is required' });
+    }
+    try {
+        const testRes = await db.query('SELECT 1 FROM conduct WHERE LOWER(code) = LOWER($1) LIMIT 1', [testId.trim()]);
+        if (testRes.rows.length === 0) {
+            return res.status(404).json({ error: 'TestId not Found' });
+        }
+        activeTests[testId.trim().toLowerCase()] = !!isEnabled;
+        return res.json({ success: true, testId, isEnabled: !!isEnabled });
+    } catch (err) {
+        console.error('Error toggling test:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/admin/tests', async (req, res) => {
+    try {
+        const result = await db.query('SELECT DISTINCT code FROM conduct');
+        const tests = {};
+        result.rows.forEach(row => {
+            tests[row.code] = {
+                isEnabled: !!activeTests[row.code.toLowerCase()]
+            };
+        });
+        return res.json(tests);
+    } catch (err) {
+        console.error('Error fetching admin tests:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/test/queries', async (req, res) => {
+    const { testId } = req.query;
+    if (!testId) {
+        return res.status(400).json({ error: 'Test ID is required' });
+    }
+    try {
+        const testRes = await db.query('SELECT testid FROM conduct WHERE LOWER(code) = LOWER($1) LIMIT 1', [testId.trim()]);
+        if (testRes.rows.length === 0) {
+            return res.status(404).json({ error: 'TestId not Found' });
+        }
+        const testIdVal = testRes.rows[0].testid;
+
+        const queryRes = await db.query('SELECT qid, query FROM query WHERE testid = $1 ORDER BY qid', [testIdVal]);
+        const tasks = queryRes.rows.map((row, index) => ({
+            id: row.qid,
+            label: `#${index + 1}:`,
+            text: row.query,
+            defaultSql: ""
+        }));
+
+        return res.json(tasks);
+    } catch (err) {
+        console.error('Error fetching queries:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/api/test/start', async (req, res) => {
+    const { testId, regNo } = req.body;
+    if (!testId || !regNo) {
+        return res.status(400).json({ error: 'Test ID and Registration Number are required' });
+    }
+    try {
+        const conductRes = await db.query('SELECT cid FROM conduct WHERE LOWER(code) = LOWER($1) LIMIT 1', [testId.trim()]);
+        if (conductRes.rows.length === 0) {
+            return res.status(404).json({ error: 'Test session not found' });
+        }
+        const cid = conductRes.rows[0].cid;
+
+        const studentRes = await db.query('SELECT 1 FROM student WHERE LOWER(regno) = LOWER($1) LIMIT 1', [regNo.trim()]);
+        if (studentRes.rows.length === 0) {
+            return res.status(404).json({ error: 'Student registration not found' });
+        }
+        
+        const attemptRes = await db.query(
+            'INSERT INTO attempt (cid, regno, query) VALUES ($1, $2, $3) RETURNING attid',
+            [cid, regNo.trim(), '']
+        );
+        const attid = attemptRes.rows[0].attid;
+
+        await db.query(
+            'INSERT INTO result (attid, status) VALUES ($1, $2)',
+            [attid, 'STARTED']
+        );
+
+        return res.json({ success: true, attid });
+    } catch (err) {
+        console.error('Error starting test attempt:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 wss.on('connection', (ws) => {
     console.log('Client connected');
 
     // Create terminal with larger initial size - spawns a pg18-client container
-    const ptyProcess = pty.spawn('docker', ['run', '-it', '--rm', '--add-host=host.docker.internal:host-gateway', '-e', 'PGPASSWORD=Aa20195@1', 'pg18-client', 'psql', '-h', 'host.docker.internal', '-U', 'postgres', '-d', 'obe', '-P', 'pager=off'], {
+    const ptyProcess = pty.spawn('docker', ['run', '-it', '--rm', '--add-host=host.docker.internal:host-gateway', '-e', 'PGPASSWORD=Aa20195@1', 'pg18-client', 'psql', '-h', 'host.docker.internal', '-U', 'postgres', '-d', 'spj', '-P', 'pager=off'], {
         name: 'xterm-256color',
         cols: 120,
         rows: 40,
