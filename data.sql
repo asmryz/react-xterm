@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
+\restrict gW1nT2qpbPlITsXurlOwDCYISVpUJ3ZtyRNXbur8Ufreoya1d9Lo9MgE3dFQHFN
 
 -- Dumped from database version 18.4 (Debian 18.4-1.pgdg13+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -27,9 +27,9 @@ DROP DATABASE IF EXISTS evaluation;
 CREATE DATABASE evaluation WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
 
 
-\unrestrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
+\unrestrict gW1nT2qpbPlITsXurlOwDCYISVpUJ3ZtyRNXbur8Ufreoya1d9Lo9MgE3dFQHFN
 \connect evaluation
-\restrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
+\restrict gW1nT2qpbPlITsXurlOwDCYISVpUJ3ZtyRNXbur8Ufreoya1d9Lo9MgE3dFQHFN
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -286,7 +286,33 @@ INSERT INTO public.attempt VALUES
 	(25, 4, '2412108', ''),
 	(26, 4, '2412116', ''),
 	(27, 4, '2312412', ''),
-	(28, 4, '2312410', '');
+	(28, 4, '2312410', ''),
+	(29, 4, '2412234', ''),
+	(30, 4, '2412227', ''),
+	(31, 4, '2412236', ''),
+	(32, 4, '2412238', ''),
+	(33, 4, '2412230', ''),
+	(34, 4, '2412232', ''),
+	(35, 4, '2412245', ''),
+	(36, 4, '2412240', ''),
+	(37, 4, '2412251', ''),
+	(38, 4, '2412239', ''),
+	(39, 4, '2412266', ''),
+	(40, 4, '2412241', ''),
+	(41, 4, '2412244', ''),
+	(42, 4, '2412261', ''),
+	(43, 4, '2412271', ''),
+	(44, 4, '2412267', ''),
+	(45, 4, '2412248', ''),
+	(46, 4, '2412231', ''),
+	(47, 4, '2412260', ''),
+	(48, 4, '2412250', ''),
+	(49, 4, '2412243', ''),
+	(50, 4, '2512366', ''),
+	(51, 4, '2412256', ''),
+	(52, 4, '2412262', ''),
+	(53, 4, '2412265', ''),
+	(54, 4, '2412254', '');
 
 
 --
@@ -481,6 +507,34 @@ JOIN part p ON sp.pno = p.pno;
 (12 rows)
 
 ', 4, 'EXECUTED'),
+	(3054, 37, 0.00, 'SELECT s.name AS supplier_name
+
+j.name AS project_name
+
+FROM spj sp
+
+JOIN supplier s ON s.sno = s.sno
+
+JOIN project j ON sp.jno = j.jno
+
+GROUP BY s.name, j.name
+
+HAVING COUNT (DISTINCT sp.pno) >1;
+ERROR:  syntax error at or near "j"
+LINE 2: j.name AS project_name
+        ^
+', 8, 'EXECUTED'),
+	(1879, 46, 0.00, 'select p.pname, s.sname, p.pname, q.qty from project p join supplier s on j.city = s.city 
+
+
+
+join part p on s.city = p.city
+
+join supplier_parts on p.pno =sp.pno;
+ERROR:  missing FROM-clause entry for table "j"
+LINE 1: ... p.pname, q.qty from project p join supplier s on j.city = s...
+                                                             ^
+', 5, 'EXECUTED'),
 	(37, 18, 0.00, 'select * from supplier;
 ┌─────┬───────┬────────┬────────┐
 │ sno │ sname │ status │  city  │
@@ -526,6 +580,105 @@ ERROR:  column "quantitysupplied" does not exist
 LINE 1: select quantitysupplied from supplier ;
                ^
 ', 4, 'EXECUTED'),
+	(2427, 52, 0.00, 'Select j.jname as "project_name", s.sname as "supplier_name", p.pname as "part_name", sp.qty as "quantity_suppli
+ed"
+
+from project j, supplier s
+
+join supplier_part sp on s.sno = sp.sno
+
+join part p on sp.pno = p.pno;
+┌──────────────┬───────────────┬───────────┬───────────────────┐
+│ project_name │ supplier_name │ part_name │ quantity_supplied │
+├──────────────┼───────────────┼───────────┼───────────────────┤
+│ Sorter       │ Smith         │ Nut       │               300 │
+│ Display      │ Smith         │ Nut       │               300 │
+│ OCR          │ Smith         │ Nut       │               300 │
+│ Console      │ Smith         │ Nut       │               300 │
+│ RAID         │ Smith         │ Nut       │               300 │
+│ EDS          │ Smith         │ Nut       │               300 │
+│ Tape         │ Smith         │ Nut       │               300 │
+│ Sorter       │ Smith         │ Bolt      │               200 │
+│ Display      │ Smith         │ Bolt      │               200 │
+│ OCR          │ Smith         │ Bolt      │               200 │
+│ Console      │ Smith         │ Bolt      │               200 │
+│ RAID         │ Smith         │ Bolt      │               200 │
+│ EDS          │ Smith         │ Bolt      │               200 │
+│ Tape         │ Smith         │ Bolt      │               200 │
+│ Sorter       │ Smith         │ Screw     │               400 │
+│ Display      │ Smith         │ Screw     │               400 │
+│ OCR          │ Smith         │ Screw     │               400 │
+│ Console      │ Smith         │ Screw     │               400 │
+│ RAID         │ Smith         │ Screw     │               400 │
+│ EDS          │ Smith         │ Screw     │               400 │
+│ Tape         │ Smith         │ Screw     │               400 │
+│ Sorter       │ Smith         │ Screw     │               200 │
+│ Display      │ Smith         │ Screw     │               200 │
+│ OCR          │ Smith         │ Screw     │               200 │
+│ Console      │ Smith         │ Screw     │               200 │
+│ RAID         │ Smith         │ Screw     │               200 │
+│ EDS          │ Smith         │ Screw     │               200 │
+│ Tape         │ Smith         │ Screw     │               200 │
+│ Sorter       │ Smith         │ Cam       │               100 │
+│ Display      │ Smith         │ Cam       │               100 │
+│ OCR          │ Smith         │ Cam       │               100 │
+│ Console      │ Smith         │ Cam       │               100 │
+│ RAID         │ Smith         │ Cam       │               100 │
+│ EDS          │ Smith         │ Cam       │               100 │
+│ Tape         │ Smith         │ Cam       │               100 │
+│ Sorter       │ Smith         │ Cog       │               100 │
+│ Display      │ Smith         │ Cog       │               100 │
+│ OCR          │ Smith         │ Cog       │               100 │
+│ Console      │ Smith         │ Cog       │               100 │
+│ RAID         │ Smith         │ Cog       │               100 │
+│ EDS          │ Smith         │ Cog       │               100 │
+│ Tape         │ Smith         │ Cog       │               100 │
+│ Sorter       │ Jones         │ Nut       │               300 │
+│ Display      │ Jones         │ Nut       │               300 │
+│ OCR          │ Jones         │ Nut       │               300 │
+│ Console      │ Jones         │ Nut       │               300 │
+│ RAID         │ Jones         │ Nut       │               300 │
+│ EDS          │ Jones         │ Nut       │               300 │
+│ Tape         │ Jones         │ Nut       │               300 │
+│ Sorter       │ Jones         │ Bolt      │               400 │
+│ Display      │ Jones         │ Bolt      │               400 │
+│ OCR          │ Jones         │ Bolt      │               400 │
+│ Console      │ Jones         │ Bolt      │               400 │
+│ RAID         │ Jones         │ Bolt      │               400 │
+│ EDS          │ Jones         │ Bolt      │               400 │
+│ Tape         │ Jones         │ Bolt      │               400 │
+│ Sorter       │ Blake         │ Bolt      │               200 │
+│ Display      │ Blake         │ Bolt      │               200 │
+│ OCR          │ Blake         │ Bolt      │               200 │
+│ Console      │ Blake         │ Bolt      │               200 │
+│ RAID         │ Blake         │ Bolt      │               200 │
+│ EDS          │ Blake         │ Bolt      │               200 │
+│ Tape         │ Blake         │ Bolt      │               200 │
+│ Sorter       │ Clark         │ Bolt      │               200 │
+│ Display      │ Clark         │ Bolt      │               200 │
+│ OCR          │ Clark         │ Bolt      │               200 │
+│ Console      │ Clark         │ Bolt      │               200 │
+│ RAID         │ Clark         │ Bolt      │               200 │
+│ EDS          │ Clark         │ Bolt      │               200 │
+│ Tape         │ Clark         │ Bolt      │               200 │
+│ Sorter       │ Clark         │ Screw     │               300 │
+│ Display      │ Clark         │ Screw     │               300 │
+│ OCR          │ Clark         │ Screw     │               300 │
+│ Console      │ Clark         │ Screw     │               300 │
+│ RAID         │ Clark         │ Screw     │               300 │
+│ EDS          │ Clark         │ Screw     │               300 │
+│ Tape         │ Clark         │ Screw     │               300 │
+│ Sorter       │ Clark         │ Cam       │               400 │
+│ Display      │ Clark         │ Cam       │               400 │
+│ OCR          │ Clark         │ Cam       │               400 │
+│ Console      │ Clark         │ Cam       │               400 │
+│ RAID         │ Clark         │ Cam       │               400 │
+│ EDS          │ Clark         │ Cam       │               400 │
+│ Tape         │ Clark         │ Cam       │               400 │
+└──────────────┴───────────────┴───────────┴───────────────────┘
+(84 rows)
+
+', 5, 'EXECUTED'),
 	(44, 7, 0.00, 'SELECT sname, pname, qty FROM supplier, part, supplier_part;
 ┌───────┬───────┬─────┐
 │ sname │ pname │ qty │
@@ -962,12 +1115,36 @@ JOIN part p ON a.pno = p.pno;
 (24 rows)
 
 ', 5, 'EXECUTED'),
+	(1980, 54, 0.00, 'Select  s.sname as supplier_name, p.pname as part_name, spj.qty as quantity supplied from  spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN supplier_part sp ON s.sno = sp.sno
+
+JOIN part p ON sp.pno = p.pno;
+ERROR:  syntax error at or near "supplied"
+LINE 1: ...r_name, p.pname as part_name, spj.qty as quantity supplied f...
+                                                             ^
+', 4, 'EXECUTED'),
 	(53, 26, NULL, NULL, NULL, 'STARTED'),
 	(56, 23, 0.00, 'SELECT  s.sname,p.name,sp.qty
 
 FROM supplier inner join supplier_part ap ON s.sno=sp.pno INNER JOIN
  part p ON sp.sno=p.pno
 ', 4, 'EXECUTED'),
+	(1941, 46, 0.00, 'select s.sname, j.jname, p.pname, sp.qty, s.city, j.city
+
+from project j join supplier s on j.city  = c.city
+
+join part p on s.city = p.city
+
+join supplier_part sp on p.pno = sp.pno
+
+where s.city <> j.city;
+ERROR:  missing FROM-clause entry for table "c"
+LINE 2: from project j join supplier s on j.city  = c.city
+                                                    ^
+', 6, 'EXECUTED'),
 	(59, 25, 0.00, 'SELECT s.sname , p.pname 
 
 FROM supplier s
@@ -1188,6 +1365,7 @@ select * from supplier_part;
 (12 rows)
 
 ', 4, 'EXECUTED'),
+	(1541, 29, NULL, NULL, NULL, 'STARTED'),
 	(1380, 17, 0.00, 'SELECT s.sname, j.jname 
 
 FROM supplier s JOIN 
@@ -1292,6 +1470,38 @@ GROUP BY s.sname;
 (4 rows)
 
 ', 7, 'EXECUTED'),
+	(1542, 30, NULL, NULL, NULL, 'STARTED'),
+	(1543, 31, NULL, NULL, NULL, 'STARTED'),
+	(1544, 32, NULL, NULL, NULL, 'STARTED'),
+	(1545, 33, NULL, NULL, NULL, 'STARTED'),
+	(1546, 34, NULL, NULL, NULL, 'STARTED'),
+	(1547, 35, NULL, NULL, NULL, 'STARTED'),
+	(1548, 36, NULL, NULL, NULL, 'STARTED'),
+	(1549, 37, NULL, NULL, NULL, 'STARTED'),
+	(1550, 38, NULL, NULL, NULL, 'STARTED'),
+	(1551, 39, NULL, NULL, NULL, 'STARTED'),
+	(1552, 40, NULL, NULL, NULL, 'STARTED'),
+	(1553, 41, NULL, NULL, NULL, 'STARTED'),
+	(1554, 42, NULL, NULL, NULL, 'STARTED'),
+	(2649, 34, 0.00, 'select s.sname,pr.janme,p.pname,sp.qty,s.city,pr.city
+
+from supplier s
+
+join project pr
+
+on s.city=pr.city
+
+join part p 
+
+on p.pno=sp.pno
+
+join supplier_part sp
+
+on p.pno=sp.pno;
+ERROR:  missing FROM-clause entry for table "sp"
+LINE 6: on p.pno=sp.pno
+                 ^
+', 6, 'EXECUTED'),
 	(504, 9, 0.00, 'SELECT j.jname, s.sname, p.pname, a.qty 
 
 FROM supplier s 
@@ -1448,6 +1658,8 @@ ERROR:  missing FROM-clause entry for table "part"
 LINE 1: select project.jname,supplier.sname,part.pname,supplier_part...
                                             ^
 ', 6, 'EXECUTED'),
+	(1555, 43, NULL, NULL, NULL, 'STARTED'),
+	(1556, 44, NULL, NULL, NULL, 'STARTED'),
 	(49, 17, 0.00, 'SELECT * FROM supplier;
 ┌─────┬───────┬────────┬────────┐
 │ sno │ sname │ status │  city  │
@@ -1461,6 +1673,14 @@ LINE 1: select project.jname,supplier.sname,part.pname,supplier_part...
 (5 rows)
 
 ', 4, 'EXECUTED'),
+	(1557, 45, NULL, NULL, NULL, 'STARTED'),
+	(1558, 46, NULL, NULL, NULL, 'STARTED'),
+	(1559, 47, NULL, NULL, NULL, 'STARTED'),
+	(1560, 48, NULL, NULL, NULL, 'STARTED'),
+	(1561, 49, NULL, NULL, NULL, 'STARTED'),
+	(1562, 50, NULL, NULL, NULL, 'STARTED'),
+	(1563, 51, NULL, NULL, NULL, 'STARTED'),
+	(1564, 52, NULL, NULL, NULL, 'STARTED'),
 	(797, 7, 0.00, '\dt
                List of tables
 ┌────────┬───────────────┬───────┬──────────┐
@@ -1747,6 +1967,8 @@ LINE 2: SUM(sp.qty)AS Total_Quantityfrom supplier s INNER JOIN suppl...
 (7 rows)
 
 ', 5, 'EXECUTED'),
+	(3086, 53, 0.00, 'SELECT s.sname as "supplier", j.j_name as "project" , count (*) from supplier s join
+', 8, 'EXECUTED'),
 	(827, 4, 0.00, 'SELECT s.sname, pj.jname, p.pname, sp.qty, s.city, pj.city 
 
 FROM supplier_part sp 
@@ -1805,6 +2027,45 @@ ON p.pno=q.pno ;
 │ Adams │ Cog   │ 500 │
 └───────┴───────┴─────┘
 (24 rows)
+
+', 4, 'EXECUTED'),
+	(1609, 47, 0.00, 'select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+select s.sname, p.pname, q.qty from supplier_part q
+
+join supplier s on q.sno = s.sno
+
+join part p on q.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
 
 ', 4, 'EXECUTED'),
 	(369, 22, 0.00, 'SELECT sname,jname,sp.qty,s.city
@@ -3310,6 +3571,29 @@ FROM supplier s
 (2520 rows)
 
 ', 5, 'EXECUTED'),
+	(2653, 31, 0.00, 'select s.sname,sp.pno
+
+sp.qty ,
+
+count(*) as TOTAL_qty,
+
+count(*) as TOTAL_parts,
+
+from supplier s
+
+ join supplier_part sp
+
+  on s.sno=sp.sno
+
+join part p 
+
+on sp.pno=p.pno
+
+group by s.sname;
+ERROR:  syntax error at or near "."
+LINE 2: sp.qty ,
+          ^
+', 7, 'EXECUTED'),
 	(34, 6, 0.00, 'SELECT s.sname, p.pname,sp.qty FROM supplier s join supplier_part sp ON s.sno=sp.sno JOIN part p ON s.pno=sp.pno
  GROUP BY s.sname, p.pname,sp.qty;
 ERROR:  column s.pno does not exist
@@ -3433,6 +3717,39 @@ GROUP BY supplier.sname;
 (4 rows)
 
 ', 8, 'EXECUTED'),
+	(1873, 50, 0.00, 'select j.jname,s.sname, p.pname, pj.qty from spj pj join project j on pj.jno = j.jno join supplier s on
+ pj.sno = s.sno join part p on pj.pno = p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
 	(395, 15, 0.00, 'SELECT j.jname , s.sname , p.pname , sp.qty 
 
 FROM Spj sp 
@@ -3626,6 +3943,57 @@ part p ON a.pno = p.pno;
 (6 rows)
 
 ', 4, 'EXECUTED'),
+	(1587, 34, 0.00, 'select s.sname,p.pname,sp.qty
+
+from supplier s
+
+join part p 
+
+on s.city=p.city
+
+join supplier_part sp 
+
+on s.sno=sp.sno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Screw │ 300 │
+│ Smith │ Cog   │ 300 │
+│ Smith │ Nut   │ 200 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cog   │ 200 │
+│ Smith │ Nut   │ 400 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Cog   │ 400 │
+│ Smith │ Nut   │ 200 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cog   │ 200 │
+│ Smith │ Nut   │ 100 │
+│ Smith │ Screw │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Smith │ Nut   │ 100 │
+│ Smith │ Screw │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Bolt  │ 300 │
+│ Jones │ Cam   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Jones │ Cam   │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Blake │ Cam   │ 200 │
+│ Clark │ Nut   │ 200 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Cog   │ 200 │
+│ Clark │ Nut   │ 300 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Nut   │ 400 │
+│ Clark │ Screw │ 400 │
+│ Clark │ Cog   │ 400 │
+└───────┴───────┴─────┘
+(33 rows)
+
+', 4, 'EXECUTED'),
 	(854, 22, 0.00, 'SELECT sname
 ', 8, 'EXECUTED'),
 	(368, 10, 0.00, 'SELECT
@@ -3801,6 +4169,12 @@ where s.city!=p.city;
 (31 rows)
 
 ', 6, 'EXECUTED'),
+	(3102, 39, 0.00, 'select s.sname as "supplier ", j.jname as "project" ,count(s.sname) from supplier s join project j on s.city=j.c
+ity where count(s.sname)>1;
+ERROR:  aggregate functions are not allowed in WHERE
+LINE 1: ... supplier s join project j on s.city=j.city where count(s.sn...
+                                                             ^
+', 8, 'EXECUTED'),
 	(619, 18, 0.00, 'SELECT s.supplier_name , 
 
 p.partname ,
@@ -3919,6 +4293,125 @@ ERROR:  syntax error at or near "WHERE"
 LINE 5: WHERE s.city!=j.city;
         ^
 ', 6, 'EXECUTED'),
+	(1930, 30, 0.00, 'select jname,sname,pname,qty as quantity_supplied
+
+from project j join supplier s on 
+
+j.city=s.city
+
+join part p 
+
+on s.city=p.city
+
+join supplier_part sp on 
+
+p.pno=sp.pno ;
+┌────────┬───────┬───────┬───────────────────┐
+│ jname  │ sname │ pname │ quantity_supplied │
+├────────┼───────┼───────┼───────────────────┤
+│ Tape   │ Smith │ Nut   │               300 │
+│ Tape   │ Smith │ Screw │               200 │
+│ Tape   │ Smith │ Cog   │               100 │
+│ Tape   │ Smith │ Nut   │               300 │
+│ Tape   │ Smith │ Screw │               300 │
+│ RAID   │ Smith │ Nut   │               300 │
+│ RAID   │ Smith │ Screw │               200 │
+│ RAID   │ Smith │ Cog   │               100 │
+│ RAID   │ Smith │ Nut   │               300 │
+│ RAID   │ Smith │ Screw │               300 │
+│ Tape   │ Clark │ Nut   │               300 │
+│ Tape   │ Clark │ Screw │               200 │
+│ Tape   │ Clark │ Cog   │               100 │
+│ Tape   │ Clark │ Nut   │               300 │
+│ Tape   │ Clark │ Screw │               300 │
+│ RAID   │ Clark │ Nut   │               300 │
+│ RAID   │ Clark │ Screw │               200 │
+│ RAID   │ Clark │ Cog   │               100 │
+│ RAID   │ Clark │ Nut   │               300 │
+│ RAID   │ Clark │ Screw │               300 │
+│ Sorter │ Jones │ Cam   │               400 │
+│ Sorter │ Jones │ Bolt  │               400 │
+│ Sorter │ Jones │ Bolt  │               200 │
+│ Sorter │ Jones │ Bolt  │               200 │
+│ Sorter │ Jones │ Cam   │               100 │
+│ Sorter │ Jones │ Bolt  │               200 │
+│ Sorter │ Blake │ Cam   │               400 │
+│ Sorter │ Blake │ Bolt  │               400 │
+│ Sorter │ Blake │ Bolt  │               200 │
+│ Sorter │ Blake │ Bolt  │               200 │
+│ Sorter │ Blake │ Cam   │               100 │
+│ Sorter │ Blake │ Bolt  │               200 │
+└────────┴───────┴───────┴───────────────────┘
+(32 rows)
+
+', 5, 'EXECUTED'),
+	(1813, 33, 0.00, 'select pr.jname,s.sname,p.pname,sp.qty
+
+select from project pr
+
+join supplier s on pr.city=s.city
+
+join supplier_part sp on s.sno=sp.sno
+
+join part p on sp.pno=p.pno;
+┌────────┬───────┬───────┬────────┐
+│ jname  │ sname │ pname │ select │
+├────────┼───────┼───────┼────────┤
+│ Tape   │ Smith │ Nut   │    300 │
+│ RAID   │ Smith │ Nut   │    300 │
+│ Tape   │ Smith │ Bolt  │    200 │
+│ RAID   │ Smith │ Bolt  │    200 │
+│ Tape   │ Smith │ Screw │    400 │
+│ RAID   │ Smith │ Screw │    400 │
+│ Tape   │ Smith │ Screw │    200 │
+│ RAID   │ Smith │ Screw │    200 │
+│ Tape   │ Smith │ Cam   │    100 │
+│ RAID   │ Smith │ Cam   │    100 │
+│ Tape   │ Smith │ Cog   │    100 │
+│ RAID   │ Smith │ Cog   │    100 │
+│ Sorter │ Jones │ Nut   │    300 │
+│ Sorter │ Jones │ Bolt  │    400 │
+│ Sorter │ Blake │ Bolt  │    200 │
+│ Tape   │ Clark │ Bolt  │    200 │
+│ RAID   │ Clark │ Bolt  │    200 │
+│ Tape   │ Clark │ Screw │    300 │
+│ RAID   │ Clark │ Screw │    300 │
+│ Tape   │ Clark │ Cam   │    400 │
+│ RAID   │ Clark │ Cam   │    400 │
+└────────┴───────┴───────┴────────┘
+(21 rows)
+
+', 5, 'EXECUTED'),
+	(1577, 31, 0.00, 'select s.sname,p.pname,sp.qty 
+
+from supplier s
+
+ join supplier_part sp
+
+  on s.sno=sp.sno
+
+join part p 
+
+on sp.pno=p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
 	(861, 13, 0.00, 'select * from project;
 ┌─────┬─────────┬────────┐
 │ jno │  jname  │  city  │
@@ -4075,6 +4568,58 @@ ON supplier.sno=supplier_part.sno;
 (12 rows)
 
 ', 4, 'EXECUTED'),
+	(2170, 40, 0.00, 'select jname, sname, pname, qty 
+
+from project j join supplier s on 
+
+j.city=s.city 
+
+join part p 
+
+on s.city=p.city
+
+join supplier_part sp on
+
+p.pno=sp.pno;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 300 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 200 │
+│ Tape   │ Clark │ Cog   │ 100 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 200 │
+│ RAID   │ Clark │ Cog   │ 100 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Sorter │ Jones │ Cam   │ 400 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Cam   │ 100 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 400 │
+│ Sorter │ Blake │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 100 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+└────────┴───────┴───────┴─────┘
+(32 rows)
+
+', 5, 'EXECUTED'),
 	(1243, 16, 0.00, 'SELECT s.sno ,s.sname, COUNT (distinct p.pno) AS total_parts, SUM(sp.qty) AS total_quantity 
 
 FROM supplier s 
@@ -4199,6 +4744,52 @@ ON sp.sno=s.sno;
 │ Console │ Smith │ Cog   │ 500 │
 └─────────┴───────┴───────┴─────┘
 (39 rows)
+
+', 5, 'EXECUTED'),
+	(1888, 41, 0.00, 'SELECT pj.jname,s.sname,p.pname, sp.qty
+
+ FROM project pj join supplier s
+
+ ON pj.city = s.city 
+
+ join part p ON s.city = p.city JOIN supplier_part sp ON p.pno = sp.pno;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 300 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 200 │
+│ Tape   │ Clark │ Cog   │ 100 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 200 │
+│ RAID   │ Clark │ Cog   │ 100 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Sorter │ Jones │ Cam   │ 400 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Cam   │ 100 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 400 │
+│ Sorter │ Blake │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 100 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+└────────┴───────┴───────┴─────┘
+(32 rows)
 
 ', 5, 'EXECUTED'),
 	(640, 13, 0.00, 'select * from project;
@@ -4531,6 +5122,47 @@ on supplier.sno=supplier_part.sno;
 (12 rows)
 
 ', 7, 'EXECUTED'),
+	(1603, 51, 0.00, 'select s.sname, p.pname, q.qty from supplier_part q
+
+JOIN supplier s on q.sno = s.sno
+
+JOIN part p on q.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(3108, 43, 0.00, 'SELECT s.sname, j.jname
+
+FROM spj sp
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN project j ON sp.jno = j.jno
+
+JOIN part p ON sp.pno = p.pno
+
+WHERE COUNT(p.pno) > 1
+
+GROUP BY p.pno;
+ERROR:  aggregate functions are not allowed in WHERE
+LINE 6: WHERE COUNT(p.pno) > 1
+              ^
+', 8, 'EXECUTED'),
 	(1153, 17, 0.00, 'SELECT COUNT(*) FROM supplier;
 ┌───────┐
 │ count │
@@ -4578,6 +5210,23 @@ JOIN project j ON a.jno = j.jno;
 (24 rows)
 
 ', 5, 'EXECUTED'),
+	(2616, 53, 0.00, 'SELECT  s.sname as "supplier_name", j.jname as "project_name", p.pname as " part_name", sp.qty as "qu
+antity_supplied" 
+
+FROM part p
+
+JOIN supplier_part sp on p.pno = sp.pno 
+
+JOIN supplier s on sp.sno = s.sno 
+
+JOIN project j on s.city = j.city where s.city != j.city;
+┌───────────────┬──────────────┬────────────┬───────────────────┐
+│ supplier_name │ project_name │  part_name │ quantity_supplied │
+├───────────────┼──────────────┼────────────┼───────────────────┤
+└───────────────┴──────────────┴────────────┴───────────────────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
 	(914, 4, 0.00, 'SELECT s.sname, COUNT(p.pno), COUNT(sp.qty) 
 
 FROM supplier_part sp 
@@ -4826,6 +5475,133 @@ JOIN project ON (supplier.city=project.city);
 (21 rows)
 
 ', 5, 'EXECUTED'),
+	(2655, 33, 0.00, 'select s.sname,pr.jname,count(qty)
+
+from project pr
+
+join supplier s on pr.city=s.city
+
+join supplier_part sp on s.sno=sp.sno;
+ERROR:  column "s.sname" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select s.sname,pr.jname,count(qty)
+               ^
+
+GROUP BY sname;
+ERROR:  syntax error at or near "GROUP"
+LINE 1: GROUP BY sname;
+        ^
+', 8, 'EXECUTED'),
+	(2327, 38, 0.00, 'select s.sname, count(sp.*), count(sp.qty) as quantity_supplied
+
+from supplier_part sp
+
+join supplier s on sp.sno = s.sno
+
+group by s.sname;
+┌───────┬───────┬───────────────────┐
+│ sname │ count │ quantity_supplied │
+├───────┼───────┼───────────────────┤
+│ Blake │     1 │                 1 │
+│ Jones │     2 │                 2 │
+│ Smith │     6 │                 6 │
+│ Clark │     3 │                 3 │
+└───────┴───────┴───────────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(2328, 32, 0.00, 'select s.sname, count(sp.*), count(sp.qty) as total_quantity
+
+from supplier_part sp
+
+join supplier s on sp.sno = s.sno
+
+group by s.sname;
+┌───────┬───────┬────────────────┐
+│ sname │ count │ total_quantity │
+├───────┼───────┼────────────────┤
+│ Blake │     1 │              1 │
+│ Jones │     2 │              2 │
+│ Smith │     6 │              6 │
+│ Clark │     3 │              3 │
+└───────┴───────┴────────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(2738, 42, 0.00, 'select sp.qty as total_quantity, p.pname as total_parts from supplier_part sp join part p on sp.pno=p.pno;
+┌────────────────┬─────────────┐
+│ total_quantity │ total_parts │
+├────────────────┼─────────────┤
+│            300 │ Nut         │
+│            200 │ Bolt        │
+│            400 │ Screw       │
+│            200 │ Screw       │
+│            100 │ Cam         │
+│            100 │ Cog         │
+│            300 │ Nut         │
+│            400 │ Bolt        │
+│            200 │ Bolt        │
+│            200 │ Bolt        │
+│            300 │ Screw       │
+│            400 │ Cam         │
+└────────────────┴─────────────┘
+(12 rows)
+
+', 7, 'EXECUTED'),
+	(2390, 35, 0.00, 'select s.sname AS supplier_name, j.jname , p.pname ,sp.qty, 
+
+s.city AS Supplier_city ,p.city AS Project_city
+
+from project j 
+
+JOIN spj sp ON j.jno = sp.jno 
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno =p.pno  ;
+┌───────────────┬─────────┬───────┬─────┬───────────────┬──────────────┐
+│ supplier_name │  jname  │ pname │ qty │ supplier_city │ project_city │
+├───────────────┼─────────┼───────┼─────┼───────────────┼──────────────┤
+│ Smith         │ Sorter  │ Nut   │ 200 │ London        │ London       │
+│ Smith         │ Console │ Nut   │ 700 │ London        │ London       │
+│ Jones         │ Sorter  │ Screw │ 400 │ Paris         │ Oslo         │
+│ Jones         │ Display │ Screw │ 200 │ Paris         │ Oslo         │
+│ Jones         │ OCR     │ Screw │ 200 │ Paris         │ Oslo         │
+│ Jones         │ Console │ Screw │ 500 │ Paris         │ Oslo         │
+│ Jones         │ RAID    │ Screw │ 600 │ Paris         │ Oslo         │
+│ Jones         │ EDS     │ Screw │ 400 │ Paris         │ Oslo         │
+│ Jones         │ Tape    │ Screw │ 800 │ Paris         │ Oslo         │
+│ Jones         │ Display │ Cam   │ 100 │ Paris         │ Paris        │
+│ Blake         │ Sorter  │ Screw │ 200 │ Paris         │ Oslo         │
+│ Blake         │ Display │ Screw │ 500 │ Paris         │ London       │
+│ Clark         │ OCR     │ Cog   │ 300 │ London        │ London       │
+│ Clark         │ Tape    │ Cog   │ 300 │ London        │ London       │
+│ Adams         │ Display │ Bolt  │ 200 │ Athens        │ Paris        │
+│ Adams         │ Console │ Bolt  │ 100 │ Athens        │ Paris        │
+│ Adams         │ RAID    │ Cam   │ 500 │ Athens        │ Paris        │
+│ Adams         │ Tape    │ Cam   │ 100 │ Athens        │ Paris        │
+│ Adams         │ Display │ Cog   │ 200 │ Athens        │ London       │
+│ Adams         │ Console │ Nut   │ 100 │ Athens        │ London       │
+│ Adams         │ Console │ Screw │ 200 │ Athens        │ Oslo         │
+│ Adams         │ Console │ Screw │ 800 │ Athens        │ London       │
+│ Adams         │ Console │ Cam   │ 400 │ Athens        │ Paris        │
+│ Adams         │ Console │ Cog   │ 500 │ Athens        │ London       │
+└───────────────┴─────────┴───────┴─────┴───────────────┴──────────────┘
+(24 rows)
+
+', 6, 'EXECUTED'),
+	(2338, 41, 0.00, 'SELECT s.sname,pj.jname,p.pname,sp.qty,s.city,pj.city
+
+ FROM supplier s join project pj
+
+ ON s.city = pj.city 
+
+ join part p ON pj.city  = p.city JOIN supplier_part sp ON sp.pno = p.pno
+
+ WHERE s.city NOT EXIST pj.city;
+ERROR:  syntax error at or near "NOT"
+LINE 5:  WHERE s.city NOT EXIST pj.city;
+                      ^
+', 6, 'EXECUTED'),
 	(1257, 27, 0.00, '\dt;
                List of tables
 ┌────────┬───────────────┬───────┬──────────┐
@@ -5070,6 +5846,64 @@ j on j.jno = sp.jno join part p on p.pno = sp.pno;
 (24 rows)
 
 ', 6, 'EXECUTED'),
+	(1796, 38, 0.00, 'select j.jname, s.sname, p.pname, pj.qty
+
+from spj pj
+
+join project j on pj.jno = j.jno
+
+join supplier s on pj.sno = s.sno 
+
+join part p on pj.pno = p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(1985, 36, 0.00, 'select s.sname, sum(sp.qty) as total_number,count(sp.pno) as parts
+
+from supplier s join supplier_part sp on s.sno = sp.sno
+
+join part p on sp.pno = p.pno
+
+group by s.sname;
+┌───────┬──────────────┬───────┐
+│ sname │ total_number │ parts │
+├───────┼──────────────┼───────┤
+│ Blake │          200 │     1 │
+│ Jones │          700 │     2 │
+│ Smith │         1300 │     6 │
+│ Clark │          900 │     3 │
+└───────┴──────────────┴───────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
 	(1169, 3, 0.00, 'select supplier.sname, 
 
 COUNT(part.pname), 
@@ -5098,6 +5932,13 @@ GROUP BY supplier.sname;
 (4 rows)
 
 ', 7, 'EXECUTED'),
+	(1970, 54, NULL, NULL, NULL, 'STARTED'),
+	(2351, 29, 0.00, 'select s.name , pj.jname , p.pname,sp.qty, sp.city p.city from supplier s join project pj on s.city = pj.city jo
+in part p on pj.city = p.city join supplier_part sp on p.pno = sp.pno where s.city not exist pj.city;
+ERROR:  syntax error at or near "."
+LINE 1: ...lect s.name , pj.jname , p.pname,sp.qty, sp.city p.city from...
+                                                             ^
+', 6, 'EXECUTED'),
 	(1187, 14, 0.00, 'SELECT
 
   supplier.sno,
@@ -5201,6 +6042,124 @@ GROUP BY s.sname,p.pname;
 (11 rows)
 
 ', 7, 'EXECUTED'),
+	(1797, 32, 0.00, 'select j.jname, s.sname, p.pname, pj.qty 
+
+from spj pj 
+
+join project j on pj.jno = j.jno 
+
+join supplier s on pj.sno = s.sno 
+
+join part p on pj.pno = p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(2001, 44, 0.00, 'SELECT s.sname, p.pname, q.qty 
+
+FROM supplier_part q 
+
+JOIN supplier s ON q.sno = s.sno
+
+JOIN part p ON q.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 5, 'EXECUTED'),
+	(1998, 45, 0.00, 'SELECT s.sname, j.jname, p.pname, spj.qty, s.city AS supplier_ci
+ty, j.city AS project_city
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno = p.pno
+
+JOIN project j ON spj.jno = j.jno
+
+WHERE s.city <> j.city;
+┌───────┬─────────┬───────┬─────┬───────────────┬──────────────┐
+│ sname │  jname  │ pname │ qty │ supplier_city │ project_city │
+├───────┼─────────┼───────┼─────┼───────────────┼──────────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London        │ Paris        │
+│ Smith │ Console │ Nut   │ 700 │ London        │ Athens       │
+│ Jones │ Display │ Screw │ 200 │ Paris         │ Rome         │
+│ Jones │ OCR     │ Screw │ 200 │ Paris         │ Athens       │
+│ Jones │ Console │ Screw │ 500 │ Paris         │ Athens       │
+│ Jones │ RAID    │ Screw │ 600 │ Paris         │ London       │
+│ Jones │ EDS     │ Screw │ 400 │ Paris         │ Oslo         │
+│ Jones │ Tape    │ Screw │ 800 │ Paris         │ London       │
+│ Jones │ Display │ Cam   │ 100 │ Paris         │ Rome         │
+│ Blake │ Display │ Screw │ 500 │ Paris         │ Rome         │
+│ Clark │ OCR     │ Cog   │ 300 │ London        │ Athens       │
+│ Adams │ Display │ Bolt  │ 200 │ Athens        │ Rome         │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens        │ London       │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens        │ London       │
+│ Adams │ Display │ Cog   │ 200 │ Athens        │ Rome         │
+└───────┴─────────┴───────┴─────┴───────────────┴──────────────┘
+(15 rows)
+
+', 6, 'EXECUTED'),
+	(1991, 33, 0.00, 'select s.sname,pr.jname,p.pname,sp.qty,s.city,pr.city
+
+from project pr
+
+right join supplier s on pr.city=s.city
+
+join supplier_part sp on s.sno=sp.sno
+
+join part p on sp.pno=p.pno
+
+where pr.city not in (s.city);
+┌───────┬───────┬───────┬─────┬──────┬──────┐
+│ sname │ jname │ pname │ qty │ city │ city │
+├───────┼───────┼───────┼─────┼──────┼──────┤
+└───────┴───────┴───────┴─────┴──────┴──────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
 	(1288, 20, 0.00, 'SELECT sname, COUNT(DISTINCT pt.pno),SUM(sp.qty)
 
 FROM supplier s
@@ -5524,6 +6483,20 @@ ERROR:  syntax error at or near "="
 LINE 3: join project.jno=spj.jno
                         ^
 ', 6, 'EXECUTED'),
+	(2430, 46, 0.00, '\dt
+               List of tables
+┌────────┬───────────────┬───────┬──────────┐
+│ Schema │     Name      │ Type  │  Owner   │
+├────────┼───────────────┼───────┼──────────┤
+│ public │ part          │ table │ postgres │
+│ public │ project       │ table │ postgres │
+│ public │ spj           │ table │ postgres │
+│ public │ supplier      │ table │ postgres │
+│ public │ supplier_part │ table │ postgres │
+└────────┴───────────────┴───────┴──────────┘
+(5 rows)
+
+', 8, 'EXECUTED'),
 	(1344, 11, 0.00, 'SELECT * from supplier;
 ERROR:  syntax error at or near "*"
 LINE 2: SELECT * from supplier;
@@ -5593,7 +6566,2806 @@ select * from spj;
 
 
 SELECT s.sname
-', 8, 'EXECUTED');
+', 8, 'EXECUTED'),
+	(1906, 49, 0.00, 'SELECT s.sname, 
+
+COUNT(DISTINCT spj.pno) AS total_different_parts, 
+
+SUM(spj.qty) AS total_quantity_supplied
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+GROUP BY s.sname;
+┌───────┬───────────────────────┬─────────────────────────┐
+│ sname │ total_different_parts │ total_quantity_supplied │
+├───────┼───────────────────────┼─────────────────────────┤
+│ Adams │                     6 │                    3100 │
+│ Blake │                     2 │                     700 │
+│ Clark │                     1 │                     600 │
+│ Jones │                     2 │                    3200 │
+│ Smith │                     1 │                     900 │
+└───────┴───────────────────────┴─────────────────────────┘
+(5 rows)
+
+', 7, 'EXECUTED'),
+	(3118, 40, 0.00, 'select sname, jname from supplier a 
+
+join spj sp on
+
+s.sno=sp.sno 
+
+join project p 
+
+on sp.jno = p.jno;
+ERROR:  missing FROM-clause entry for table "s"
+LINE 3: s.sno=sp.sno 
+        ^
+', 8, 'EXECUTED'),
+	(2561, 52, 0.00, 'Select s.sname as "supplier_name", j.jname as "project_name", p.pname as "part_name", sp.qty as "quantity_suppli
+ed"
+
+from part p
+
+join supplier_part sp on p.pno = p.pno
+
+join supplier s on sp.sno = s.sno
+
+join project j on s.city = j.city where s.city != j.city;
+┌───────────────┬──────────────┬───────────┬───────────────────┐
+│ supplier_name │ project_name │ part_name │ quantity_supplied │
+├───────────────┼──────────────┼───────────┼───────────────────┤
+└───────────────┴──────────────┴───────────┴───────────────────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
+	(2007, 29, 0.00, 'select pj.jname ,s.sname ,p.pname , sp.qty from project pj join supplier s on pj.city = s.city join part p on s.
+city = p.city join supplier_part sp on p.pno = sp.pno;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 300 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 200 │
+│ Tape   │ Clark │ Cog   │ 100 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 200 │
+│ RAID   │ Clark │ Cog   │ 100 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Sorter │ Jones │ Cam   │ 400 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Cam   │ 100 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 400 │
+│ Sorter │ Blake │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 100 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+└────────┴───────┴───────┴─────┘
+(32 rows)
+
+', 5, 'EXECUTED'),
+	(2499, 29, 0.00, 'select sp.qty as total_quantity, p.pname as total_parts from supplier_part sp join part p on sp.pno = p.pno;
+┌────────────────┬─────────────┐
+│ total_quantity │ total_parts │
+├────────────────┼─────────────┤
+│            300 │ Nut         │
+│            200 │ Bolt        │
+│            400 │ Screw       │
+│            200 │ Screw       │
+│            100 │ Cam         │
+│            100 │ Cog         │
+│            300 │ Nut         │
+│            400 │ Bolt        │
+│            200 │ Bolt        │
+│            200 │ Bolt        │
+│            300 │ Screw       │
+│            400 │ Cam         │
+└────────────────┴─────────────┘
+(12 rows)
+
+', 7, 'EXECUTED'),
+	(3139, 48, 0.00, 'select 
+
+s.sname, p.pname, q.qty
+
+from supplier_part q
+
+JOIN supplier s on q.sno=s.sno
+
+JOIN part p on q.pno=p.pno
+
+group by supplier s;
+ERROR:  syntax error at or near "s"
+LINE 6: group by supplier s;
+                          ^
+', 7, 'EXECUTED'),
+	(2441, 36, 0.00, 'select s.sname, j.jname
+
+from supplier s join project j on s.city = j.city
+
+join supplier_part sp on s.sno = sp.sno
+
+where sp.pno> j.jno;
+┌───────┬────────┐
+│ sname │ jname  │
+├───────┼────────┤
+│ Smith │ Tape   │
+│ Smith │ RAID   │
+│ Smith │ Tape   │
+│ Smith │ RAID   │
+│ Smith │ Tape   │
+│ Smith │ RAID   │
+│ Smith │ Tape   │
+│ Smith │ RAID   │
+│ Smith │ Tape   │
+│ Smith │ RAID   │
+│ Smith │ Tape   │
+│ Smith │ RAID   │
+│ Jones │ Sorter │
+│ Jones │ Sorter │
+│ Blake │ Sorter │
+│ Clark │ Tape   │
+│ Clark │ RAID   │
+│ Clark │ Tape   │
+│ Clark │ RAID   │
+│ Clark │ Tape   │
+│ Clark │ RAID   │
+└───────┴────────┘
+(21 rows)
+
+', 8, 'EXECUTED'),
+	(1586, 33, 0.00, 'select s.sname,p.pname,sp.qty
+
+from supplier s
+
+join supplier_part sp on s.sno=sp.sno
+
+join part p on p.pno=sp.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1598, 42, 0.00, 'select s.sname,p.pname,sp.qty from supplier s join part p on s.city = p.city join supplier_part sp on p.pno = sp
+.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 200 │
+│ Smith │ Screw │ 200 │
+│ Blake │ Cam   │ 100 │
+│ Jones │ Cam   │ 100 │
+│ Clark │ Cog   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 400 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Smith │ Screw │ 300 │
+│ Blake │ Cam   │ 400 │
+│ Jones │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(22 rows)
+
+', 4, 'EXECUTED'),
+	(1590, 53, NULL, NULL, NULL, 'STARTED'),
+	(2034, 49, 0.00, 'SELECT s.sname, j.jname
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN project j ON spj.jno = j.jno
+
+GROUP BY s.sname, j.jname
+
+HAVING COUNT(DISTINCT spj.pno) > 1;
+┌───────┬─────────┐
+│ sname │  jname  │
+├───────┼─────────┤
+│ Adams │ Console │
+│ Adams │ Display │
+│ Jones │ Display │
+└───────┴─────────┘
+(3 rows)
+
+', 8, 'EXECUTED'),
+	(1605, 49, 0.00, 'SELECT s.sname, p.pname, spj.qty
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(3088, 35, 0.00, 'Select s.sname, j.jname AS project_name ,sp.qty
+
+FROM project j 
+
+JOIN spj sp ON j.jno = sp.jno 
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno =p.pno  ;
+┌───────┬──────────────┬─────┐
+│ sname │ project_name │ qty │
+├───────┼──────────────┼─────┤
+│ Smith │ Sorter       │ 200 │
+│ Smith │ Console      │ 700 │
+│ Jones │ Sorter       │ 400 │
+│ Jones │ Display      │ 200 │
+│ Jones │ OCR          │ 200 │
+│ Jones │ Console      │ 500 │
+│ Jones │ RAID         │ 600 │
+│ Jones │ EDS          │ 400 │
+│ Jones │ Tape         │ 800 │
+│ Jones │ Display      │ 100 │
+│ Blake │ Sorter       │ 200 │
+│ Blake │ Display      │ 500 │
+│ Clark │ OCR          │ 300 │
+│ Clark │ Tape         │ 300 │
+│ Adams │ Display      │ 200 │
+│ Adams │ Console      │ 100 │
+│ Adams │ RAID         │ 500 │
+│ Adams │ Tape         │ 100 │
+│ Adams │ Display      │ 200 │
+│ Adams │ Console      │ 100 │
+│ Adams │ Console      │ 200 │
+│ Adams │ Console      │ 800 │
+│ Adams │ Console      │ 400 │
+│ Adams │ Console      │ 500 │
+└───────┴──────────────┴─────┘
+(24 rows)
+
+', 8, 'EXECUTED'),
+	(2548, 50, 0.00, 'select s.sname, j.jname, count(distinct spj.pno) as different_parts from spj join supplier s on spj.sno
+ = s.sno join project j on spj.jno = j.jno group by s.sname, j.jname having count(distinct spj.pno) > 1;
+┌───────┬─────────┬─────────────────┐
+│ sname │  jname  │ different_parts │
+├───────┼─────────┼─────────────────┤
+│ Adams │ Console │               6 │
+│ Adams │ Display │               2 │
+│ Jones │ Display │               2 │
+└───────┴─────────┴─────────────────┘
+(3 rows)
+
+', 8, 'EXECUTED'),
+	(1580, 32, 0.00, 'select s.sname, p.pname, sp.qty 
+
+from supplier s 
+
+join supplier_part sp on s.sno = sp.sno
+
+join part p on sp.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1607, 52, 0.00, 'Select s.sname as "supplier_name" , p.pname as "part_name", sp.qty as "quantity_supplied"
+
+from supplier s
+
+join supplier_part sp on s.sno = sp.sno
+
+join part p on sp.pno = p.pno;
+┌───────────────┬───────────┬───────────────────┐
+│ supplier_name │ part_name │ quantity_supplied │
+├───────────────┼───────────┼───────────────────┤
+│ Smith         │ Nut       │               300 │
+│ Smith         │ Bolt      │               200 │
+│ Smith         │ Screw     │               400 │
+│ Smith         │ Screw     │               200 │
+│ Smith         │ Cam       │               100 │
+│ Smith         │ Cog       │               100 │
+│ Jones         │ Nut       │               300 │
+│ Jones         │ Bolt      │               400 │
+│ Blake         │ Bolt      │               200 │
+│ Clark         │ Bolt      │               200 │
+│ Clark         │ Screw     │               300 │
+│ Clark         │ Cam       │               400 │
+└───────────────┴───────────┴───────────────────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1572, 50, 0.00, 'select s.sname, p.pname, sp.qty from supplier_part sp join supplier s on sp.sno = s.sno join part p on 
+sp.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1576, 41, 0.00, 'SELECT s.sname,p.pname,sp.qty from supplier s join part p on s.city = p.city join supplier_part sp on p.pno = sp
+.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 200 │
+│ Smith │ Screw │ 200 │
+│ Blake │ Cam   │ 100 │
+│ Jones │ Cam   │ 100 │
+│ Clark │ Cog   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 400 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Smith │ Screw │ 300 │
+│ Blake │ Cam   │ 400 │
+│ Jones │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(22 rows)
+
+', 4, 'EXECUTED'),
+	(1568, 38, 0.00, 'select s.sname, p.pname, sp.qty
+
+from supplier_part sp 
+
+join supplier s on sp.sno = s.sno 
+
+join part p on sp.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1817, 36, 0.00, 'select j.jname, s.sname, p.pname, sp.qty
+
+from project j join supplier s on j.city = s.city
+
+join part p on s.city = p.city
+
+join supplier_part sp on p.pno = sp.pno;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 300 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 200 │
+│ Tape   │ Clark │ Cog   │ 100 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 200 │
+│ RAID   │ Clark │ Cog   │ 100 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Sorter │ Jones │ Cam   │ 400 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Cam   │ 100 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 400 │
+│ Sorter │ Blake │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 100 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+└────────┴───────┴───────┴─────┘
+(32 rows)
+
+', 5, 'EXECUTED'),
+	(1597, 37, 0.00, 'SELECT s.sname, p.pname, spj.qty
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(2745, 44, 0.00, 'SELECT s.sname, p.pname, q.qty
+
+FROM supplier_part q
+
+JOIN supplier s ON q.sno = s.sno
+
+JOIN part p ON q.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 7, 'EXECUTED'),
+	(1578, 29, 0.00, 'select s.sname, p.pname ,sp.qty from supplier s  join  part p on s.city = p.city join supplier_part sp on p.pno 
+= sp.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 200 │
+│ Smith │ Screw │ 200 │
+│ Blake │ Cam   │ 100 │
+│ Jones │ Cam   │ 100 │
+│ Clark │ Cog   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 400 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Smith │ Screw │ 300 │
+│ Blake │ Cam   │ 400 │
+│ Jones │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(22 rows)
+
+', 4, 'EXECUTED'),
+	(1614, 45, 0.00, 'SELECT s.sname, p.pname, spj.qty
+
+FROM spj 
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(1565, 36, 0.00, 'select p.pname, s.sname, sp.qty
+
+from part p join supplier_part sp on p.pno = sp.pno
+
+join supplier s on sp.sno = s.sno;
+┌───────┬───────┬─────┐
+│ pname │ sname │ qty │
+├───────┼───────┼─────┤
+│ Nut   │ Smith │ 300 │
+│ Bolt  │ Smith │ 200 │
+│ Screw │ Smith │ 400 │
+│ Screw │ Smith │ 200 │
+│ Cam   │ Smith │ 100 │
+│ Cog   │ Smith │ 100 │
+│ Nut   │ Jones │ 300 │
+│ Bolt  │ Jones │ 400 │
+│ Bolt  │ Blake │ 200 │
+│ Bolt  │ Clark │ 200 │
+│ Screw │ Clark │ 300 │
+│ Cam   │ Clark │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1673, 45, 0.00, 'SELECT j.jname, s.sname, p.pname, spj.qty
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno = p.pno
+
+JOIN project j ON spj.jno = j.jno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(2051, 36, 0.00, 'select s.sname, j.jname, p.pname, sp.qty, s.city, j.city, s.city
+
+from supplier s join supplier_part sp on s.sno = sp.sno
+
+join part p on s.city = p.city
+
+join project j on p.city = j.city
+
+where s.city <> j.city;
+┌───────┬───────┬───────┬─────┬──────┬──────┬──────┐
+│ sname │ jname │ pname │ qty │ city │ city │ city │
+├───────┼───────┼───────┼─────┼──────┼──────┼──────┤
+└───────┴───────┴───────┴─────┴──────┴──────┴──────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
+	(1574, 46, 0.00, 'select * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+', 4, 'EXECUTED'),
+	(1852, 45, 0.00, 'SELECT s.sname, j.jname
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN project j ON spj.jno = j.jno
+
+GROUP BY s.sname, j.jname
+
+HAVING COUNT(DISTINCT spj.pno) > 1;
+┌───────┬─────────┐
+│ sname │  jname  │
+├───────┼─────────┤
+│ Adams │ Console │
+│ Adams │ Display │
+│ Jones │ Display │
+└───────┴─────────┘
+(3 rows)
+
+', 8, 'EXECUTED'),
+	(2755, 37, 0.00, 'SELECT s.name
+
+COUNT (DISTINCT sp.pno) AS total_different_parts,
+
+SUM(sp.qty) AS total_quatity_supplied
+
+FROM supplier s 
+
+JOIN spj sp ON s.sno = sp.sno
+
+GROUP BY s.name;
+ERROR:  syntax error at or near "("
+LINE 2: COUNT (DISTINCT sp.pno) AS total_different_parts,
+              ^
+', 7, 'EXECUTED'),
+	(1646, 53, 0.00, 'SELECT  s.sname as "supplier_name", p.pname as "part_name", sp.qty as "quantity_supplied" 
+
+FROM supplier s 
+
+JOIN supplier_part sp on s.sno = sp.sno 
+
+JOIN part p on sp.pno = p.pno;
+┌───────────────┬───────────┬───────────────────┐
+│ supplier_name │ part_name │ quantity_supplied │
+├───────────────┼───────────┼───────────────────┤
+│ Smith         │ Nut       │               300 │
+│ Smith         │ Bolt      │               200 │
+│ Smith         │ Screw     │               400 │
+│ Smith         │ Screw     │               200 │
+│ Smith         │ Cam       │               100 │
+│ Smith         │ Cog       │               100 │
+│ Jones         │ Nut       │               300 │
+│ Jones         │ Bolt      │               400 │
+│ Blake         │ Bolt      │               200 │
+│ Clark         │ Bolt      │               200 │
+│ Clark         │ Screw     │               300 │
+│ Clark         │ Cam       │               400 │
+└───────────────┴───────────┴───────────────────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1566, 35, 0.00, 'SELECT s.sname,p.pname ,spj.qty
+
+FROM spj 
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno =p.pno  ;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(2261, 51, 0.00, 'select j.jname, s.sname, p.pname, a.qty
+
+from spj a
+
+JOIN project j on a.jno = j.jno
+
+JOIN supplier s on a.sno = s.sno
+
+JOIN part p on a.pno = p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(1889, 37, 0.00, 'SELECT j.jname, s.sname, p.pname, sp.qty
+
+FROM project j
+
+JOIN spj sp ON j.jno = sp.jno
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno = p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(3177, 51, 0.00, 'select DISTINCT
+
+s.sname, j.jname, p.pname, p.city
+
+from spj a
+
+JOIN project j on a.jno = j.jno
+
+JOIN supplier s on a.sno = s.sno
+
+JOIN part p on a.pno = p.pno;
+┌───────┬─────────┬───────┬────────┐
+│ sname │  jname  │ pname │  city  │
+├───────┼─────────┼───────┼────────┤
+│ Clark │ OCR     │ Cog   │ London │
+│ Adams │ Tape    │ Cam   │ Paris  │
+│ Jones │ Display │ Cam   │ Paris  │
+│ Adams │ Console │ Nut   │ London │
+│ Jones │ RAID    │ Screw │ Oslo   │
+│ Clark │ Tape    │ Cog   │ London │
+│ Jones │ EDS     │ Screw │ Oslo   │
+│ Jones │ Console │ Screw │ Oslo   │
+│ Adams │ Console │ Screw │ London │
+│ Jones │ Display │ Screw │ Oslo   │
+│ Adams │ Display │ Bolt  │ Paris  │
+│ Jones │ Tape    │ Screw │ Oslo   │
+│ Adams │ RAID    │ Cam   │ Paris  │
+│ Blake │ Display │ Screw │ London │
+│ Smith │ Sorter  │ Nut   │ London │
+│ Jones │ Sorter  │ Screw │ Oslo   │
+│ Adams │ Display │ Cog   │ London │
+│ Adams │ Console │ Cam   │ Paris  │
+│ Adams │ Console │ Screw │ Oslo   │
+│ Jones │ OCR     │ Screw │ Oslo   │
+│ Adams │ Console │ Cog   │ London │
+│ Blake │ Sorter  │ Screw │ Oslo   │
+│ Adams │ Console │ Bolt  │ Paris  │
+│ Smith │ Console │ Nut   │ London │
+└───────┴─────────┴───────┴────────┘
+(24 rows)
+
+', 8, 'EXECUTED'),
+	(1762, 49, 0.00, 'SELECT j.jname, s.sname, p.pname, spj.qty
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno = p.pno
+
+JOIN project j ON spj.jno = j.jno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(1768, 49, 0.00, 'SELECT s.sname, j.jname, p.pname, spj.qty, s.city AS supplier_city, 
+j.city AS project_city
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN part p ON spj.pno = p.pno
+
+JOIN project j ON spj.jno = j.jno
+
+WHERE s.city <> j.city;
+┌───────┬─────────┬───────┬─────┬───────────────┬──────────────┐
+│ sname │  jname  │ pname │ qty │ supplier_city │ project_city │
+├───────┼─────────┼───────┼─────┼───────────────┼──────────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London        │ Paris        │
+│ Smith │ Console │ Nut   │ 700 │ London        │ Athens       │
+│ Jones │ Display │ Screw │ 200 │ Paris         │ Rome         │
+│ Jones │ OCR     │ Screw │ 200 │ Paris         │ Athens       │
+│ Jones │ Console │ Screw │ 500 │ Paris         │ Athens       │
+│ Jones │ RAID    │ Screw │ 600 │ Paris         │ London       │
+│ Jones │ EDS     │ Screw │ 400 │ Paris         │ Oslo         │
+│ Jones │ Tape    │ Screw │ 800 │ Paris         │ London       │
+│ Jones │ Display │ Cam   │ 100 │ Paris         │ Rome         │
+│ Blake │ Display │ Screw │ 500 │ Paris         │ Rome         │
+│ Clark │ OCR     │ Cog   │ 300 │ London        │ Athens       │
+│ Adams │ Display │ Bolt  │ 200 │ Athens        │ Rome         │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens        │ London       │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens        │ London       │
+│ Adams │ Display │ Cog   │ 200 │ Athens        │ Rome         │
+└───────┴─────────┴───────┴─────┴───────────────┴──────────────┘
+(15 rows)
+
+', 6, 'EXECUTED'),
+	(3179, 47, 0.00, 'select district
+
+s.sname ,j.jname, p.pname, p.city 
+
+from spj a
+
+Join project j on a.jno = j.jno
+
+join supplier s on a.sno = s.sno 
+
+join part p on a.pno = p.pno;
+ERROR:  syntax error at or near "."
+LINE 2: s.sname ,j.jname, p.pname, p.city 
+         ^
+', 8, 'EXECUTED'),
+	(2134, 54, 0.00, 'Select  pj.jname as project_name,s.sname as supplier_name, p.pname as part_name,spj.qty as quantity_supplied fro
+m  spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN project pj ON s.jno = j.jno
+
+JOIN supplier_part sp ON s.sno = sp.sno
+
+JOIN part p ON sp.pno = p.pno;
+ERROR:  column s.jno does not exist
+LINE 3: JOIN project pj ON s.jno = j.jno
+                           ^
+HINT:  Perhaps you meant to reference the column "s.sno".
+', 5, 'EXECUTED'),
+	(1584, 40, 0.00, 'select sname, pname, qty from supplier s join part p 
+
+on s.city=p.city
+
+join supplier_part sp on 
+
+p.pno=sp.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 200 │
+│ Smith │ Screw │ 200 │
+│ Blake │ Cam   │ 100 │
+│ Jones │ Cam   │ 100 │
+│ Clark │ Cog   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Clark │ Nut   │ 300 │
+│ Smith │ Nut   │ 300 │
+│ Blake │ Bolt  │ 400 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Smith │ Screw │ 300 │
+│ Blake │ Cam   │ 400 │
+│ Jones │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(22 rows)
+
+', 4, 'EXECUTED'),
+	(2040, 30, 0.00, 'select sname,jname,pname,qty,s.city,p.city
+
+from project j join supplier s on 
+
+j.city=s.city
+
+join part p 
+
+on s.city!=p.city
+
+join supplier_part sp on 
+
+p.pno=sp.pno;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Blake │ Sorter  │ Nut   │ 300 │ Paris  │ London │
+│ Blake │ Sorter  │ Screw │ 400 │ Paris  │ Oslo   │
+│ Blake │ Sorter  │ Screw │ 200 │ Paris  │ London │
+│ Blake │ Sorter  │ Cog   │ 100 │ Paris  │ London │
+│ Blake │ Sorter  │ Nut   │ 300 │ Paris  │ London │
+│ Blake │ Sorter  │ Screw │ 300 │ Paris  │ London │
+│ Jones │ Sorter  │ Nut   │ 300 │ Paris  │ London │
+│ Jones │ Sorter  │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Sorter  │ Screw │ 200 │ Paris  │ London │
+│ Jones │ Sorter  │ Cog   │ 100 │ Paris  │ London │
+│ Jones │ Sorter  │ Nut   │ 300 │ Paris  │ London │
+│ Jones │ Sorter  │ Screw │ 300 │ Paris  │ London │
+│ Adams │ OCR     │ Nut   │ 300 │ Athens │ London │
+│ Adams │ OCR     │ Bolt  │ 200 │ Athens │ Paris  │
+│ Adams │ OCR     │ Screw │ 400 │ Athens │ Oslo   │
+│ Adams │ OCR     │ Screw │ 200 │ Athens │ London │
+│ Adams │ OCR     │ Cam   │ 100 │ Athens │ Paris  │
+│ Adams │ OCR     │ Cog   │ 100 │ Athens │ London │
+│ Adams │ OCR     │ Nut   │ 300 │ Athens │ London │
+│ Adams │ OCR     │ Bolt  │ 400 │ Athens │ Paris  │
+│ Adams │ OCR     │ Bolt  │ 200 │ Athens │ Paris  │
+│ Adams │ OCR     │ Bolt  │ 200 │ Athens │ Paris  │
+│ Adams │ OCR     │ Screw │ 300 │ Athens │ London │
+│ Adams │ OCR     │ Cam   │ 400 │ Athens │ Paris  │
+│ Adams │ Console │ Nut   │ 300 │ Athens │ London │
+│ Adams │ Console │ Bolt  │ 200 │ Athens │ Paris  │
+│ Adams │ Console │ Screw │ 400 │ Athens │ Oslo   │
+│ Adams │ Console │ Screw │ 200 │ Athens │ London │
+│ Adams │ Console │ Cam   │ 100 │ Athens │ Paris  │
+│ Adams │ Console │ Cog   │ 100 │ Athens │ London │
+│ Adams │ Console │ Nut   │ 300 │ Athens │ London │
+│ Adams │ Console │ Bolt  │ 400 │ Athens │ Paris  │
+│ Adams │ Console │ Bolt  │ 200 │ Athens │ Paris  │
+│ Adams │ Console │ Bolt  │ 200 │ Athens │ Paris  │
+│ Adams │ Console │ Screw │ 300 │ Athens │ London │
+│ Adams │ Console │ Cam   │ 400 │ Athens │ Paris  │
+│ Clark │ RAID    │ Bolt  │ 200 │ London │ Paris  │
+│ Clark │ RAID    │ Screw │ 400 │ London │ Oslo   │
+│ Clark │ RAID    │ Cam   │ 100 │ London │ Paris  │
+│ Clark │ RAID    │ Bolt  │ 400 │ London │ Paris  │
+│ Clark │ RAID    │ Bolt  │ 200 │ London │ Paris  │
+│ Clark │ RAID    │ Bolt  │ 200 │ London │ Paris  │
+│ Clark │ RAID    │ Cam   │ 400 │ London │ Paris  │
+│ Smith │ RAID    │ Bolt  │ 200 │ London │ Paris  │
+│ Smith │ RAID    │ Screw │ 400 │ London │ Oslo   │
+│ Smith │ RAID    │ Cam   │ 100 │ London │ Paris  │
+│ Smith │ RAID    │ Bolt  │ 400 │ London │ Paris  │
+│ Smith │ RAID    │ Bolt  │ 200 │ London │ Paris  │
+│ Smith │ RAID    │ Bolt  │ 200 │ London │ Paris  │
+│ Smith │ RAID    │ Cam   │ 400 │ London │ Paris  │
+│ Clark │ Tape    │ Bolt  │ 200 │ London │ Paris  │
+│ Clark │ Tape    │ Screw │ 400 │ London │ Oslo   │
+│ Clark │ Tape    │ Cam   │ 100 │ London │ Paris  │
+│ Clark │ Tape    │ Bolt  │ 400 │ London │ Paris  │
+│ Clark │ Tape    │ Bolt  │ 200 │ London │ Paris  │
+│ Clark │ Tape    │ Bolt  │ 200 │ London │ Paris  │
+│ Clark │ Tape    │ Cam   │ 400 │ London │ Paris  │
+│ Smith │ Tape    │ Bolt  │ 200 │ London │ Paris  │
+│ Smith │ Tape    │ Screw │ 400 │ London │ Oslo   │
+│ Smith │ Tape    │ Cam   │ 100 │ London │ Paris  │
+│ Smith │ Tape    │ Bolt  │ 400 │ London │ Paris  │
+│ Smith │ Tape    │ Bolt  │ 200 │ London │ Paris  │
+│ Smith │ Tape    │ Bolt  │ 200 │ London │ Paris  │
+│ Smith │ Tape    │ Cam   │ 400 │ London │ Paris  │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(64 rows)
+
+', 6, 'EXECUTED'),
+	(1567, 43, 0.00, 'SELECT s.sname, p.pname, sp.qty 
+
+FROM supplier_part sp 
+
+JOIN part p ON sp.pno = p.pno 
+
+JOIN supplier s ON s.sno = sp.sno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(2282, 50, 0.00, 'select s.sname, count(distinct sp.pno) as different_parts_supplied, sum(sp.qty) as total_quantity_suppl
+ied from supplier_part sp join supplier s on sp.sno = s.sno group by s.sname;
+┌───────┬──────────────────────────┬─────────────────────────┐
+│ sname │ different_parts_supplied │ total_quantity_supplied │
+├───────┼──────────────────────────┼─────────────────────────┤
+│ Blake │                        1 │                     200 │
+│ Clark │                        3 │                     900 │
+│ Jones │                        2 │                     700 │
+│ Smith │                        6 │                    1300 │
+└───────┴──────────────────────────┴─────────────────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(2894, 53, 0.00, 'SELECT s.sname, sum (sp.qty) as total_number 
+
+FROM supplier s  
+
+Join supplier_part sp on s.sno=sp.sno 
+
+JOIN part p on sp.pno = p.pno group by s.sname;
+┌───────┬──────────────┐
+│ sname │ total_number │
+├───────┼──────────────┤
+│ Blake │          200 │
+│ Jones │          700 │
+│ Smith │         1300 │
+│ Clark │          900 │
+└───────┴──────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(2432, 48, 0.00, 'select
+
+s.sname, j.jname, p.pname, a.qty, s.city, j.city
+
+from spj a
+
+JOIN project j on a.jno=j.jno
+
+JOIN supplier s on a.sno=s.sno
+
+JOIN part p on a.pno=p.pno
+
+WHERE s.city <> j.city;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ London │ Athens │
+│ Jones │ Display │ Screw │ 200 │ Paris  │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Paris  │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ Paris  │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ Paris  │ London │
+│ Jones │ Display │ Cam   │ 100 │ Paris  │ Rome   │
+│ Blake │ Display │ Screw │ 500 │ Paris  │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ London │ Athens │
+│ Adams │ Display │ Bolt  │ 200 │ Athens │ Rome   │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens │ London │
+│ Adams │ Display │ Cog   │ 200 │ Athens │ Rome   │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(15 rows)
+
+', 6, 'EXECUTED'),
+	(2063, 31, 0.00, 'select j.jname,s.sname,p.pname,sp.qty 
+
+from project j join supplier s on j.city=s.city
+
+join supplier_part sp
+
+  on s.sno=sp.sno
+
+join part p 
+
+on sp.pno=p.pno;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Bolt  │ 200 │
+│ RAID   │ Smith │ Bolt  │ 200 │
+│ Tape   │ Smith │ Screw │ 400 │
+│ RAID   │ Smith │ Screw │ 400 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cam   │ 100 │
+│ RAID   │ Smith │ Cam   │ 100 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ Sorter │ Jones │ Nut   │ 300 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Tape   │ Clark │ Bolt  │ 200 │
+│ RAID   │ Clark │ Bolt  │ 200 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Tape   │ Clark │ Cam   │ 400 │
+│ RAID   │ Clark │ Cam   │ 400 │
+└────────┴───────┴───────┴─────┘
+(21 rows)
+
+', 5, 'EXECUTED'),
+	(2172, 48, 0.00, 'select
+
+s.sname, j.jname, p.pname, a.qty, s.city, j.city
+
+from spj a
+
+JOIN project j on a.jno=j.jno
+
+JOIN supplier s on a.sno=s.sno
+
+JOIN part p on a.pno=p.pno
+
+WHERE s.city <> j.city;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ London │ Athens │
+│ Jones │ Display │ Screw │ 200 │ Paris  │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Paris  │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ Paris  │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ Paris  │ London │
+│ Jones │ Display │ Cam   │ 100 │ Paris  │ Rome   │
+│ Blake │ Display │ Screw │ 500 │ Paris  │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ London │ Athens │
+│ Adams │ Display │ Bolt  │ 200 │ Athens │ Rome   │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens │ London │
+│ Adams │ Display │ Cog   │ 200 │ Athens │ Rome   │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(15 rows)
+
+', 5, 'EXECUTED'),
+	(2892, 48, 0.00, 'select DISTINCT
+
+s.sname, p.pname, j.jname,  p.city 
+
+from spj a
+
+JOIN project j on a.jno=j.jno
+
+JOIN supplier s on a.sno=s.sno
+
+JOIN part p on a.pno=p.pno;
+┌───────┬───────┬─────────┬────────┐
+│ sname │ pname │  jname  │  city  │
+├───────┼───────┼─────────┼────────┤
+│ Adams │ Cog   │ Console │ London │
+│ Blake │ Screw │ Sorter  │ Oslo   │
+│ Adams │ Bolt  │ Console │ Paris  │
+│ Jones │ Screw │ OCR     │ Oslo   │
+│ Jones │ Cam   │ Display │ Paris  │
+│ Adams │ Screw │ Console │ London │
+│ Jones │ Screw │ Sorter  │ Oslo   │
+│ Adams │ Nut   │ Console │ London │
+│ Smith │ Nut   │ Console │ London │
+│ Smith │ Nut   │ Sorter  │ London │
+│ Jones │ Screw │ Console │ Oslo   │
+│ Adams │ Cog   │ Display │ London │
+│ Blake │ Screw │ Display │ London │
+│ Adams │ Screw │ Console │ Oslo   │
+│ Jones │ Screw │ RAID    │ Oslo   │
+│ Adams │ Cam   │ RAID    │ Paris  │
+│ Adams │ Cam   │ Tape    │ Paris  │
+│ Adams │ Cam   │ Console │ Paris  │
+│ Clark │ Cog   │ OCR     │ London │
+│ Adams │ Bolt  │ Display │ Paris  │
+│ Jones │ Screw │ Display │ Oslo   │
+│ Jones │ Screw │ EDS     │ Oslo   │
+│ Jones │ Screw │ Tape    │ Oslo   │
+│ Clark │ Cog   │ Tape    │ London │
+└───────┴───────┴─────────┴────────┘
+(24 rows)
+
+', 8, 'EXECUTED'),
+	(1958, 42, 0.00, 'select pj.jname, s.sname, p.pname, sp.qty 
+
+from project pj join supplier s on pj.city = s.city join part p on s.city = p.city join supplier_part sp on p.pn
+o = sp.pno;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 300 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 200 │
+│ Tape   │ Clark │ Cog   │ 100 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 200 │
+│ RAID   │ Clark │ Cog   │ 100 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Sorter │ Jones │ Cam   │ 400 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Cam   │ 100 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 400 │
+│ Sorter │ Blake │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 100 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+└────────┴───────┴───────┴─────┘
+(32 rows)
+
+', 5, 'EXECUTED'),
+	(2270, 31, 0.00, 'select s.sname,j.jname,p.pname,p.city,j.city,sp.qty 
+
+from project j join supplier s on j.city=s.city
+
+join supplier_part sp
+
+  on s.sno=sp.sno
+
+join part p 
+
+on sp.pno=p.pno
+
+where s.city not in (select j.city from project);
+┌───────┬───────┬───────┬──────┬──────┬─────┐
+│ sname │ jname │ pname │ city │ city │ qty │
+├───────┼───────┼───────┼──────┼──────┼─────┤
+└───────┴───────┴───────┴──────┴──────┴─────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
+	(1932, 34, 0.00, 'select pr.jname,s.sname,p.pname,sp.qty
+
+from project pr
+
+join supplier s 
+
+on pr.city=s.city
+
+join part p
+
+on s.city=p.city
+
+join supplier_part sp
+
+on p.pno=sp.pno;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ Tape   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Screw │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Screw │ 300 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 200 │
+│ Tape   │ Clark │ Cog   │ 100 │
+│ Tape   │ Clark │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 200 │
+│ RAID   │ Clark │ Cog   │ 100 │
+│ RAID   │ Clark │ Nut   │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Sorter │ Jones │ Cam   │ 400 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Jones │ Cam   │ 100 │
+│ Sorter │ Jones │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 400 │
+│ Sorter │ Blake │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Blake │ Cam   │ 100 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+└────────┴───────┴───────┴─────┘
+(32 rows)
+
+', 5, 'EXECUTED'),
+	(2713, 31, 0.00, 'select j.jname,s.sname
+
+from project j join supplier s on j.city=s.city
+
+join spj on s.sno=spj.sno
+
+where s.sno > spj.pno;
+┌─────────┬───────┐
+│  jname  │ sname │
+├─────────┼───────┤
+│ Sorter  │ Blake │
+│ Sorter  │ Blake │
+│ Sorter  │ Jones │
+│ Sorter  │ Jones │
+│ Sorter  │ Jones │
+│ Sorter  │ Jones │
+│ Sorter  │ Jones │
+│ Sorter  │ Jones │
+│ Sorter  │ Jones │
+│ Sorter  │ Jones │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ OCR     │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ Console │ Adams │
+│ RAID    │ Clark │
+│ RAID    │ Clark │
+│ RAID    │ Smith │
+│ RAID    │ Smith │
+│ Tape    │ Clark │
+│ Tape    │ Clark │
+│ Tape    │ Smith │
+│ Tape    │ Smith │
+└─────────┴───────┘
+(38 rows)
+
+', 8, 'EXECUTED'),
+	(1912, 38, 0.00, 'select s.sname, j.jname, p.pname, pj.qty, s.city, j.city 
+
+from spj pj 
+
+join supplier s on pj.sno = s.sno 
+
+join project j on pj.jno = j.jno
+
+join part p on pj.pno = p.pno
+
+where s.city != j.city;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ London │ Athens │
+│ Jones │ Display │ Screw │ 200 │ Paris  │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Paris  │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ Paris  │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ Paris  │ London │
+│ Jones │ Display │ Cam   │ 100 │ Paris  │ Rome   │
+│ Blake │ Display │ Screw │ 500 │ Paris  │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ London │ Athens │
+│ Adams │ Display │ Bolt  │ 200 │ Athens │ Rome   │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens │ London │
+│ Adams │ Display │ Cog   │ 200 │ Athens │ Rome   │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(15 rows)
+
+', 6, 'EXECUTED'),
+	(2013, 32, 0.00, 'select s.sname, j.jname, p.pname, pj.qty, s.city, j.city
+
+from spj pj
+
+join supplier s on pj.sno = s.sno
+
+join project j on pj.jno = j.jno
+
+join part p on pj.pno = p.pno
+
+where s.city != j.city;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ London │ Athens │
+│ Jones │ Display │ Screw │ 200 │ Paris  │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Paris  │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ Paris  │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ Paris  │ London │
+│ Jones │ Display │ Cam   │ 100 │ Paris  │ Rome   │
+│ Blake │ Display │ Screw │ 500 │ Paris  │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ London │ Athens │
+│ Adams │ Display │ Bolt  │ 200 │ Athens │ Rome   │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens │ London │
+│ Adams │ Display │ Cog   │ 200 │ Athens │ Rome   │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(15 rows)
+
+', 6, 'EXECUTED'),
+	(2470, 42, 0.00, 'Select s.sname, pj.jname, p.pname,sp.qty,sp.city,p.city from supplier s join project pj on s.city = pj.city join
+ part p on pj.city = p.city join supplier_part sp on sp.pno = p.pno where s.city != pj.city; 
+ERROR:  column sp.city does not exist
+LINE 1: Select s.sname, pj.jname, p.pname,sp.qty,sp.city,p.city from...
+                                                 ^
+HINT:  Perhaps you meant to reference the column "s.city" or the column "p.city".
+
+
+
+\d part
+                        Table "public.part"
+┌────────┬───────────────────────┬───────────┬──────────┬─────────┐
+│ Column │         Type          │ Collation │ Nullable │ Default │
+├────────┼───────────────────────┼───────────┼──────────┼─────────┤
+│ pno    │ character varying(6)  │           │ not null │         │
+│ pname  │ character varying(20) │           │ not null │         │
+│ color  │ character varying(6)  │           │ not null │         │
+│ weight │ numeric(5,1)          │           │ not null │         │
+│ city   │ character varying(15) │           │ not null │         │
+└────────┴───────────────────────┴───────────┴──────────┴─────────┘
+Indexes:
+    "part_pkey" PRIMARY KEY, btree (pno)
+Referenced by:
+    TABLE "spj" CONSTRAINT "spj_pno_fkey" FOREIGN KEY (pno) REFERENCES part(pno)
+    TABLE "supplier_part" CONSTRAINT "supplier_part_pno_fkey" FOREIGN KEY (pno) REFERENCES part(pno)
+
+', 6, 'EXECUTED'),
+	(2363, 33, 0.00, 'select s.sname,s.status,sp.qty
+
+from supplier s
+
+join supplier_part sp on s.sno=sp.sno;
+┌───────┬────────┬─────┐
+│ sname │ status │ qty │
+├───────┼────────┼─────┤
+│ Smith │     20 │ 300 │
+│ Smith │     20 │ 200 │
+│ Smith │     20 │ 400 │
+│ Smith │     20 │ 200 │
+│ Smith │     20 │ 100 │
+│ Smith │     20 │ 100 │
+│ Jones │     10 │ 300 │
+│ Jones │     10 │ 400 │
+│ Blake │     30 │ 200 │
+│ Clark │     20 │ 200 │
+│ Clark │     20 │ 300 │
+│ Clark │     20 │ 400 │
+└───────┴────────┴─────┘
+(12 rows)
+
+', 7, 'EXECUTED'),
+	(2379, 53, 0.00, 'SELECT j.jname as "project_name", s.sname as "supplier_name", p.pname as "part_name", sp.qty as "quan
+tity_supplied" 
+
+FROM project j, supplier s 
+
+JOIN supplier_part sp on s.sno =sp.sno 
+
+JOIN part p on sp.pno = p.pno;
+┌──────────────┬───────────────┬───────────┬───────────────────┐
+│ project_name │ supplier_name │ part_name │ quantity_supplied │
+├──────────────┼───────────────┼───────────┼───────────────────┤
+│ Sorter       │ Smith         │ Nut       │               300 │
+│ Display      │ Smith         │ Nut       │               300 │
+│ OCR          │ Smith         │ Nut       │               300 │
+│ Console      │ Smith         │ Nut       │               300 │
+│ RAID         │ Smith         │ Nut       │               300 │
+│ EDS          │ Smith         │ Nut       │               300 │
+│ Tape         │ Smith         │ Nut       │               300 │
+│ Sorter       │ Smith         │ Bolt      │               200 │
+│ Display      │ Smith         │ Bolt      │               200 │
+│ OCR          │ Smith         │ Bolt      │               200 │
+│ Console      │ Smith         │ Bolt      │               200 │
+│ RAID         │ Smith         │ Bolt      │               200 │
+│ EDS          │ Smith         │ Bolt      │               200 │
+│ Tape         │ Smith         │ Bolt      │               200 │
+│ Sorter       │ Smith         │ Screw     │               400 │
+│ Display      │ Smith         │ Screw     │               400 │
+│ OCR          │ Smith         │ Screw     │               400 │
+│ Console      │ Smith         │ Screw     │               400 │
+│ RAID         │ Smith         │ Screw     │               400 │
+│ EDS          │ Smith         │ Screw     │               400 │
+│ Tape         │ Smith         │ Screw     │               400 │
+│ Sorter       │ Smith         │ Screw     │               200 │
+│ Display      │ Smith         │ Screw     │               200 │
+│ OCR          │ Smith         │ Screw     │               200 │
+│ Console      │ Smith         │ Screw     │               200 │
+│ RAID         │ Smith         │ Screw     │               200 │
+│ EDS          │ Smith         │ Screw     │               200 │
+│ Tape         │ Smith         │ Screw     │               200 │
+│ Sorter       │ Smith         │ Cam       │               100 │
+│ Display      │ Smith         │ Cam       │               100 │
+│ OCR          │ Smith         │ Cam       │               100 │
+│ Console      │ Smith         │ Cam       │               100 │
+│ RAID         │ Smith         │ Cam       │               100 │
+│ EDS          │ Smith         │ Cam       │               100 │
+│ Tape         │ Smith         │ Cam       │               100 │
+│ Sorter       │ Smith         │ Cog       │               100 │
+│ Display      │ Smith         │ Cog       │               100 │
+│ OCR          │ Smith         │ Cog       │               100 │
+│ Console      │ Smith         │ Cog       │               100 │
+│ RAID         │ Smith         │ Cog       │               100 │
+│ EDS          │ Smith         │ Cog       │               100 │
+│ Tape         │ Smith         │ Cog       │               100 │
+│ Sorter       │ Jones         │ Nut       │               300 │
+│ Display      │ Jones         │ Nut       │               300 │
+│ OCR          │ Jones         │ Nut       │               300 │
+│ Console      │ Jones         │ Nut       │               300 │
+│ RAID         │ Jones         │ Nut       │               300 │
+│ EDS          │ Jones         │ Nut       │               300 │
+│ Tape         │ Jones         │ Nut       │               300 │
+│ Sorter       │ Jones         │ Bolt      │               400 │
+│ Display      │ Jones         │ Bolt      │               400 │
+│ OCR          │ Jones         │ Bolt      │               400 │
+│ Console      │ Jones         │ Bolt      │               400 │
+│ RAID         │ Jones         │ Bolt      │               400 │
+│ EDS          │ Jones         │ Bolt      │               400 │
+│ Tape         │ Jones         │ Bolt      │               400 │
+│ Sorter       │ Blake         │ Bolt      │               200 │
+│ Display      │ Blake         │ Bolt      │               200 │
+│ OCR          │ Blake         │ Bolt      │               200 │
+│ Console      │ Blake         │ Bolt      │               200 │
+│ RAID         │ Blake         │ Bolt      │               200 │
+│ EDS          │ Blake         │ Bolt      │               200 │
+│ Tape         │ Blake         │ Bolt      │               200 │
+│ Sorter       │ Clark         │ Bolt      │               200 │
+│ Display      │ Clark         │ Bolt      │               200 │
+│ OCR          │ Clark         │ Bolt      │               200 │
+│ Console      │ Clark         │ Bolt      │               200 │
+│ RAID         │ Clark         │ Bolt      │               200 │
+│ EDS          │ Clark         │ Bolt      │               200 │
+│ Tape         │ Clark         │ Bolt      │               200 │
+│ Sorter       │ Clark         │ Screw     │               300 │
+│ Display      │ Clark         │ Screw     │               300 │
+│ OCR          │ Clark         │ Screw     │               300 │
+│ Console      │ Clark         │ Screw     │               300 │
+│ RAID         │ Clark         │ Screw     │               300 │
+│ EDS          │ Clark         │ Screw     │               300 │
+│ Tape         │ Clark         │ Screw     │               300 │
+│ Sorter       │ Clark         │ Cam       │               400 │
+│ Display      │ Clark         │ Cam       │               400 │
+│ OCR          │ Clark         │ Cam       │               400 │
+│ Console      │ Clark         │ Cam       │               400 │
+│ RAID         │ Clark         │ Cam       │               400 │
+│ EDS          │ Clark         │ Cam       │               400 │
+│ Tape         │ Clark         │ Cam       │               400 │
+└──────────────┴───────────────┴───────────┴───────────────────┘
+(84 rows)
+
+', 5, 'EXECUTED'),
+	(1902, 35, 0.00, 'Select  j.jname AS project_name ,s.sname, p.pname ,sp.qty
+
+FROM project j 
+
+JOIN spj sp ON j.jno = sp.jno 
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno =p.pno  ;
+┌──────────────┬───────┬───────┬─────┐
+│ project_name │ sname │ pname │ qty │
+├──────────────┼───────┼───────┼─────┤
+│ Sorter       │ Smith │ Nut   │ 200 │
+│ Console      │ Smith │ Nut   │ 700 │
+│ Sorter       │ Jones │ Screw │ 400 │
+│ Display      │ Jones │ Screw │ 200 │
+│ OCR          │ Jones │ Screw │ 200 │
+│ Console      │ Jones │ Screw │ 500 │
+│ RAID         │ Jones │ Screw │ 600 │
+│ EDS          │ Jones │ Screw │ 400 │
+│ Tape         │ Jones │ Screw │ 800 │
+│ Display      │ Jones │ Cam   │ 100 │
+│ Sorter       │ Blake │ Screw │ 200 │
+│ Display      │ Blake │ Screw │ 500 │
+│ OCR          │ Clark │ Cog   │ 300 │
+│ Tape         │ Clark │ Cog   │ 300 │
+│ Display      │ Adams │ Bolt  │ 200 │
+│ Console      │ Adams │ Bolt  │ 100 │
+│ RAID         │ Adams │ Cam   │ 500 │
+│ Tape         │ Adams │ Cam   │ 100 │
+│ Display      │ Adams │ Cog   │ 200 │
+│ Console      │ Adams │ Nut   │ 100 │
+│ Console      │ Adams │ Screw │ 200 │
+│ Console      │ Adams │ Screw │ 800 │
+│ Console      │ Adams │ Cam   │ 400 │
+│ Console      │ Adams │ Cog   │ 500 │
+└──────────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(2393, 47, 0.00, 'select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+select j.jname, s.name, p.pname, q.qty
+
+from spj a 
+
+Join project j on a.jno = j.jno
+
+join supplier s on a.sno = s.sno 
+
+join part p on a.pno = p.pno;
+ERROR:  column s.name does not exist
+LINE 1: select j.jname, s.name, p.pname, q.qty
+                        ^
+HINT:  Perhaps you meant to reference the column "s.sname".
+', 5, 'EXECUTED'),
+	(1969, 50, 0.00, 'select s.sname, count(distinct sp.pno) as different_parts_supplied, sum(sp.qty) as total_quantity_suppl
+ied from supplier_part sp join supplier s on sp.sno = s.sno group by s.sname;
+┌───────┬──────────────────────────┬─────────────────────────┐
+│ sname │ different_parts_supplied │ total_quantity_supplied │
+├───────┼──────────────────────────┼─────────────────────────┤
+│ Blake │                        1 │                     200 │
+│ Clark │                        3 │                     900 │
+│ Jones │                        2 │                     700 │
+│ Smith │                        6 │                    1300 │
+└───────┴──────────────────────────┴─────────────────────────┘
+(4 rows)
+
+', 6, 'EXECUTED'),
+	(2396, 37, 0.00, 'SELECT j.jname, s.sname, p.pname, sp.qty,
+
+s.city AS supplier_city, p.city AS project_city
+
+FROM project j
+
+JOIN spj sp ON j.jno = sp.jno
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno = p.pno;
+┌─────────┬───────┬───────┬─────┬───────────────┬──────────────┐
+│  jname  │ sname │ pname │ qty │ supplier_city │ project_city │
+├─────────┼───────┼───────┼─────┼───────────────┼──────────────┤
+│ Sorter  │ Smith │ Nut   │ 200 │ London        │ London       │
+│ Console │ Smith │ Nut   │ 700 │ London        │ London       │
+│ Sorter  │ Jones │ Screw │ 400 │ Paris         │ Oslo         │
+│ Display │ Jones │ Screw │ 200 │ Paris         │ Oslo         │
+│ OCR     │ Jones │ Screw │ 200 │ Paris         │ Oslo         │
+│ Console │ Jones │ Screw │ 500 │ Paris         │ Oslo         │
+│ RAID    │ Jones │ Screw │ 600 │ Paris         │ Oslo         │
+│ EDS     │ Jones │ Screw │ 400 │ Paris         │ Oslo         │
+│ Tape    │ Jones │ Screw │ 800 │ Paris         │ Oslo         │
+│ Display │ Jones │ Cam   │ 100 │ Paris         │ Paris        │
+│ Sorter  │ Blake │ Screw │ 200 │ Paris         │ Oslo         │
+│ Display │ Blake │ Screw │ 500 │ Paris         │ London       │
+│ OCR     │ Clark │ Cog   │ 300 │ London        │ London       │
+│ Tape    │ Clark │ Cog   │ 300 │ London        │ London       │
+│ Display │ Adams │ Bolt  │ 200 │ Athens        │ Paris        │
+│ Console │ Adams │ Bolt  │ 100 │ Athens        │ Paris        │
+│ RAID    │ Adams │ Cam   │ 500 │ Athens        │ Paris        │
+│ Tape    │ Adams │ Cam   │ 100 │ Athens        │ Paris        │
+│ Display │ Adams │ Cog   │ 200 │ Athens        │ London       │
+│ Console │ Adams │ Nut   │ 100 │ Athens        │ London       │
+│ Console │ Adams │ Screw │ 200 │ Athens        │ Oslo         │
+│ Console │ Adams │ Screw │ 800 │ Athens        │ London       │
+│ Console │ Adams │ Cam   │ 400 │ Athens        │ Paris        │
+│ Console │ Adams │ Cog   │ 500 │ Athens        │ London       │
+└─────────┴───────┴───────┴─────┴───────────────┴──────────────┘
+(24 rows)
+
+', 6, 'EXECUTED'),
+	(2403, 44, 0.00, 'SELECT j.jname, s.sname, p.pname, a.qty
+
+FROM spj a
+
+JOIN project j ON a.jno = j.jno
+
+JOIN supplier s ON a.sno = s.sno
+
+JOIN part p ON a.pno = p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 6, 'EXECUTED'),
+	(2398, 40, 0.00, 'select sname, jname, pname, qty, s.city, p.city
+
+from project j join supplier s 
+
+on j.city= s.city 
+
+join part p 
+
+on s.city=p.city 
+
+join supplier_part sp on
+
+p.pno=sp.pno ;
+┌───────┬────────┬───────┬─────┬────────┬────────┐
+│ sname │ jname  │ pname │ qty │  city  │  city  │
+├───────┼────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Tape   │ Nut   │ 300 │ London │ London │
+│ Smith │ Tape   │ Screw │ 200 │ London │ London │
+│ Smith │ Tape   │ Cog   │ 100 │ London │ London │
+│ Smith │ Tape   │ Nut   │ 300 │ London │ London │
+│ Smith │ Tape   │ Screw │ 300 │ London │ London │
+│ Smith │ RAID   │ Nut   │ 300 │ London │ London │
+│ Smith │ RAID   │ Screw │ 200 │ London │ London │
+│ Smith │ RAID   │ Cog   │ 100 │ London │ London │
+│ Smith │ RAID   │ Nut   │ 300 │ London │ London │
+│ Smith │ RAID   │ Screw │ 300 │ London │ London │
+│ Clark │ Tape   │ Nut   │ 300 │ London │ London │
+│ Clark │ Tape   │ Screw │ 200 │ London │ London │
+│ Clark │ Tape   │ Cog   │ 100 │ London │ London │
+│ Clark │ Tape   │ Nut   │ 300 │ London │ London │
+│ Clark │ Tape   │ Screw │ 300 │ London │ London │
+│ Clark │ RAID   │ Nut   │ 300 │ London │ London │
+│ Clark │ RAID   │ Screw │ 200 │ London │ London │
+│ Clark │ RAID   │ Cog   │ 100 │ London │ London │
+│ Clark │ RAID   │ Nut   │ 300 │ London │ London │
+│ Clark │ RAID   │ Screw │ 300 │ London │ London │
+│ Jones │ Sorter │ Cam   │ 400 │ Paris  │ Paris  │
+│ Jones │ Sorter │ Bolt  │ 400 │ Paris  │ Paris  │
+│ Jones │ Sorter │ Bolt  │ 200 │ Paris  │ Paris  │
+│ Jones │ Sorter │ Bolt  │ 200 │ Paris  │ Paris  │
+│ Jones │ Sorter │ Cam   │ 100 │ Paris  │ Paris  │
+│ Jones │ Sorter │ Bolt  │ 200 │ Paris  │ Paris  │
+│ Blake │ Sorter │ Cam   │ 400 │ Paris  │ Paris  │
+│ Blake │ Sorter │ Bolt  │ 400 │ Paris  │ Paris  │
+│ Blake │ Sorter │ Bolt  │ 200 │ Paris  │ Paris  │
+│ Blake │ Sorter │ Bolt  │ 200 │ Paris  │ Paris  │
+│ Blake │ Sorter │ Cam   │ 100 │ Paris  │ Paris  │
+│ Blake │ Sorter │ Bolt  │ 200 │ Paris  │ Paris  │
+└───────┴────────┴───────┴─────┴────────┴────────┘
+(32 rows)
+
+', 6, 'EXECUTED'),
+	(2155, 43, 0.00, 'SELECT j.jname, s.sname, p.pname, sp.qty
+
+FROM spj sp 
+
+JOIN project j ON sp.jno = j.jno
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno = p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(2475, 51, 0.00, 'select 
+
+s.sname, j.jname, p.pname, a.qty, s.city, j.city
+
+from spj a
+
+JOIN project j on a.jno = j.jno
+
+JOIN supplier s on a.sno = s.sno
+
+JOIN part p on a.pno = p.pno
+
+WHERE s.city <> j.city;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ London │ Athens │
+│ Jones │ Display │ Screw │ 200 │ Paris  │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Paris  │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ Paris  │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ Paris  │ London │
+│ Jones │ Display │ Cam   │ 100 │ Paris  │ Rome   │
+│ Blake │ Display │ Screw │ 500 │ Paris  │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ London │ Athens │
+│ Adams │ Display │ Bolt  │ 200 │ Athens │ Rome   │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens │ London │
+│ Adams │ Display │ Cog   │ 200 │ Athens │ Rome   │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(15 rows)
+
+', 6, 'EXECUTED'),
+	(1571, 30, 0.00, 'select sname,pname,qty as quantity_supplied
+
+from supplier s join part p 
+
+on s.city=p.city
+
+join supplier_part sp on 
+
+p.pno=sp.pno;
+┌───────┬───────┬───────────────────┐
+│ sname │ pname │ quantity_supplied │
+├───────┼───────┼───────────────────┤
+│ Clark │ Nut   │               300 │
+│ Smith │ Nut   │               300 │
+│ Blake │ Bolt  │               200 │
+│ Jones │ Bolt  │               200 │
+│ Clark │ Screw │               200 │
+│ Smith │ Screw │               200 │
+│ Blake │ Cam   │               100 │
+│ Jones │ Cam   │               100 │
+│ Clark │ Cog   │               100 │
+│ Smith │ Cog   │               100 │
+│ Clark │ Nut   │               300 │
+│ Smith │ Nut   │               300 │
+│ Blake │ Bolt  │               400 │
+│ Jones │ Bolt  │               400 │
+│ Blake │ Bolt  │               200 │
+│ Jones │ Bolt  │               200 │
+│ Blake │ Bolt  │               200 │
+│ Jones │ Bolt  │               200 │
+│ Clark │ Screw │               300 │
+│ Smith │ Screw │               300 │
+│ Blake │ Cam   │               400 │
+│ Jones │ Cam   │               400 │
+└───────┴───────┴───────────────────┘
+(22 rows)
+
+', 4, 'EXECUTED'),
+	(2690, 32, 0.00, 'select s.sname, j.jname, count(distinct spj.pno) as different_part 
+
+from spj join supplier s on spj.sno = s.sno
+
+join project j on spj.jno = j.jno
+
+group by s.sname,j.jname
+
+having count(distinct spj.pno) > 1;
+┌───────┬─────────┬────────────────┐
+│ sname │  jname  │ different_part │
+├───────┼─────────┼────────────────┤
+│ Adams │ Console │              6 │
+│ Adams │ Display │              2 │
+│ Jones │ Display │              2 │
+└───────┴─────────┴────────────────┘
+(3 rows)
+
+', 8, 'EXECUTED'),
+	(2264, 41, 0.00, 'SELECT s.sname, COUNT(p.pno) AS totalno,sp.qty from supplier s join part p on s.city = p.city join supplier_part
+ sp on p.pno = sp.pno group by sp.pno;
+ERROR:  column "s.sname" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT s.sname, COUNT(p.pno) AS totalno,sp.qty from supplier...
+               ^
+
+ select sp.qty as total_quantity ,p.pname as total_parts from supplier_part sp join part p on sp.pno = p.pno;
+┌────────────────┬─────────────┐
+│ total_quantity │ total_parts │
+├────────────────┼─────────────┤
+│            300 │ Nut         │
+│            200 │ Bolt        │
+│            400 │ Screw       │
+│            200 │ Screw       │
+│            100 │ Cam         │
+│            100 │ Cog         │
+│            300 │ Nut         │
+│            400 │ Bolt        │
+│            200 │ Bolt        │
+│            200 │ Bolt        │
+│            300 │ Screw       │
+│            400 │ Cam         │
+└────────────────┴─────────────┘
+(12 rows)
+
+', 7, 'EXECUTED'),
+	(2691, 51, 0.00, 'select s.sname, p.pname, q.qty 
+
+from supplier_part q
+
+JOIN supplier s on q.sno = s.sno
+
+JOIN part p on q.pno = p.pno
+
+group by supplier;
+ERROR:  column "supplier" does not exist
+LINE 5: group by supplier;
+                 ^
+', 7, 'EXECUTED'),
+	(2531, 43, 0.00, 'SELECT *FROM project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+SELECT * FROM supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+SELECT s.sname, j.jname, p.pname, sp.qty, s.city, j.city
+
+FROM spj sp 
+
+JOIN project j ON sp.jno = j.jno
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno = p.pno
+
+WHERE s.city NOT IN (SELECT j.city FROM project j);
+┌───────┬───────┬───────┬─────┬──────┬──────┐
+│ sname │ jname │ pname │ qty │ city │ city │
+├───────┼───────┼───────┼─────┼──────┼──────┤
+└───────┴───────┴───────┴─────┴──────┴──────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
+	(2723, 30, 0.00, 'select sname,jname from supplier s
+
+join spj sp on 
+
+s.sno=sp.sno 
+
+join project p on 
+
+sp.jno=p.jno;
+┌───────┬─────────┐
+│ sname │  jname  │
+├───────┼─────────┤
+│ Smith │ Sorter  │
+│ Smith │ Console │
+│ Jones │ Sorter  │
+│ Jones │ Display │
+│ Jones │ OCR     │
+│ Jones │ Console │
+│ Jones │ RAID    │
+│ Jones │ EDS     │
+│ Jones │ Tape    │
+│ Jones │ Display │
+│ Blake │ Sorter  │
+│ Blake │ Display │
+│ Clark │ OCR     │
+│ Clark │ Tape    │
+│ Adams │ Display │
+│ Adams │ Console │
+│ Adams │ RAID    │
+│ Adams │ Tape    │
+│ Adams │ Display │
+│ Adams │ Console │
+│ Adams │ Console │
+│ Adams │ Console │
+│ Adams │ Console │
+│ Adams │ Console │
+└───────┴─────────┘
+(24 rows)
+
+', 8, 'EXECUTED'),
+	(2420, 30, 0.00, 'select sname as supplier,weight as total_number,qty as total_quantity from
+
+supplier s join 
+
+spj ts on s.sno=ts.sno
+
+join part p 
+
+on ts.pno=p.pno ;
+┌──────────┬──────────────┬────────────────┐
+│ supplier │ total_number │ total_quantity │
+├──────────┼──────────────┼────────────────┤
+│ Smith    │         12.0 │            200 │
+│ Smith    │         12.0 │            700 │
+│ Jones    │         17.0 │            400 │
+│ Jones    │         17.0 │            200 │
+│ Jones    │         17.0 │            200 │
+│ Jones    │         17.0 │            500 │
+│ Jones    │         17.0 │            600 │
+│ Jones    │         17.0 │            400 │
+│ Jones    │         17.0 │            800 │
+│ Jones    │         12.0 │            100 │
+│ Blake    │         17.0 │            200 │
+│ Blake    │         14.0 │            500 │
+│ Clark    │         19.0 │            300 │
+│ Clark    │         19.0 │            300 │
+│ Adams    │         17.0 │            200 │
+│ Adams    │         17.0 │            100 │
+│ Adams    │         12.0 │            500 │
+│ Adams    │         12.0 │            100 │
+│ Adams    │         19.0 │            200 │
+│ Adams    │         12.0 │            100 │
+│ Adams    │         17.0 │            200 │
+│ Adams    │         14.0 │            800 │
+│ Adams    │         12.0 │            400 │
+│ Adams    │         19.0 │            500 │
+└──────────┴──────────────┴────────────────┘
+(24 rows)
+
+', 7, 'EXECUTED'),
+	(2592, 39, 0.00, 'select s.sname as "supplier_name" , j.jname as "project_name", p.pname as "part_name" , sp.qty as "quantity_supp
+lied" from part p join  supplier_part sp on p.pno=sp.pno join supplier s on sp.sno = s.sno join project j on s.city = 
+j.city where s.city != j.city;
+┌───────────────┬──────────────┬───────────┬───────────────────┐
+│ supplier_name │ project_name │ part_name │ quantity_supplied │
+├───────────────┼──────────────┼───────────┼───────────────────┤
+└───────────────┴──────────────┴───────────┴───────────────────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
+	(1892, 39, 0.00, 'select j.jname as "Project_name", s.sname as "Supplier_name",p.pname as "Part_name",sp.qty as "quantity_supplied
+" from project j , supplier s join supplier_part sp on s.sno = sp.sno join part p on sp.pno = p.pno;
+┌──────────────┬───────────────┬───────────┬───────────────────┐
+│ Project_name │ Supplier_name │ Part_name │ quantity_supplied │
+├──────────────┼───────────────┼───────────┼───────────────────┤
+│ Sorter       │ Smith         │ Nut       │               300 │
+│ Display      │ Smith         │ Nut       │               300 │
+│ OCR          │ Smith         │ Nut       │               300 │
+│ Console      │ Smith         │ Nut       │               300 │
+│ RAID         │ Smith         │ Nut       │               300 │
+│ EDS          │ Smith         │ Nut       │               300 │
+│ Tape         │ Smith         │ Nut       │               300 │
+│ Sorter       │ Smith         │ Bolt      │               200 │
+│ Display      │ Smith         │ Bolt      │               200 │
+│ OCR          │ Smith         │ Bolt      │               200 │
+│ Console      │ Smith         │ Bolt      │               200 │
+│ RAID         │ Smith         │ Bolt      │               200 │
+│ EDS          │ Smith         │ Bolt      │               200 │
+│ Tape         │ Smith         │ Bolt      │               200 │
+│ Sorter       │ Smith         │ Screw     │               400 │
+│ Display      │ Smith         │ Screw     │               400 │
+│ OCR          │ Smith         │ Screw     │               400 │
+│ Console      │ Smith         │ Screw     │               400 │
+│ RAID         │ Smith         │ Screw     │               400 │
+│ EDS          │ Smith         │ Screw     │               400 │
+│ Tape         │ Smith         │ Screw     │               400 │
+│ Sorter       │ Smith         │ Screw     │               200 │
+│ Display      │ Smith         │ Screw     │               200 │
+│ OCR          │ Smith         │ Screw     │               200 │
+│ Console      │ Smith         │ Screw     │               200 │
+│ RAID         │ Smith         │ Screw     │               200 │
+│ EDS          │ Smith         │ Screw     │               200 │
+│ Tape         │ Smith         │ Screw     │               200 │
+│ Sorter       │ Smith         │ Cam       │               100 │
+│ Display      │ Smith         │ Cam       │               100 │
+│ OCR          │ Smith         │ Cam       │               100 │
+│ Console      │ Smith         │ Cam       │               100 │
+│ RAID         │ Smith         │ Cam       │               100 │
+│ EDS          │ Smith         │ Cam       │               100 │
+│ Tape         │ Smith         │ Cam       │               100 │
+│ Sorter       │ Smith         │ Cog       │               100 │
+│ Display      │ Smith         │ Cog       │               100 │
+│ OCR          │ Smith         │ Cog       │               100 │
+│ Console      │ Smith         │ Cog       │               100 │
+│ RAID         │ Smith         │ Cog       │               100 │
+│ EDS          │ Smith         │ Cog       │               100 │
+│ Tape         │ Smith         │ Cog       │               100 │
+│ Sorter       │ Jones         │ Nut       │               300 │
+│ Display      │ Jones         │ Nut       │               300 │
+│ OCR          │ Jones         │ Nut       │               300 │
+│ Console      │ Jones         │ Nut       │               300 │
+│ RAID         │ Jones         │ Nut       │               300 │
+│ EDS          │ Jones         │ Nut       │               300 │
+│ Tape         │ Jones         │ Nut       │               300 │
+│ Sorter       │ Jones         │ Bolt      │               400 │
+│ Display      │ Jones         │ Bolt      │               400 │
+│ OCR          │ Jones         │ Bolt      │               400 │
+│ Console      │ Jones         │ Bolt      │               400 │
+│ RAID         │ Jones         │ Bolt      │               400 │
+│ EDS          │ Jones         │ Bolt      │               400 │
+│ Tape         │ Jones         │ Bolt      │               400 │
+│ Sorter       │ Blake         │ Bolt      │               200 │
+│ Display      │ Blake         │ Bolt      │               200 │
+│ OCR          │ Blake         │ Bolt      │               200 │
+│ Console      │ Blake         │ Bolt      │               200 │
+│ RAID         │ Blake         │ Bolt      │               200 │
+│ EDS          │ Blake         │ Bolt      │               200 │
+│ Tape         │ Blake         │ Bolt      │               200 │
+│ Sorter       │ Clark         │ Bolt      │               200 │
+│ Display      │ Clark         │ Bolt      │               200 │
+│ OCR          │ Clark         │ Bolt      │               200 │
+│ Console      │ Clark         │ Bolt      │               200 │
+│ RAID         │ Clark         │ Bolt      │               200 │
+│ EDS          │ Clark         │ Bolt      │               200 │
+│ Tape         │ Clark         │ Bolt      │               200 │
+│ Sorter       │ Clark         │ Screw     │               300 │
+│ Display      │ Clark         │ Screw     │               300 │
+│ OCR          │ Clark         │ Screw     │               300 │
+│ Console      │ Clark         │ Screw     │               300 │
+│ RAID         │ Clark         │ Screw     │               300 │
+│ EDS          │ Clark         │ Screw     │               300 │
+│ Tape         │ Clark         │ Screw     │               300 │
+│ Sorter       │ Clark         │ Cam       │               400 │
+│ Display      │ Clark         │ Cam       │               400 │
+│ OCR          │ Clark         │ Cam       │               400 │
+│ Console      │ Clark         │ Cam       │               400 │
+│ RAID         │ Clark         │ Cam       │               400 │
+│ EDS          │ Clark         │ Cam       │               400 │
+│ Tape         │ Clark         │ Cam       │               400 │
+└──────────────┴───────────────┴───────────┴───────────────────┘
+(84 rows)
+
+', 5, 'EXECUTED'),
+	(1623, 44, 0.00, 'SELECT s.sname, p.pname, q.qty 
+
+FROM supplier_part q 
+
+JOIN supplier s ON q.sno = s.sno
+
+JOIN part p ON q.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1585, 39, 0.00, 'select s.sname as "supplier_name",p.pname as "part_name", sp.qty as "quantity_supplied" from supplier s join sup
+plier_part sp on s.sno = sp.sno join part p on sp.pno = p.pno ;
+┌───────────────┬───────────┬───────────────────┐
+│ supplier_name │ part_name │ quantity_supplied │
+├───────────────┼───────────┼───────────────────┤
+│ Smith         │ Nut       │               300 │
+│ Smith         │ Bolt      │               200 │
+│ Smith         │ Screw     │               400 │
+│ Smith         │ Screw     │               200 │
+│ Smith         │ Cam       │               100 │
+│ Smith         │ Cog       │               100 │
+│ Jones         │ Nut       │               300 │
+│ Jones         │ Bolt      │               400 │
+│ Blake         │ Bolt      │               200 │
+│ Clark         │ Bolt      │               200 │
+│ Clark         │ Screw     │               300 │
+│ Clark         │ Cam       │               400 │
+└───────────────┴───────────┴───────────────────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(2770, 40, 0.00, 'select sname as supplier, weight as total_number , qty as total_quantity 
+
+from supplier s join
+
+spj ts on s.sno=ts.sno 
+
+join part p 
+
+on ts.pno=p.pno ;
+┌──────────┬──────────────┬────────────────┐
+│ supplier │ total_number │ total_quantity │
+├──────────┼──────────────┼────────────────┤
+│ Smith    │         12.0 │            200 │
+│ Smith    │         12.0 │            700 │
+│ Jones    │         17.0 │            400 │
+│ Jones    │         17.0 │            200 │
+│ Jones    │         17.0 │            200 │
+│ Jones    │         17.0 │            500 │
+│ Jones    │         17.0 │            600 │
+│ Jones    │         17.0 │            400 │
+│ Jones    │         17.0 │            800 │
+│ Jones    │         12.0 │            100 │
+│ Blake    │         17.0 │            200 │
+│ Blake    │         14.0 │            500 │
+│ Clark    │         19.0 │            300 │
+│ Clark    │         19.0 │            300 │
+│ Adams    │         17.0 │            200 │
+│ Adams    │         17.0 │            100 │
+│ Adams    │         12.0 │            500 │
+│ Adams    │         12.0 │            100 │
+│ Adams    │         19.0 │            200 │
+│ Adams    │         12.0 │            100 │
+│ Adams    │         17.0 │            200 │
+│ Adams    │         14.0 │            800 │
+│ Adams    │         12.0 │            400 │
+│ Adams    │         19.0 │            500 │
+└──────────┴──────────────┴────────────────┘
+(24 rows)
+
+', 7, 'EXECUTED'),
+	(2724, 29, 0.00, 'slecet s.sname , pj.jname , p.pname from supplier s join project pj on s.city = pj.city join part p on pj.city =
+ p.city having sp.qty;
+ERROR:  syntax error at or near "slecet"
+LINE 1: slecet s.sname , pj.jname , p.pname from supplier s join pro...
+        ^
+', 8, 'EXECUTED'),
+	(2581, 54, 0.00, 'Select  s.sname as supplier_name,pj.jname as project_name, p.pname as part_name,spj.qty as quantity_supplied fro
+m  spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+JOIN project pj ON s.jno = pj.jno
+
+JOIN supplier_part sp ON s.sno = sp.sno
+
+JOIN part p ON sp.pno = p.pno;
+ERROR:  column s.jno does not exist
+LINE 3: JOIN project pj ON s.jno = pj.jno
+                           ^
+HINT:  Perhaps you meant to reference the column "s.sno".
+', 6, 'EXECUTED'),
+	(2480, 35, 0.00, 'SELECT s.name, COUNT  sp.pno As Total_part ,
+
+SUM (sp.qty)AS Total_quantity_supplies 
+
+FROM supplier s 
+
+JOIN spj sp ON s.sno =sp .sno
+
+GROUP BY s.name;
+ERROR:  syntax error at or near "."
+LINE 1: SELECT s.name, COUNT  sp.pno As Total_part ,
+                                ^
+', 7, 'EXECUTED'),
+	(2827, 41, 0.00, 'select s.sname, pj.jname from supplier s join project pj on s.city = p.city;
+ERROR:  missing FROM-clause entry for table "p"
+LINE 1: ...pj.jname from supplier s join project pj on s.city = p.city;
+                                                                ^
+', 8, 'EXECUTED'),
+	(2307, 34, 0.00, 'select s.sname ,p.pno,sp.qty
+
+from supplier s 
+
+join part p 
+
+on s.city=p.city
+
+join supplier_part sp
+
+on p.pno=sp.pno;
+┌───────┬─────┬─────┐
+│ sname │ pno │ qty │
+├───────┼─────┼─────┤
+│ Clark │ P1  │ 300 │
+│ Smith │ P1  │ 300 │
+│ Blake │ P2  │ 200 │
+│ Jones │ P2  │ 200 │
+│ Clark │ P4  │ 200 │
+│ Smith │ P4  │ 200 │
+│ Blake │ P5  │ 100 │
+│ Jones │ P5  │ 100 │
+│ Clark │ P6  │ 100 │
+│ Smith │ P6  │ 100 │
+│ Clark │ P1  │ 300 │
+│ Smith │ P1  │ 300 │
+│ Blake │ P2  │ 400 │
+│ Jones │ P2  │ 400 │
+│ Blake │ P2  │ 200 │
+│ Jones │ P2  │ 200 │
+│ Blake │ P2  │ 200 │
+│ Jones │ P2  │ 200 │
+│ Clark │ P4  │ 300 │
+│ Smith │ P4  │ 300 │
+│ Blake │ P5  │ 400 │
+│ Jones │ P5  │ 400 │
+└───────┴─────┴─────┘
+(22 rows)
+
+', 7, 'EXECUTED'),
+	(2823, 43, 0.00, 'SELECT s.sname, COUNT(p.pno), sum(sp.qty)
+
+FROM supplier_part sp
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN part p ON sp.pno = p.pno
+
+GROUP BY s.sname;
+┌───────┬───────┬──────┐
+│ sname │ count │ sum  │
+├───────┼───────┼──────┤
+│ Blake │     1 │  200 │
+│ Jones │     2 │  700 │
+│ Smith │     6 │ 1300 │
+│ Clark │     3 │  900 │
+└───────┴───────┴──────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(2884, 39, 0.00, 'select s.sname , sum(sp.qty) as "total_number" from supplier s join supplier_part sp on s.sno=sp.sno join part p
+ on sp.pno=p.pno group by s.sname;
+┌───────┬──────────────┐
+│ sname │ total_number │
+├───────┼──────────────┤
+│ Blake │          200 │
+│ Jones │          700 │
+│ Smith │         1300 │
+│ Clark │          900 │
+└───────┴──────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(2887, 34, 0.00, 'select s.sname,pr.janme 
+
+from supplier s 
+
+join project p 
+
+where s.sname > pr.janme;
+ERROR:  syntax error at or near "where"
+LINE 4: where s.sname > pr.janme;
+        ^
+', 8, 'EXECUTED'),
+	(2861, 42, 0.00, 'select (count(*) + sp.qty) s.sname, pj.jname, p.pname from supplier s join project pj on s.city = pj.city join p
+art p on pj.city = p.city having sp.qty;
+ERROR:  syntax error at or near "."
+LINE 1: select (count(*) + sp.qty) s.sname, pj.jname, p.pname from s...
+                                    ^
+', 8, 'EXECUTED'),
+	(2076, 45, 0.00, 'SELECT s.sname, 
+
+COUNT(DISTINCT spj.pno) AS total_different_parts, 
+
+SUM(spj.qty) AS total_quantity_supplied
+
+FROM spj
+
+JOIN supplier s ON spj.sno = s.sno
+
+GROUP BY s.sname;
+┌───────┬───────────────────────┬─────────────────────────┐
+│ sname │ total_different_parts │ total_quantity_supplied │
+├───────┼───────────────────────┼─────────────────────────┤
+│ Adams │                     6 │                    3100 │
+│ Blake │                     2 │                     700 │
+│ Clark │                     1 │                     600 │
+│ Jones │                     2 │                    3200 │
+│ Smith │                     1 │                     900 │
+└───────┴───────────────────────┴─────────────────────────┘
+(5 rows)
+
+', 7, 'EXECUTED'),
+	(2871, 52, 0.00, 'Select s.sname, sum(sp.qty) as total_number 
+
+from supplier s 
+
+join supplier_part sp on s.sno = sp.sno
+
+join part p on sp.pno = p.pno
+
+group by s.sname;
+┌───────┬──────────────┐
+│ sname │ total_number │
+├───────┼──────────────┤
+│ Blake │          200 │
+│ Jones │          700 │
+│ Smith │         1300 │
+│ Clark │          900 │
+└───────┴──────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(2817, 44, 0.00, 'SELECT DISTINCT s.sname, p.pname, j.jname
+
+FROM spj a
+
+JOIN project j ON a.jno = j.jno
+
+JOIN supplier s ON a.sno = s.sno
+
+JOIN part p ON a.pno = p.pno;
+┌───────┬───────┬─────────┐
+│ sname │ pname │  jname  │
+├───────┼───────┼─────────┤
+│ Adams │ Cog   │ Console │
+│ Jones │ Screw │ Tape    │
+│ Smith │ Nut   │ Sorter  │
+│ Smith │ Nut   │ Console │
+│ Jones │ Screw │ Sorter  │
+│ Jones │ Cam   │ Display │
+│ Adams │ Bolt  │ Console │
+│ Jones │ Screw │ OCR     │
+│ Blake │ Screw │ Display │
+│ Adams │ Bolt  │ Display │
+│ Jones │ Screw │ RAID    │
+│ Adams │ Screw │ Console │
+│ Blake │ Screw │ Sorter  │
+│ Clark │ Cog   │ OCR     │
+│ Adams │ Cam   │ Console │
+│ Jones │ Screw │ Console │
+│ Adams │ Cog   │ Display │
+│ Adams │ Nut   │ Console │
+│ Jones │ Screw │ EDS     │
+│ Clark │ Cog   │ Tape    │
+│ Adams │ Cam   │ Tape    │
+│ Adams │ Cam   │ RAID    │
+│ Jones │ Screw │ Display │
+└───────┴───────┴─────────┘
+(23 rows)
+
+', 8, 'EXECUTED'),
+	(2948, 52, 0.00, 'Select s.sname, j.jname
+
+from supplier s 
+
+join project j on s.city = j.city
+
+join supplier_part sp on s.sno = sp.sno
+
+where sp.pno = j.jno;
+┌───────┬───────┐
+│ sname │ jname │
+├───────┼───────┤
+└───────┴───────┘
+(0 rows)
+
+', 8, 'EXECUTED'),
+	(1613, 48, 0.00, 'select
+
+j.jname, s.sname, p.pname, a.qty
+
+from spj a
+
+JOIN project j on a.jno=j.jno
+
+JOIN supplier s on a.sno=s.sno
+
+JOIN part p on a.pno=p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(2654, 38, 0.00, 'select s.sname, j.jname, count(distinct spj.pno) as different_part
+
+from spj join supplier s on spj.sno = s.sno 
+
+join project j on spj.jno = j.jno group by s.sname,j.jname 
+
+having count(distinct spj.pno) > 1;
+┌───────┬─────────┬────────────────┐
+│ sname │  jname  │ different_part │
+├───────┼─────────┼────────────────┤
+│ Adams │ Console │              6 │
+│ Adams │ Display │              2 │
+│ Jones │ Display │              2 │
+└───────┴─────────┴────────────────┘
+(3 rows)
+
+', 8, 'EXECUTED'),
+	(2482, 47, 0.00, 'select
+
+s.sname, j.jname, p.pname, a.qty, s.city, j.city
+
+from spj a 
+
+Join project j on a.jno = j.jno
+
+join supplier s on a.sno = s.sno 
+
+join part p on a.pno = p.pno
+
+where s.city <> j.city;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ London │ Athens │
+│ Jones │ Display │ Screw │ 200 │ Paris  │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Paris  │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ Paris  │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ Paris  │ London │
+│ Jones │ Display │ Cam   │ 100 │ Paris  │ Rome   │
+│ Blake │ Display │ Screw │ 500 │ Paris  │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ London │ Athens │
+│ Adams │ Display │ Bolt  │ 200 │ Athens │ Rome   │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens │ London │
+│ Adams │ Display │ Cog   │ 200 │ Athens │ Rome   │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(15 rows)
+
+', 6, 'EXECUTED');
 
 
 --
@@ -7205,7 +10977,33 @@ INSERT INTO public.student VALUES
 	('2512508', 'Versha Lohana'),
 	('2512509', 'Vikash Kumar'),
 	('2312410', 'Abdul Rehman'),
-	('2312412', 'Hamza Khan');
+	('2312412', 'Hamza Khan'),
+	('2412227', 'Aarish Shamnani'),
+	('2412230', 'Aleena Hashmi'),
+	('2412231', 'Ali Ghori'),
+	('2412232', 'Alizeh Khan'),
+	('2412234', 'Anchal Thakur'),
+	('2412236', 'Areeba Aqil'),
+	('2412238', 'Chander Kumar'),
+	('2412239', 'Charag Akhani'),
+	('2412240', 'Darian Dsouza'),
+	('2412241', 'Gotam Kumar'),
+	('2412243', 'Harsha Daulat Bhimani'),
+	('2412244', 'Ishita Bai'),
+	('2412245', 'Jai Jagdeesh'),
+	('2412248', 'Kunnal'),
+	('2412250', 'M Bilal'),
+	('2412251', 'Manish Kumar'),
+	('2412254', 'Muhammad Abbas Badami'),
+	('2412256', 'Muhammad Shahan Arshad'),
+	('2412260', 'Nikil Kumar'),
+	('2412261', 'Prachi Pahooja'),
+	('2412262', 'Rahim Ali Ajmal'),
+	('2412265', 'Sania Fareed'),
+	('2412266', 'Sanjina Bai'),
+	('2412267', 'Sharjeel Iqbal'),
+	('2412271', 'Waheed Shahid'),
+	('2512366', 'Rohan Kumar');
 
 
 --
@@ -7220,7 +11018,7 @@ INSERT INTO public.test VALUES
 -- Name: attempt_attid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.attempt_attid_seq', 28, true);
+SELECT pg_catalog.setval('public.attempt_attid_seq', 54, true);
 
 
 --
@@ -7241,7 +11039,7 @@ SELECT pg_catalog.setval('public.query_qid_seq', 8, true);
 -- Name: result_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.result_rid_seq', 1538, true);
+SELECT pg_catalog.setval('public.result_rid_seq', 3206, true);
 
 
 --
@@ -7359,5 +11157,5 @@ ALTER TABLE ONLY public.result
 -- PostgreSQL database dump complete
 --
 
-\unrestrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
+\unrestrict gW1nT2qpbPlITsXurlOwDCYISVpUJ3ZtyRNXbur8Ufreoya1d9Lo9MgE3dFQHFN
 
