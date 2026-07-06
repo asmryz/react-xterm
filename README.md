@@ -28,6 +28,10 @@ npm run dev
 \x auto
 ``` 
 
+```bash
+PGPASSWORD='Po@995886' pg_dump -U postgres -h localhost -p 5432 -d evaluation -F p   --create --clean --if-exists --no-owner --no-privileges   --inserts --rows-per-insert=1000   -f data.sql
+```
+
 3. Open the printed URL (usually http://localhost:5173)
 
 What you'll find:

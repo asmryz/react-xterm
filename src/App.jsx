@@ -143,7 +143,7 @@ export default function App() {
 
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (e.key === 'F5' && step === 'test') {
+            if (e.key === 'F9' && step === 'test') {
                 e.preventDefault()
                 runQueryRef.current()
             }
@@ -573,11 +573,11 @@ export default function App() {
                         </svg>
                         <span>SQL QUERY EDITOR</span>
                     </div>
-                    <div className="header-actions">
+                    {/* <div className="header-actions">
                         <button className="btn btn-clear" onClick={handleCopyTestText}>
                             {copiedText ? '✓ Copied' : 'CopY Text'}
                         </button>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="queries-scroll-container">
                     {tasks.map((task, index) => (
@@ -618,9 +618,9 @@ export default function App() {
                         <button className="btn btn-clear" onClick={handleShowSubmissions}>
                             Submission
                         </button>
-                        <button className="btn btn-clear" onClick={handleCopyTerminalOutput}>
+                        {/* <button className="btn btn-clear" onClick={handleCopyTerminalOutput}>
                             {copied ? '✓ Copied' : 'Copy Output'}
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 <div className="terminal-content">

@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
+\restrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
 
 -- Dumped from database version 18.4 (Debian 18.4-1.pgdg13+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -27,9 +27,9 @@ DROP DATABASE IF EXISTS evaluation;
 CREATE DATABASE evaluation WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
 
 
-\unrestrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
+\unrestrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
 \connect evaluation
-\restrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
+\restrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -260,8 +260,33 @@ ALTER TABLE ONLY public.test ALTER COLUMN testid SET DEFAULT nextval('public.tes
 --
 
 INSERT INTO public.attempt VALUES
-	(1, 4, '1732102', ''),
-	(2, 4, '1732102', '');
+	(2, 4, '1732102', ''),
+	(3, 4, '2412121', ''),
+	(4, 4, '2412503', ''),
+	(5, 4, '2412125', ''),
+	(6, 4, '2412507', ''),
+	(7, 4, '2412111', ''),
+	(8, 4, '2412119', ''),
+	(9, 4, '2412129', ''),
+	(10, 4, '2412130', ''),
+	(11, 4, '2412509', ''),
+	(12, 4, '2412128', ''),
+	(13, 4, '2412117', ''),
+	(14, 4, '2412115', ''),
+	(15, 4, '2412110', ''),
+	(16, 4, '2412109', ''),
+	(17, 4, '2412505', ''),
+	(18, 4, '2412500', ''),
+	(19, 4, '2412506', ''),
+	(20, 4, '2412114', ''),
+	(21, 4, '2412127', ''),
+	(22, 4, '2412107', ''),
+	(23, 4, '2412123', ''),
+	(24, 4, '2412120', ''),
+	(25, 4, '2412108', ''),
+	(26, 4, '2412116', ''),
+	(27, 4, '2312412', ''),
+	(28, 4, '2312410', '');
 
 
 --
@@ -289,34 +314,7 @@ INSERT INTO public.query VALUES
 --
 
 INSERT INTO public.result VALUES
-	(1, 1, NULL, NULL, NULL, NULL),
 	(2, 2, NULL, NULL, NULL, 'STARTED'),
-	(3, 2, 0.00, 'SELECT
-    s.sname,
-    p.pname,
-    sp.qty
-FROM supplier_part sp
-JOIN supplier s ON sp.sno = s.sno
-JOIN part p ON sp.pno = p.pno;
-┌───────┬───────┬─────┐
-│ sname │ pname │ qty │
-├───────┼───────┼─────┤
-│ Smith │ Nut   │ 300 │
-│ Smith │ Bolt  │ 200 │
-│ Smith │ Screw │ 400 │
-│ Smith │ Screw │ 200 │
-│ Smith │ Cam   │ 100 │
-│ Smith │ Cog   │ 100 │
-│ Jones │ Nut   │ 300 │
-│ Jones │ Bolt  │ 400 │
-│ Blake │ Bolt  │ 200 │
-│ Clark │ Bolt  │ 200 │
-│ Clark │ Screw │ 300 │
-│ Clark │ Cam   │ 400 │
-└───────┴───────┴─────┘
-(12 rows)
-
-', 4, 'EXECUTED'),
 	(6, 2, 0.00, 'SELECT
     j.jname,
     s.sname,
@@ -433,6 +431,5168 @@ ORDER BY s.sname, j.jname;
 └───────┴─────────┴─────────────────┴────────────────┘
 (3 rows)
 
+', 8, 'EXECUTED'),
+	(10, 3, NULL, NULL, NULL, 'STARTED'),
+	(11, 4, NULL, NULL, NULL, 'STARTED'),
+	(12, 5, NULL, NULL, NULL, 'STARTED'),
+	(13, 6, NULL, NULL, NULL, 'STARTED'),
+	(14, 7, NULL, NULL, NULL, 'STARTED'),
+	(15, 8, NULL, NULL, NULL, 'STARTED'),
+	(16, 9, NULL, NULL, NULL, 'STARTED'),
+	(17, 10, NULL, NULL, NULL, 'STARTED'),
+	(18, 11, NULL, NULL, NULL, 'STARTED'),
+	(19, 12, NULL, NULL, NULL, 'STARTED'),
+	(20, 13, NULL, NULL, NULL, 'STARTED'),
+	(21, 14, NULL, NULL, NULL, 'STARTED'),
+	(22, 15, NULL, NULL, NULL, 'STARTED'),
+	(23, 16, NULL, NULL, NULL, 'STARTED'),
+	(24, 17, NULL, NULL, NULL, 'STARTED'),
+	(25, 18, NULL, NULL, NULL, 'STARTED'),
+	(26, 19, NULL, NULL, NULL, 'STARTED'),
+	(27, 20, NULL, NULL, NULL, 'STARTED'),
+	(28, 21, NULL, NULL, NULL, 'STARTED'),
+	(29, 22, NULL, NULL, NULL, 'STARTED'),
+	(30, 23, NULL, NULL, NULL, 'STARTED'),
+	(31, 24, NULL, NULL, NULL, 'STARTED'),
+	(32, 25, NULL, NULL, NULL, 'STARTED'),
+	(3, 2, 0.00, 'SELECT
+    s.sname,
+    p.pname,
+    sp.qty
+FROM supplier_part sp
+JOIN supplier s ON sp.sno = s.sno
+JOIN part p ON sp.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(37, 18, 0.00, 'select * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+select sname from supplier ;
+┌───────┐
+│ sname │
+├───────┤
+│ Smith │
+│ Jones │
+│ Blake │
+│ Clark │
+│ Adams │
+└───────┘
+(5 rows)
+
+
+select pname from part ;
+┌───────┐
+│ pname │
+├───────┤
+│ Nut   │
+│ Bolt  │
+│ Screw │
+│ Screw │
+│ Cam   │
+│ Cog   │
+└───────┘
+(6 rows)
+
+
+select quantitysupplied from supplier ;
+ERROR:  column "quantitysupplied" does not exist
+LINE 1: select quantitysupplied from supplier ;
+               ^
+', 4, 'EXECUTED'),
+	(44, 7, 0.00, 'SELECT sname, pname, qty FROM supplier, part, supplier_part;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 400 │
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 100 │
+│ Smith │ Nut   │ 100 │
+│ Smith │ Nut   │ 300 │
+│ Smith │ Nut   │ 400 │
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 300 │
+│ Smith │ Nut   │ 400 │
+│ Smith │ Bolt  │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Bolt  │ 400 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Bolt  │ 100 │
+│ Smith │ Bolt  │ 100 │
+│ Smith │ Bolt  │ 300 │
+│ Smith │ Bolt  │ 400 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Bolt  │ 300 │
+│ Smith │ Bolt  │ 400 │
+│ Smith │ Screw │ 300 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 100 │
+│ Smith │ Screw │ 100 │
+│ Smith │ Screw │ 300 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 300 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 300 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 100 │
+│ Smith │ Screw │ 100 │
+│ Smith │ Screw │ 300 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Screw │ 300 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Cam   │ 300 │
+│ Smith │ Cam   │ 200 │
+│ Smith │ Cam   │ 400 │
+│ Smith │ Cam   │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cam   │ 300 │
+│ Smith │ Cam   │ 400 │
+│ Smith │ Cam   │ 200 │
+│ Smith │ Cam   │ 200 │
+│ Smith │ Cam   │ 300 │
+│ Smith │ Cam   │ 400 │
+│ Smith │ Cog   │ 300 │
+│ Smith │ Cog   │ 200 │
+│ Smith │ Cog   │ 400 │
+│ Smith │ Cog   │ 200 │
+│ Smith │ Cog   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Smith │ Cog   │ 300 │
+│ Smith │ Cog   │ 400 │
+│ Smith │ Cog   │ 200 │
+│ Smith │ Cog   │ 200 │
+│ Smith │ Cog   │ 300 │
+│ Smith │ Cog   │ 400 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Nut   │ 200 │
+│ Jones │ Nut   │ 400 │
+│ Jones │ Nut   │ 200 │
+│ Jones │ Nut   │ 100 │
+│ Jones │ Nut   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Nut   │ 400 │
+│ Jones │ Nut   │ 200 │
+│ Jones │ Nut   │ 200 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Nut   │ 400 │
+│ Jones │ Bolt  │ 300 │
+│ Jones │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 400 │
+│ Jones │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 100 │
+│ Jones │ Bolt  │ 100 │
+│ Jones │ Bolt  │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Jones │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 200 │
+│ Jones │ Bolt  │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Jones │ Screw │ 300 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 100 │
+│ Jones │ Screw │ 100 │
+│ Jones │ Screw │ 300 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 300 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 300 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 100 │
+│ Jones │ Screw │ 100 │
+│ Jones │ Screw │ 300 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 300 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Cam   │ 300 │
+│ Jones │ Cam   │ 200 │
+│ Jones │ Cam   │ 400 │
+│ Jones │ Cam   │ 200 │
+│ Jones │ Cam   │ 100 │
+│ Jones │ Cam   │ 100 │
+│ Jones │ Cam   │ 300 │
+│ Jones │ Cam   │ 400 │
+│ Jones │ Cam   │ 200 │
+│ Jones │ Cam   │ 200 │
+│ Jones │ Cam   │ 300 │
+│ Jones │ Cam   │ 400 │
+│ Jones │ Cog   │ 300 │
+│ Jones │ Cog   │ 200 │
+│ Jones │ Cog   │ 400 │
+│ Jones │ Cog   │ 200 │
+│ Jones │ Cog   │ 100 │
+│ Jones │ Cog   │ 100 │
+│ Jones │ Cog   │ 300 │
+│ Jones │ Cog   │ 400 │
+│ Jones │ Cog   │ 200 │
+│ Jones │ Cog   │ 200 │
+│ Jones │ Cog   │ 300 │
+│ Jones │ Cog   │ 400 │
+│ Blake │ Nut   │ 300 │
+│ Blake │ Nut   │ 200 │
+│ Blake │ Nut   │ 400 │
+│ Blake │ Nut   │ 200 │
+│ Blake │ Nut   │ 100 │
+│ Blake │ Nut   │ 100 │
+│ Blake │ Nut   │ 300 │
+│ Blake │ Nut   │ 400 │
+│ Blake │ Nut   │ 200 │
+│ Blake │ Nut   │ 200 │
+│ Blake │ Nut   │ 300 │
+│ Blake │ Nut   │ 400 │
+│ Blake │ Bolt  │ 300 │
+│ Blake │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 100 │
+│ Blake │ Bolt  │ 100 │
+│ Blake │ Bolt  │ 300 │
+│ Blake │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 200 │
+│ Blake │ Bolt  │ 300 │
+│ Blake │ Bolt  │ 400 │
+│ Blake │ Screw │ 300 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 400 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 100 │
+│ Blake │ Screw │ 100 │
+│ Blake │ Screw │ 300 │
+│ Blake │ Screw │ 400 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 300 │
+│ Blake │ Screw │ 400 │
+│ Blake │ Screw │ 300 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 400 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 100 │
+│ Blake │ Screw │ 100 │
+│ Blake │ Screw │ 300 │
+│ Blake │ Screw │ 400 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 300 │
+│ Blake │ Screw │ 400 │
+│ Blake │ Cam   │ 300 │
+│ Blake │ Cam   │ 200 │
+│ Blake │ Cam   │ 400 │
+│ Blake │ Cam   │ 200 │
+│ Blake │ Cam   │ 100 │
+│ Blake │ Cam   │ 100 │
+│ Blake │ Cam   │ 300 │
+│ Blake │ Cam   │ 400 │
+│ Blake │ Cam   │ 200 │
+│ Blake │ Cam   │ 200 │
+│ Blake │ Cam   │ 300 │
+│ Blake │ Cam   │ 400 │
+│ Blake │ Cog   │ 300 │
+│ Blake │ Cog   │ 200 │
+│ Blake │ Cog   │ 400 │
+│ Blake │ Cog   │ 200 │
+│ Blake │ Cog   │ 100 │
+│ Blake │ Cog   │ 100 │
+│ Blake │ Cog   │ 300 │
+│ Blake │ Cog   │ 400 │
+│ Blake │ Cog   │ 200 │
+│ Blake │ Cog   │ 200 │
+│ Blake │ Cog   │ 300 │
+│ Blake │ Cog   │ 400 │
+│ Clark │ Nut   │ 300 │
+│ Clark │ Nut   │ 200 │
+│ Clark │ Nut   │ 400 │
+│ Clark │ Nut   │ 200 │
+│ Clark │ Nut   │ 100 │
+│ Clark │ Nut   │ 100 │
+│ Clark │ Nut   │ 300 │
+│ Clark │ Nut   │ 400 │
+│ Clark │ Nut   │ 200 │
+│ Clark │ Nut   │ 200 │
+│ Clark │ Nut   │ 300 │
+│ Clark │ Nut   │ 400 │
+│ Clark │ Bolt  │ 300 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 400 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 100 │
+│ Clark │ Bolt  │ 100 │
+│ Clark │ Bolt  │ 300 │
+│ Clark │ Bolt  │ 400 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 300 │
+│ Clark │ Bolt  │ 400 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 400 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 100 │
+│ Clark │ Screw │ 100 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Screw │ 400 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Screw │ 400 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 400 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 100 │
+│ Clark │ Screw │ 100 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Screw │ 400 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Screw │ 400 │
+│ Clark │ Cam   │ 300 │
+│ Clark │ Cam   │ 200 │
+│ Clark │ Cam   │ 400 │
+│ Clark │ Cam   │ 200 │
+│ Clark │ Cam   │ 100 │
+│ Clark │ Cam   │ 100 │
+│ Clark │ Cam   │ 300 │
+│ Clark │ Cam   │ 400 │
+│ Clark │ Cam   │ 200 │
+│ Clark │ Cam   │ 200 │
+│ Clark │ Cam   │ 300 │
+│ Clark │ Cam   │ 400 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 200 │
+│ Clark │ Cog   │ 400 │
+│ Clark │ Cog   │ 200 │
+│ Clark │ Cog   │ 100 │
+│ Clark │ Cog   │ 100 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 400 │
+│ Clark │ Cog   │ 200 │
+│ Clark │ Cog   │ 200 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 400 │
+│ Adams │ Nut   │ 300 │
+│ Adams │ Nut   │ 200 │
+│ Adams │ Nut   │ 400 │
+│ Adams │ Nut   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Nut   │ 300 │
+│ Adams │ Nut   │ 400 │
+│ Adams │ Nut   │ 200 │
+│ Adams │ Nut   │ 200 │
+│ Adams │ Nut   │ 300 │
+│ Adams │ Nut   │ 400 │
+│ Adams │ Bolt  │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 400 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Bolt  │ 300 │
+│ Adams │ Bolt  │ 400 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 300 │
+│ Adams │ Bolt  │ 400 │
+│ Adams │ Screw │ 300 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 400 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 100 │
+│ Adams │ Screw │ 100 │
+│ Adams │ Screw │ 300 │
+│ Adams │ Screw │ 400 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 300 │
+│ Adams │ Screw │ 400 │
+│ Adams │ Screw │ 300 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 400 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 100 │
+│ Adams │ Screw │ 100 │
+│ Adams │ Screw │ 300 │
+│ Adams │ Screw │ 400 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 300 │
+│ Adams │ Screw │ 400 │
+│ Adams │ Cam   │ 300 │
+│ Adams │ Cam   │ 200 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cam   │ 200 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cam   │ 300 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cam   │ 200 │
+│ Adams │ Cam   │ 200 │
+│ Adams │ Cam   │ 300 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 300 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Cog   │ 400 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Cog   │ 100 │
+│ Adams │ Cog   │ 100 │
+│ Adams │ Cog   │ 300 │
+│ Adams │ Cog   │ 400 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Cog   │ 300 │
+│ Adams │ Cog   │ 400 │
+└───────┴───────┴─────┘
+(360 rows)
+
+', 4, 'EXECUTED'),
+	(33, 3, 0.00, 'SELECT supplier.sname, supplier_part.qty, part.pname 
+
+FROM supplier 
+
+JOIN supplier_part 
+
+ON supplier.sno = supplier_part.sno
+
+JOIN part 
+
+ON supplier_part.pno = part.pno;
+┌───────┬─────┬───────┐
+│ sname │ qty │ pname │
+├───────┼─────┼───────┤
+│ Smith │ 300 │ Nut   │
+│ Smith │ 200 │ Bolt  │
+│ Smith │ 400 │ Screw │
+│ Smith │ 200 │ Screw │
+│ Smith │ 100 │ Cam   │
+│ Smith │ 100 │ Cog   │
+│ Jones │ 300 │ Nut   │
+│ Jones │ 400 │ Bolt  │
+│ Blake │ 200 │ Bolt  │
+│ Clark │ 200 │ Bolt  │
+│ Clark │ 300 │ Screw │
+│ Clark │ 400 │ Cam   │
+└───────┴─────┴───────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(622, 8, 0.00, 'SELECT s.sname, p.pname, a.qty 
+
+FROM supplier s 
+
+JOIN spj a ON s.sno = a.sno 
+
+JOIN part p ON a.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(53, 26, NULL, NULL, NULL, 'STARTED'),
+	(56, 23, 0.00, 'SELECT  s.sname,p.name,sp.qty
+
+FROM supplier inner join supplier_part ap ON s.sno=sp.pno INNER JOIN
+ part p ON sp.sno=p.pno
+', 4, 'EXECUTED'),
+	(59, 25, 0.00, 'SELECT s.sname , p.pname 
+
+FROM supplier s
+
+JOIN part p 
+
+ON s.city = p.city 
+
+order by s.sname;
+┌───────┬───────┐
+│ sname │ pname │
+├───────┼───────┤
+│ Blake │ Cam   │
+│ Blake │ Bolt  │
+│ Clark │ Nut   │
+│ Clark │ Cog   │
+│ Clark │ Screw │
+│ Jones │ Cam   │
+│ Jones │ Bolt  │
+│ Smith │ Nut   │
+│ Smith │ Screw │
+│ Smith │ Cog   │
+└───────┴───────┘
+(10 rows)
+
+', 4, 'EXECUTED'),
+	(63, 4, 0.00, 'SELECT s.sname, p.pname, sp.qty 
+
+FROM supplier_part sp 
+
+JOIN part p ON sp.pno = p.pno 
+
+JOIN supplier s ON sp.sno = s.sno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(472, 16, 0.00, 'SELECT pj.jname,s.sname ,p.pname , sp.qty  
+
+FROM project pj 
+
+JOIN spj sp 
+
+ON pj.jno=sp.jno 
+
+JOIN supplier s ON 
+
+s.sno=sp.sno 
+
+JOIN part p 
+
+ON p.pno=sp.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(73, 19, 0.00, 'select * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+SELECT s.suppliername,p.partname,sp.quantitysupplied 
+
+FROM supplier s join supplies sp ON 
+
+s.supplier_id=sp.supplier_id join part p ON
+
+p.part_id=sp.part_id;
+ERROR:  relation "supplies" does not exist
+LINE 2: FROM supplier s join supplies sp ON 
+                             ^
+', 4, 'EXECUTED'),
+	(60, 21, 0.00, 'SELECT sname,qty,pname
+
+FROM supplier s 
+
+INNER JOIN supplier_part q 
+
+ON s.sno=q.sno
+
+INNER JOIN part p
+
+ON q.pno = p.pno;
+┌───────┬─────┬───────┐
+│ sname │ qty │ pname │
+├───────┼─────┼───────┤
+│ Smith │ 300 │ Nut   │
+│ Smith │ 200 │ Bolt  │
+│ Smith │ 400 │ Screw │
+│ Smith │ 200 │ Screw │
+│ Smith │ 100 │ Cam   │
+│ Smith │ 100 │ Cog   │
+│ Jones │ 300 │ Nut   │
+│ Jones │ 400 │ Bolt  │
+│ Blake │ 200 │ Bolt  │
+│ Clark │ 200 │ Bolt  │
+│ Clark │ 300 │ Screw │
+│ Clark │ 400 │ Cam   │
+└───────┴─────┴───────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(68, 11, 0.00, 'SELECT s.sname,p.pname, sp.qty FROM supplier s JOIN supplier_part sp ON s.sno=sp.sno join part p On sp.pno=p.pno
+;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+
+select * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+select * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+
+select * from supplier_part;
+┌─────┬─────┬─────┐
+│ sno │ pno │ qty │
+├─────┼─────┼─────┤
+│ S1  │ P1  │ 300 │
+│ S1  │ P2  │ 200 │
+│ S1  │ P3  │ 400 │
+│ S1  │ P4  │ 200 │
+│ S1  │ P5  │ 100 │
+│ S1  │ P6  │ 100 │
+│ S2  │ P1  │ 300 │
+│ S2  │ P2  │ 400 │
+│ S3  │ P2  │ 200 │
+│ S4  │ P2  │ 200 │
+│ S4  │ P4  │ 300 │
+│ S4  │ P5  │ 400 │
+└─────┴─────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1380, 17, 0.00, 'SELECT s.sname, j.jname 
+
+FROM supplier s JOIN 
+
+project j ON
+
+s.sno = j.jno;
+┌───────┬───────┐
+│ sname │ jname │
+├───────┼───────┤
+└───────┴───────┘
+(0 rows)
+
+', 8, 'EXECUTED'),
+	(65, 12, 0.00, 'SELECT * FROM supplier, supplier_part;
+┌─────┬───────┬────────┬────────┬─────┬─────┬─────┐
+│ sno │ sname │ status │  city  │ sno │ pno │ qty │
+├─────┼───────┼────────┼────────┼─────┼─────┼─────┤
+│ S1  │ Smith │     20 │ London │ S1  │ P1  │ 300 │
+│ S2  │ Jones │     10 │ Paris  │ S1  │ P1  │ 300 │
+│ S3  │ Blake │     30 │ Paris  │ S1  │ P1  │ 300 │
+│ S4  │ Clark │     20 │ London │ S1  │ P1  │ 300 │
+│ S5  │ Adams │     30 │ Athens │ S1  │ P1  │ 300 │
+│ S1  │ Smith │     20 │ London │ S1  │ P2  │ 200 │
+│ S2  │ Jones │     10 │ Paris  │ S1  │ P2  │ 200 │
+│ S3  │ Blake │     30 │ Paris  │ S1  │ P2  │ 200 │
+│ S4  │ Clark │     20 │ London │ S1  │ P2  │ 200 │
+│ S5  │ Adams │     30 │ Athens │ S1  │ P2  │ 200 │
+│ S1  │ Smith │     20 │ London │ S1  │ P3  │ 400 │
+│ S2  │ Jones │     10 │ Paris  │ S1  │ P3  │ 400 │
+│ S3  │ Blake │     30 │ Paris  │ S1  │ P3  │ 400 │
+│ S4  │ Clark │     20 │ London │ S1  │ P3  │ 400 │
+│ S5  │ Adams │     30 │ Athens │ S1  │ P3  │ 400 │
+│ S1  │ Smith │     20 │ London │ S1  │ P4  │ 200 │
+│ S2  │ Jones │     10 │ Paris  │ S1  │ P4  │ 200 │
+│ S3  │ Blake │     30 │ Paris  │ S1  │ P4  │ 200 │
+│ S4  │ Clark │     20 │ London │ S1  │ P4  │ 200 │
+│ S5  │ Adams │     30 │ Athens │ S1  │ P4  │ 200 │
+│ S1  │ Smith │     20 │ London │ S1  │ P5  │ 100 │
+│ S2  │ Jones │     10 │ Paris  │ S1  │ P5  │ 100 │
+│ S3  │ Blake │     30 │ Paris  │ S1  │ P5  │ 100 │
+│ S4  │ Clark │     20 │ London │ S1  │ P5  │ 100 │
+│ S5  │ Adams │     30 │ Athens │ S1  │ P5  │ 100 │
+│ S1  │ Smith │     20 │ London │ S1  │ P6  │ 100 │
+│ S2  │ Jones │     10 │ Paris  │ S1  │ P6  │ 100 │
+│ S3  │ Blake │     30 │ Paris  │ S1  │ P6  │ 100 │
+│ S4  │ Clark │     20 │ London │ S1  │ P6  │ 100 │
+│ S5  │ Adams │     30 │ Athens │ S1  │ P6  │ 100 │
+│ S1  │ Smith │     20 │ London │ S2  │ P1  │ 300 │
+│ S2  │ Jones │     10 │ Paris  │ S2  │ P1  │ 300 │
+│ S3  │ Blake │     30 │ Paris  │ S2  │ P1  │ 300 │
+│ S4  │ Clark │     20 │ London │ S2  │ P1  │ 300 │
+│ S5  │ Adams │     30 │ Athens │ S2  │ P1  │ 300 │
+│ S1  │ Smith │     20 │ London │ S2  │ P2  │ 400 │
+│ S2  │ Jones │     10 │ Paris  │ S2  │ P2  │ 400 │
+│ S3  │ Blake │     30 │ Paris  │ S2  │ P2  │ 400 │
+│ S4  │ Clark │     20 │ London │ S2  │ P2  │ 400 │
+│ S5  │ Adams │     30 │ Athens │ S2  │ P2  │ 400 │
+│ S1  │ Smith │     20 │ London │ S3  │ P2  │ 200 │
+│ S2  │ Jones │     10 │ Paris  │ S3  │ P2  │ 200 │
+│ S3  │ Blake │     30 │ Paris  │ S3  │ P2  │ 200 │
+│ S4  │ Clark │     20 │ London │ S3  │ P2  │ 200 │
+│ S5  │ Adams │     30 │ Athens │ S3  │ P2  │ 200 │
+│ S1  │ Smith │     20 │ London │ S4  │ P2  │ 200 │
+│ S2  │ Jones │     10 │ Paris  │ S4  │ P2  │ 200 │
+│ S3  │ Blake │     30 │ Paris  │ S4  │ P2  │ 200 │
+│ S4  │ Clark │     20 │ London │ S4  │ P2  │ 200 │
+│ S5  │ Adams │     30 │ Athens │ S4  │ P2  │ 200 │
+│ S1  │ Smith │     20 │ London │ S4  │ P4  │ 300 │
+│ S2  │ Jones │     10 │ Paris  │ S4  │ P4  │ 300 │
+│ S3  │ Blake │     30 │ Paris  │ S4  │ P4  │ 300 │
+│ S4  │ Clark │     20 │ London │ S4  │ P4  │ 300 │
+│ S5  │ Adams │     30 │ Athens │ S4  │ P4  │ 300 │
+│ S1  │ Smith │     20 │ London │ S4  │ P5  │ 400 │
+│ S2  │ Jones │     10 │ Paris  │ S4  │ P5  │ 400 │
+│ S3  │ Blake │     30 │ Paris  │ S4  │ P5  │ 400 │
+│ S4  │ Clark │     20 │ London │ S4  │ P5  │ 400 │
+│ S5  │ Adams │     30 │ Athens │ S4  │ P5  │ 400 │
+└─────┴───────┴────────┴────────┴─────┴─────┴─────┘
+(60 rows)
+
+', 4, 'EXECUTED'),
+	(1378, 8, 0.00, 'SELECT s.sname, COUNT(p.pname), SUM(a.qty)
+
+AS "Total Quantity"
+
+FROM supplier s 
+
+JOIN supplier_part a ON s.sno = a.sno
+
+JOIN part p ON a.pno = p.pno 
+
+GROUP BY s.sname;
+┌───────┬───────┬────────────────┐
+│ sname │ count │ Total Quantity │
+├───────┼───────┼────────────────┤
+│ Blake │     1 │            200 │
+│ Jones │     2 │            700 │
+│ Smith │     6 │           1300 │
+│ Clark │     3 │            900 │
+└───────┴───────┴────────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(504, 9, 0.00, 'SELECT j.jname, s.sname, p.pname, a.qty 
+
+FROM supplier s 
+
+JOIN spj a ON s.sno = a.sno 
+
+JOIN part p ON a.pno = p.pno 
+
+JOIN project j ON a.jno = j.jno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(97, 14, 0.00, 'SELECT 
+
+  supplier.sname,
+
+  part.pname,
+
+  supplier_part.qty  
+
+FROM supplier_part
+
+JOIN supplier ON (supplier_part.sno=supplier.sno)
+
+JOIN part ON (supplier_part.pno=part.pno);
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(86, 15, 0.00, 'SELECT s.sname , p.pname , sp.qty
+
+ FROM supplier s 
+
+ JOIN supplier_part sp  ON s.sno = sp.sno
+
+ JOIN part p on p.pno = sp.pno ;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(757, 12, 0.00, 'select supplier ,count (*) part from supplier group by supplier;
+┌──────────────────────┬──────┐
+│       supplier       │ part │
+├──────────────────────┼──────┤
+│ (S2,Jones,10,Paris)  │    1 │
+│ (S4,Clark,20,London) │    1 │
+│ (S5,Adams,30,Athens) │    1 │
+│ (S3,Blake,30,Paris)  │    1 │
+│ (S1,Smith,20,London) │    1 │
+└──────────────────────┴──────┘
+(5 rows)
+
+', 7, 'EXECUTED'),
+	(52, 10, 0.00, 'SELECT s.sname,
+
+       p.pname,
+
+       sp.qty
+
+FROM supplier s
+
+JOIN supplier_part sp
+
+    ON s.sno = sp.sno
+
+JOIN part p
+
+    ON p.pno = sp.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1403, 27, 0.00, 'select project.jname,supplier.sname,part.pname,supplier_part.qty
+
+from project
+
+join supplier
+
+ON project.city=supplier.city;
+ERROR:  missing FROM-clause entry for table "part"
+LINE 1: select project.jname,supplier.sname,part.pname,supplier_part...
+                                            ^
+', 6, 'EXECUTED'),
+	(49, 17, 0.00, 'SELECT * FROM supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+', 4, 'EXECUTED'),
+	(797, 7, 0.00, '\dt
+               List of tables
+┌────────┬───────────────┬───────┬──────────┐
+│ Schema │     Name      │ Type  │  Owner   │
+├────────┼───────────────┼───────┼──────────┤
+│ public │ part          │ table │ postgres │
+│ public │ project       │ table │ postgres │
+│ public │ spj           │ table │ postgres │
+│ public │ supplier      │ table │ postgres │
+│ public │ supplier_part │ table │ postgres │
+└────────┴───────────────┴───────┴──────────┘
+(5 rows)
+
+', 8, 'EXECUTED'),
+	(143, 23, 0.00, 'SELECT  pj.name,s.sname,p.pname,sp.qty
+
+FROM project pj INNER JOIN
+
+supplier_part ap ON s.sno=sp.sno INNER JOIN part p ON sp.sno=p.pno
+', 5, 'EXECUTED'),
+	(41, 16, 0.00, 'SELECT s.sname , p.pname , SUM(sp.qty) FROM supplier s JOIN spj sp ON sp.sno=s.sno join part p ON p.pno=sp.pno G
+ROUP BY s.sname , p.pname;
+┌───────┬───────┬──────┐
+│ sname │ pname │ sum  │
+├───────┼───────┼──────┤
+│ Adams │ Screw │ 1000 │
+│ Jones │ Cam   │  100 │
+│ Adams │ Cog   │  700 │
+│ Clark │ Cog   │  600 │
+│ Adams │ Cam   │ 1000 │
+│ Jones │ Screw │ 3100 │
+│ Adams │ Nut   │  100 │
+│ Blake │ Screw │  700 │
+│ Smith │ Nut   │  900 │
+│ Adams │ Bolt  │  300 │
+└───────┴───────┴──────┘
+(10 rows)
+
+', 4, 'EXECUTED'),
+	(414, 19, 0.00, 'SELECT * FROM project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+SELECT pr.project_name,s.supplier_name,p.part_name
+
+,sp.quantity_supplied FROM supplier s  JOIN supplier
+
+s ON s.supplier_Id=sp.supplier_Id JOIN pr.project_Id=
+
+sp.project_Id;
+ERROR:  syntax error at or near "="
+LINE 3: s ON s.supplier_Id=sp.supplier_Id JOIN pr.project_Id=
+                                                            ^
+
+select name from project;
+ERROR:  column "name" does not exist
+LINE 1: select name from project;
+               ^
+HINT:  Perhaps you meant to reference the column "project.jname".
+', 5, 'EXECUTED'),
+	(996, 20, 0.00, 'SELECT s.sname,p.jname,pt.pname,sp.qty,s.city,p.city
+
+FROM project p
+
+JOIN spj m
+
+ON p.jno=m.jno
+
+JOIN part pt
+
+ON m.pno=pt.pno
+
+JOIN Supplier_part sp
+
+ON pt.pno=sp.pno
+
+JOIN supplier s
+
+ON sp.sno=s.sno
+
+WHERE s.city=p.city;
+┌───────┬────────┬───────┬─────┬────────┬────────┐
+│ sname │ jname  │ pname │ qty │  city  │  city  │
+├───────┼────────┼───────┼─────┼────────┼────────┤
+│ Jones │ Sorter │ Nut   │ 300 │ Paris  │ Paris  │
+│ Smith │ RAID   │ Screw │ 400 │ London │ London │
+│ Smith │ Tape   │ Screw │ 400 │ London │ London │
+│ Smith │ Tape   │ Cog   │ 100 │ London │ London │
+│ Clark │ RAID   │ Cam   │ 400 │ London │ London │
+│ Smith │ RAID   │ Cam   │ 100 │ London │ London │
+│ Clark │ Tape   │ Cam   │ 400 │ London │ London │
+│ Smith │ Tape   │ Cam   │ 100 │ London │ London │
+└───────┴────────┴───────┴─────┴────────┴────────┘
+(8 rows)
+
+', 6, 'EXECUTED'),
+	(61, 22, 0.00, 'SELECT sname,pname,qty
+
+FROM supplier s
+
+INNER JOIN supplier_part sp
+
+ON s.sno=sp.sno
+
+INNER JOIN part p
+
+ON sp.pno=p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 300 │
+│ Smith │ Bolt  │ 200 │
+│ Smith │ Screw │ 400 │
+│ Smith │ Screw │ 200 │
+│ Smith │ Cam   │ 100 │
+│ Smith │ Cog   │ 100 │
+│ Jones │ Nut   │ 300 │
+│ Jones │ Bolt  │ 400 │
+│ Blake │ Bolt  │ 200 │
+│ Clark │ Bolt  │ 200 │
+│ Clark │ Screw │ 300 │
+│ Clark │ Cam   │ 400 │
+└───────┴───────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(815, 16, 0.00, 'SELECT s.sname , pj.jname , p.pname , sp.qty , s.city AS supplier_city , pj.city AS project_city 
+
+FROM supplier s 
+
+JOIN spj sp 
+
+ON sp.sno=s.sno 
+
+JOIN project pj 
+
+ON pj.jno=sp.jno  
+
+JOIN part p 
+
+ON p.pno=sp.pno;
+┌───────┬─────────┬───────┬─────┬───────────────┬──────────────┐
+│ sname │  jname  │ pname │ qty │ supplier_city │ project_city │
+├───────┼─────────┼───────┼─────┼───────────────┼──────────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London        │ Paris        │
+│ Smith │ Console │ Nut   │ 700 │ London        │ Athens       │
+│ Jones │ Sorter  │ Screw │ 400 │ Paris         │ Paris        │
+│ Jones │ Display │ Screw │ 200 │ Paris         │ Rome         │
+│ Jones │ OCR     │ Screw │ 200 │ Paris         │ Athens       │
+│ Jones │ Console │ Screw │ 500 │ Paris         │ Athens       │
+│ Jones │ RAID    │ Screw │ 600 │ Paris         │ London       │
+│ Jones │ EDS     │ Screw │ 400 │ Paris         │ Oslo         │
+│ Jones │ Tape    │ Screw │ 800 │ Paris         │ London       │
+│ Jones │ Display │ Cam   │ 100 │ Paris         │ Rome         │
+│ Blake │ Sorter  │ Screw │ 200 │ Paris         │ Paris        │
+│ Blake │ Display │ Screw │ 500 │ Paris         │ Rome         │
+│ Clark │ OCR     │ Cog   │ 300 │ London        │ Athens       │
+│ Clark │ Tape    │ Cog   │ 300 │ London        │ London       │
+│ Adams │ Display │ Bolt  │ 200 │ Athens        │ Rome         │
+│ Adams │ Console │ Bolt  │ 100 │ Athens        │ Athens       │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens        │ London       │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens        │ London       │
+│ Adams │ Display │ Cog   │ 200 │ Athens        │ Rome         │
+│ Adams │ Console │ Nut   │ 100 │ Athens        │ Athens       │
+│ Adams │ Console │ Screw │ 200 │ Athens        │ Athens       │
+│ Adams │ Console │ Screw │ 800 │ Athens        │ Athens       │
+│ Adams │ Console │ Cam   │ 400 │ Athens        │ Athens       │
+│ Adams │ Console │ Cog   │ 500 │ Athens        │ Athens       │
+└───────┴─────────┴───────┴─────┴───────────────┴──────────────┘
+(24 rows)
+
+
+where s.city!=pj.city;
+ERROR:  syntax error at or near "where"
+LINE 1: where s.city!=pj.city;
+        ^
+', 6, 'EXECUTED'),
+	(1030, 26, 0.00, 'SELECT j.jname AS project_name,
+
+s.sname AS supplier_name,p.pname AS part_name,
+
+q.qty AS quantity_supplied
+
+FROM project j 
+
+JOIN spj q
+
+ON j.jno=q.jno
+
+JOIN part p 
+
+ON q.pno=p.pno
+
+JOIN supplier_part sp
+
+ON sp.pno=p.pno
+
+JOIN supplier s
+
+ON sp.sno=s.sno;
+┌──────────────┬───────────────┬───────────┬───────────────────┐
+│ project_name │ supplier_name │ part_name │ quantity_supplied │
+├──────────────┼───────────────┼───────────┼───────────────────┤
+│ Sorter       │ Jones         │ Nut       │               200 │
+│ Sorter       │ Smith         │ Nut       │               200 │
+│ Console      │ Jones         │ Nut       │               700 │
+│ Console      │ Smith         │ Nut       │               700 │
+│ Sorter       │ Smith         │ Screw     │               400 │
+│ Display      │ Smith         │ Screw     │               200 │
+│ OCR          │ Smith         │ Screw     │               200 │
+│ Console      │ Smith         │ Screw     │               500 │
+│ RAID         │ Smith         │ Screw     │               600 │
+│ EDS          │ Smith         │ Screw     │               400 │
+│ Tape         │ Smith         │ Screw     │               800 │
+│ Display      │ Clark         │ Cam       │               100 │
+│ Display      │ Smith         │ Cam       │               100 │
+│ Sorter       │ Smith         │ Screw     │               200 │
+│ Display      │ Clark         │ Screw     │               500 │
+│ Display      │ Smith         │ Screw     │               500 │
+│ OCR          │ Smith         │ Cog       │               300 │
+│ Tape         │ Smith         │ Cog       │               300 │
+│ Display      │ Clark         │ Bolt      │               200 │
+│ Display      │ Blake         │ Bolt      │               200 │
+│ Display      │ Jones         │ Bolt      │               200 │
+│ Display      │ Smith         │ Bolt      │               200 │
+│ Console      │ Clark         │ Bolt      │               100 │
+│ Console      │ Blake         │ Bolt      │               100 │
+│ Console      │ Jones         │ Bolt      │               100 │
+│ Console      │ Smith         │ Bolt      │               100 │
+│ RAID         │ Clark         │ Cam       │               500 │
+│ RAID         │ Smith         │ Cam       │               500 │
+│ Tape         │ Clark         │ Cam       │               100 │
+│ Tape         │ Smith         │ Cam       │               100 │
+│ Display      │ Smith         │ Cog       │               200 │
+│ Console      │ Jones         │ Nut       │               100 │
+│ Console      │ Smith         │ Nut       │               100 │
+│ Console      │ Smith         │ Screw     │               200 │
+│ Console      │ Clark         │ Screw     │               800 │
+│ Console      │ Smith         │ Screw     │               800 │
+│ Console      │ Clark         │ Cam       │               400 │
+│ Console      │ Smith         │ Cam       │               400 │
+│ Console      │ Smith         │ Cog       │               500 │
+└──────────────┴───────────────┴───────────┴───────────────────┘
+(39 rows)
+
+', 5, 'EXECUTED'),
+	(1003, 25, 0.00, 'SELECT q.jno , j.jname , q.sno , s.sname , q.pno , p.pname , qty FROM spj q JOIN project j on q.jno =  j.jno , J
+OIN supplier s on q.sno = s.sno , JOIN part p on q.pno  = p.no order by j.jname;
+ERROR:  syntax error at or near "supplier"
+LINE 1: ...ROM spj q JOIN project j on q.jno =  j.jno , JOIN supplier s...
+                                                             ^
+', 5, 'EXECUTED'),
+	(1414, 23, 0.00, 'SELECT s.name,COUNT(DISTINCT sp.no) AS Total_Quantity FROM
+
+SUM(sp.qty)AS Total_Quantityfrom supplier s INNER JOIN supplier_part
+ spon s.sno=sp=sno Group BY s.sname;
+ERROR:  syntax error at or near "supplier"
+LINE 2: SUM(sp.qty)AS Total_Quantityfrom supplier s INNER JOIN suppl...
+                                         ^
+', 7, 'EXECUTED'),
+	(156, 10, 0.00, 'select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+', 5, 'EXECUTED'),
+	(827, 4, 0.00, 'SELECT s.sname, pj.jname, p.pname, sp.qty, s.city, pj.city 
+
+FROM supplier_part sp 
+
+JOIN part p ON sp.pno = p.pno 
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN project pj ON pj.city = p.city AND pj.city = s.city
+
+WHERE s.city != pj.city;
+┌───────┬───────┬───────┬─────┬──────┬──────┐
+│ sname │ jname │ pname │ qty │ city │ city │
+├───────┼───────┼───────┼─────┼──────┼──────┤
+└───────┴───────┴───────┴─────┴──────┴──────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
+	(64, 20, 0.00, 'SELECT s.sname,p.pname,q.qty
+
+FROM supplier s
+
+JOIN spj q
+
+ON s.sno=q.sno
+
+JOIN part p
+
+ON p.pno=q.pno ;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(369, 22, 0.00, 'SELECT sname,jname,sp.qty,s.city
+
+FROM supplier s
+
+INNER JOIN supplier_part sp
+
+ON s.sno=sp.sno
+
+INNER JOIN spj 
+
+ON sp.pno=spj.pno
+
+INNER JOIN project pj
+
+ON spj.jno=pj.jno;
+┌───────┬─────────┬─────┬────────┐
+│ sname │  jname  │ qty │  city  │
+├───────┼─────────┼─────┼────────┤
+│ Smith │ Console │ 300 │ London │
+│ Smith │ Console │ 300 │ London │
+│ Smith │ Sorter  │ 300 │ London │
+│ Smith │ Console │ 200 │ London │
+│ Smith │ Display │ 200 │ London │
+│ Smith │ Console │ 400 │ London │
+│ Smith │ Sorter  │ 400 │ London │
+│ Smith │ Tape    │ 400 │ London │
+│ Smith │ EDS     │ 400 │ London │
+│ Smith │ RAID    │ 400 │ London │
+│ Smith │ Console │ 400 │ London │
+│ Smith │ OCR     │ 400 │ London │
+│ Smith │ Display │ 400 │ London │
+│ Smith │ Sorter  │ 400 │ London │
+│ Smith │ Console │ 200 │ London │
+│ Smith │ Display │ 200 │ London │
+│ Smith │ Console │ 100 │ London │
+│ Smith │ Tape    │ 100 │ London │
+│ Smith │ RAID    │ 100 │ London │
+│ Smith │ Display │ 100 │ London │
+│ Smith │ Console │ 100 │ London │
+│ Smith │ Display │ 100 │ London │
+│ Smith │ Tape    │ 100 │ London │
+│ Smith │ OCR     │ 100 │ London │
+│ Jones │ Console │ 300 │ Paris  │
+│ Jones │ Console │ 300 │ Paris  │
+│ Jones │ Sorter  │ 300 │ Paris  │
+│ Jones │ Console │ 400 │ Paris  │
+│ Jones │ Display │ 400 │ Paris  │
+│ Blake │ Console │ 200 │ Paris  │
+│ Blake │ Display │ 200 │ Paris  │
+│ Clark │ Console │ 200 │ London │
+│ Clark │ Display │ 200 │ London │
+│ Clark │ Console │ 300 │ London │
+│ Clark │ Display │ 300 │ London │
+│ Clark │ Console │ 400 │ London │
+│ Clark │ Tape    │ 400 │ London │
+│ Clark │ RAID    │ 400 │ London │
+│ Clark │ Display │ 400 │ London │
+└───────┴─────────┴─────┴────────┘
+(39 rows)
+
+', 6, 'EXECUTED'),
+	(225, 12, 0.00, 'SELECT *
+
+ FROM 
+
+ project, supplier, part;
+┌─────┬─────────┬────────┬─────┬───────┬────────┬────────┬─────┬───────┬───────┬────────┬────────┐
+│ jno │  jname  │  city  │ sno │ sname │ status │  city  │ pno │ pname │ color │ weight │  city  │
+├─────┼─────────┼────────┼─────┼───────┼────────┼────────┼─────┼───────┼───────┼────────┼────────┤
+│ J1  │ Sorter  │ Paris  │ S1  │ Smith │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J2  │ Display │ Rome   │ S1  │ Smith │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J3  │ OCR     │ Athens │ S1  │ Smith │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J4  │ Console │ Athens │ S1  │ Smith │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J5  │ RAID    │ London │ S1  │ Smith │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S1  │ Smith │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J7  │ Tape    │ London │ S1  │ Smith │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S1  │ Smith │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S1  │ Smith │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S1  │ Smith │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J4  │ Console │ Athens │ S1  │ Smith │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J5  │ RAID    │ London │ S1  │ Smith │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S1  │ Smith │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J7  │ Tape    │ London │ S1  │ Smith │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S1  │ Smith │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J2  │ Display │ Rome   │ S1  │ Smith │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J3  │ OCR     │ Athens │ S1  │ Smith │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J4  │ Console │ Athens │ S1  │ Smith │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J5  │ RAID    │ London │ S1  │ Smith │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J6  │ EDS     │ Oslo   │ S1  │ Smith │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J7  │ Tape    │ London │ S1  │ Smith │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J1  │ Sorter  │ Paris  │ S1  │ Smith │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J2  │ Display │ Rome   │ S1  │ Smith │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J3  │ OCR     │ Athens │ S1  │ Smith │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J4  │ Console │ Athens │ S1  │ Smith │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J5  │ RAID    │ London │ S1  │ Smith │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S1  │ Smith │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J7  │ Tape    │ London │ S1  │ Smith │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S1  │ Smith │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S1  │ Smith │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S1  │ Smith │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J4  │ Console │ Athens │ S1  │ Smith │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J5  │ RAID    │ London │ S1  │ Smith │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S1  │ Smith │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J7  │ Tape    │ London │ S1  │ Smith │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S1  │ Smith │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J2  │ Display │ Rome   │ S1  │ Smith │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J3  │ OCR     │ Athens │ S1  │ Smith │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J4  │ Console │ Athens │ S1  │ Smith │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J5  │ RAID    │ London │ S1  │ Smith │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S1  │ Smith │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J7  │ Tape    │ London │ S1  │ Smith │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S2  │ Jones │     10 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J2  │ Display │ Rome   │ S2  │ Jones │     10 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J3  │ OCR     │ Athens │ S2  │ Jones │     10 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J4  │ Console │ Athens │ S2  │ Jones │     10 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J5  │ RAID    │ London │ S2  │ Jones │     10 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S2  │ Jones │     10 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J7  │ Tape    │ London │ S2  │ Jones │     10 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S2  │ Jones │     10 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S2  │ Jones │     10 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S2  │ Jones │     10 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J4  │ Console │ Athens │ S2  │ Jones │     10 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J5  │ RAID    │ London │ S2  │ Jones │     10 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S2  │ Jones │     10 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J7  │ Tape    │ London │ S2  │ Jones │     10 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S2  │ Jones │     10 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J2  │ Display │ Rome   │ S2  │ Jones │     10 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J3  │ OCR     │ Athens │ S2  │ Jones │     10 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J4  │ Console │ Athens │ S2  │ Jones │     10 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J5  │ RAID    │ London │ S2  │ Jones │     10 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J6  │ EDS     │ Oslo   │ S2  │ Jones │     10 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J7  │ Tape    │ London │ S2  │ Jones │     10 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J1  │ Sorter  │ Paris  │ S2  │ Jones │     10 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J2  │ Display │ Rome   │ S2  │ Jones │     10 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J3  │ OCR     │ Athens │ S2  │ Jones │     10 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J4  │ Console │ Athens │ S2  │ Jones │     10 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J5  │ RAID    │ London │ S2  │ Jones │     10 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S2  │ Jones │     10 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J7  │ Tape    │ London │ S2  │ Jones │     10 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S2  │ Jones │     10 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S2  │ Jones │     10 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S2  │ Jones │     10 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J4  │ Console │ Athens │ S2  │ Jones │     10 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J5  │ RAID    │ London │ S2  │ Jones │     10 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S2  │ Jones │     10 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J7  │ Tape    │ London │ S2  │ Jones │     10 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S2  │ Jones │     10 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J2  │ Display │ Rome   │ S2  │ Jones │     10 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J3  │ OCR     │ Athens │ S2  │ Jones │     10 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J4  │ Console │ Athens │ S2  │ Jones │     10 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J5  │ RAID    │ London │ S2  │ Jones │     10 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S2  │ Jones │     10 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J7  │ Tape    │ London │ S2  │ Jones │     10 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S3  │ Blake │     30 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J2  │ Display │ Rome   │ S3  │ Blake │     30 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J3  │ OCR     │ Athens │ S3  │ Blake │     30 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J4  │ Console │ Athens │ S3  │ Blake │     30 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J5  │ RAID    │ London │ S3  │ Blake │     30 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S3  │ Blake │     30 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J7  │ Tape    │ London │ S3  │ Blake │     30 │ Paris  │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S3  │ Blake │     30 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S3  │ Blake │     30 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S3  │ Blake │     30 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J4  │ Console │ Athens │ S3  │ Blake │     30 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J5  │ RAID    │ London │ S3  │ Blake │     30 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S3  │ Blake │     30 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J7  │ Tape    │ London │ S3  │ Blake │     30 │ Paris  │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S3  │ Blake │     30 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J2  │ Display │ Rome   │ S3  │ Blake │     30 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J3  │ OCR     │ Athens │ S3  │ Blake │     30 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J4  │ Console │ Athens │ S3  │ Blake │     30 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J5  │ RAID    │ London │ S3  │ Blake │     30 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J6  │ EDS     │ Oslo   │ S3  │ Blake │     30 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J7  │ Tape    │ London │ S3  │ Blake │     30 │ Paris  │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J1  │ Sorter  │ Paris  │ S3  │ Blake │     30 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J2  │ Display │ Rome   │ S3  │ Blake │     30 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J3  │ OCR     │ Athens │ S3  │ Blake │     30 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J4  │ Console │ Athens │ S3  │ Blake │     30 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J5  │ RAID    │ London │ S3  │ Blake │     30 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S3  │ Blake │     30 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J7  │ Tape    │ London │ S3  │ Blake │     30 │ Paris  │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S3  │ Blake │     30 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S3  │ Blake │     30 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S3  │ Blake │     30 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J4  │ Console │ Athens │ S3  │ Blake │     30 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J5  │ RAID    │ London │ S3  │ Blake │     30 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S3  │ Blake │     30 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J7  │ Tape    │ London │ S3  │ Blake │     30 │ Paris  │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S3  │ Blake │     30 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J2  │ Display │ Rome   │ S3  │ Blake │     30 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J3  │ OCR     │ Athens │ S3  │ Blake │     30 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J4  │ Console │ Athens │ S3  │ Blake │     30 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J5  │ RAID    │ London │ S3  │ Blake │     30 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S3  │ Blake │     30 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J7  │ Tape    │ London │ S3  │ Blake │     30 │ Paris  │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S4  │ Clark │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J2  │ Display │ Rome   │ S4  │ Clark │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J3  │ OCR     │ Athens │ S4  │ Clark │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J4  │ Console │ Athens │ S4  │ Clark │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J5  │ RAID    │ London │ S4  │ Clark │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S4  │ Clark │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J7  │ Tape    │ London │ S4  │ Clark │     20 │ London │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S4  │ Clark │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S4  │ Clark │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S4  │ Clark │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J4  │ Console │ Athens │ S4  │ Clark │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J5  │ RAID    │ London │ S4  │ Clark │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S4  │ Clark │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J7  │ Tape    │ London │ S4  │ Clark │     20 │ London │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S4  │ Clark │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J2  │ Display │ Rome   │ S4  │ Clark │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J3  │ OCR     │ Athens │ S4  │ Clark │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J4  │ Console │ Athens │ S4  │ Clark │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J5  │ RAID    │ London │ S4  │ Clark │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J6  │ EDS     │ Oslo   │ S4  │ Clark │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J7  │ Tape    │ London │ S4  │ Clark │     20 │ London │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J1  │ Sorter  │ Paris  │ S4  │ Clark │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J2  │ Display │ Rome   │ S4  │ Clark │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J3  │ OCR     │ Athens │ S4  │ Clark │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J4  │ Console │ Athens │ S4  │ Clark │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J5  │ RAID    │ London │ S4  │ Clark │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S4  │ Clark │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J7  │ Tape    │ London │ S4  │ Clark │     20 │ London │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S4  │ Clark │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S4  │ Clark │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S4  │ Clark │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J4  │ Console │ Athens │ S4  │ Clark │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J5  │ RAID    │ London │ S4  │ Clark │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S4  │ Clark │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J7  │ Tape    │ London │ S4  │ Clark │     20 │ London │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S4  │ Clark │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J2  │ Display │ Rome   │ S4  │ Clark │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J3  │ OCR     │ Athens │ S4  │ Clark │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J4  │ Console │ Athens │ S4  │ Clark │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J5  │ RAID    │ London │ S4  │ Clark │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S4  │ Clark │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J7  │ Tape    │ London │ S4  │ Clark │     20 │ London │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S5  │ Adams │     30 │ Athens │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J2  │ Display │ Rome   │ S5  │ Adams │     30 │ Athens │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J3  │ OCR     │ Athens │ S5  │ Adams │     30 │ Athens │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J4  │ Console │ Athens │ S5  │ Adams │     30 │ Athens │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J5  │ RAID    │ London │ S5  │ Adams │     30 │ Athens │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S5  │ Adams │     30 │ Athens │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J7  │ Tape    │ London │ S5  │ Adams │     30 │ Athens │ P1  │ Nut   │ Red   │   12.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S5  │ Adams │     30 │ Athens │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S5  │ Adams │     30 │ Athens │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S5  │ Adams │     30 │ Athens │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J4  │ Console │ Athens │ S5  │ Adams │     30 │ Athens │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J5  │ RAID    │ London │ S5  │ Adams │     30 │ Athens │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S5  │ Adams │     30 │ Athens │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J7  │ Tape    │ London │ S5  │ Adams │     30 │ Athens │ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S5  │ Adams │     30 │ Athens │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J2  │ Display │ Rome   │ S5  │ Adams │     30 │ Athens │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J3  │ OCR     │ Athens │ S5  │ Adams │     30 │ Athens │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J4  │ Console │ Athens │ S5  │ Adams │     30 │ Athens │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J5  │ RAID    │ London │ S5  │ Adams │     30 │ Athens │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J6  │ EDS     │ Oslo   │ S5  │ Adams │     30 │ Athens │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J7  │ Tape    │ London │ S5  │ Adams │     30 │ Athens │ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ J1  │ Sorter  │ Paris  │ S5  │ Adams │     30 │ Athens │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J2  │ Display │ Rome   │ S5  │ Adams │     30 │ Athens │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J3  │ OCR     │ Athens │ S5  │ Adams │     30 │ Athens │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J4  │ Console │ Athens │ S5  │ Adams │     30 │ Athens │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J5  │ RAID    │ London │ S5  │ Adams │     30 │ Athens │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S5  │ Adams │     30 │ Athens │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J7  │ Tape    │ London │ S5  │ Adams │     30 │ Athens │ P4  │ Screw │ Red   │   14.0 │ London │
+│ J1  │ Sorter  │ Paris  │ S5  │ Adams │     30 │ Athens │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J2  │ Display │ Rome   │ S5  │ Adams │     30 │ Athens │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J3  │ OCR     │ Athens │ S5  │ Adams │     30 │ Athens │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J4  │ Console │ Athens │ S5  │ Adams │     30 │ Athens │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J5  │ RAID    │ London │ S5  │ Adams │     30 │ Athens │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J6  │ EDS     │ Oslo   │ S5  │ Adams │     30 │ Athens │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J7  │ Tape    │ London │ S5  │ Adams │     30 │ Athens │ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ J1  │ Sorter  │ Paris  │ S5  │ Adams │     30 │ Athens │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J2  │ Display │ Rome   │ S5  │ Adams │     30 │ Athens │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J3  │ OCR     │ Athens │ S5  │ Adams │     30 │ Athens │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J4  │ Console │ Athens │ S5  │ Adams │     30 │ Athens │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J5  │ RAID    │ London │ S5  │ Adams │     30 │ Athens │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J6  │ EDS     │ Oslo   │ S5  │ Adams │     30 │ Athens │ P6  │ Cog   │ Red   │   19.0 │ London │
+│ J7  │ Tape    │ London │ S5  │ Adams │     30 │ Athens │ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴─────────┴────────┴─────┴───────┴────────┴────────┴─────┴───────┴───────┴────────┴────────┘
+(210 rows)
+
+', 5, 'EXECUTED'),
+	(169, 17, 0.00, 'SELECT j.jname, s.sname, p.pname, q.qty
+
+FROM project j JOIN supplier s 
+
+ON j.jno = s.sno
+
+JOIN part p
+
+ON s.sno = p.pno
+
+JOIN supplier_part q
+
+ON p.pno = s.sno;
+┌───────┬───────┬───────┬─────┐
+│ jname │ sname │ pname │ qty │
+├───────┼───────┼───────┼─────┤
+└───────┴───────┴───────┴─────┘
+(0 rows)
+
+', 5, 'EXECUTED'),
+	(407, 10, 0.00, 'SELECT
+
+    s.sname,
+
+    j.jname
+
+FROM spj
+
+JOIN supplier s ON s.sno = spj.sno
+
+JOIN project j ON j.jno = spj.jno
+
+GROUP BY s.sname, j.jname
+
+HAVING COUNT(DISTINCT spj.pno) > 1;
+┌───────┬─────────┐
+│ sname │  jname  │
+├───────┼─────────┤
+│ Adams │ Console │
+│ Adams │ Display │
+│ Jones │ Display │
+└───────┴─────────┘
+(3 rows)
+
+', 8, 'EXECUTED'),
+	(188, 11, 0.00, 'select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+select * from supplier_part;
+┌─────┬─────┬─────┐
+│ sno │ pno │ qty │
+├─────┼─────┼─────┤
+│ S1  │ P1  │ 300 │
+│ S1  │ P2  │ 200 │
+│ S1  │ P3  │ 400 │
+│ S1  │ P4  │ 200 │
+│ S1  │ P5  │ 100 │
+│ S1  │ P6  │ 100 │
+│ S2  │ P1  │ 300 │
+│ S2  │ P2  │ 400 │
+│ S3  │ P2  │ 200 │
+│ S4  │ P2  │ 200 │
+│ S4  │ P4  │ 300 │
+│ S4  │ P5  │ 400 │
+└─────┴─────┴─────┘
+(12 rows)
+
+
+SELECT j.jname,s.sname,p.pname,sp.qty
+
+FROM supplier s 
+
+JOIN supplier_part sp 
+
+ON s.sno=sp.sno JOIN part p 
+
+ON sp.pno=p.pno JOIN project j 
+
+ON s.city=j.city;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Bolt  │ 200 │
+│ RAID   │ Smith │ Bolt  │ 200 │
+│ Tape   │ Smith │ Screw │ 400 │
+│ RAID   │ Smith │ Screw │ 400 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cam   │ 100 │
+│ RAID   │ Smith │ Cam   │ 100 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ Sorter │ Jones │ Nut   │ 300 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Tape   │ Clark │ Bolt  │ 200 │
+│ RAID   │ Clark │ Bolt  │ 200 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Tape   │ Clark │ Cam   │ 400 │
+│ RAID   │ Clark │ Cam   │ 400 │
+└────────┴───────┴───────┴─────┘
+(21 rows)
+
+', 5, 'EXECUTED'),
+	(142, 26, 0.00, 'SELECT s.sname AS supplier_name, p.pname AS part_name , q.qty AS quantity_supplied
+
+FROM supplier s JOIN spj q ON s.sno=q.sno 
+
+JOIN part p ON p.pno=q.pno;
+┌───────────────┬───────────┬───────────────────┐
+│ supplier_name │ part_name │ quantity_supplied │
+├───────────────┼───────────┼───────────────────┤
+│ Smith         │ Nut       │               200 │
+│ Smith         │ Nut       │               700 │
+│ Jones         │ Screw     │               400 │
+│ Jones         │ Screw     │               200 │
+│ Jones         │ Screw     │               200 │
+│ Jones         │ Screw     │               500 │
+│ Jones         │ Screw     │               600 │
+│ Jones         │ Screw     │               400 │
+│ Jones         │ Screw     │               800 │
+│ Jones         │ Cam       │               100 │
+│ Blake         │ Screw     │               200 │
+│ Blake         │ Screw     │               500 │
+│ Clark         │ Cog       │               300 │
+│ Clark         │ Cog       │               300 │
+│ Adams         │ Bolt      │               200 │
+│ Adams         │ Bolt      │               100 │
+│ Adams         │ Cam       │               500 │
+│ Adams         │ Cam       │               100 │
+│ Adams         │ Cog       │               200 │
+│ Adams         │ Nut       │               100 │
+│ Adams         │ Screw     │               200 │
+│ Adams         │ Screw     │               800 │
+│ Adams         │ Cam       │               400 │
+│ Adams         │ Cog       │               500 │
+└───────────────┴───────────┴───────────────────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(1424, 20, 0.00, '\d
+              List of relations
+┌────────┬───────────────┬───────┬──────────┐
+│ Schema │     Name      │ Type  │  Owner   │
+├────────┼───────────────┼───────┼──────────┤
+│ public │ part          │ table │ postgres │
+│ public │ project       │ table │ postgres │
+│ public │ spj           │ table │ postgres │
+│ public │ supplier      │ table │ postgres │
+│ public │ supplier_part │ table │ postgres │
+└────────┴───────────────┴───────┴──────────┘
+(5 rows)
+
+
+
+
+SELECT sname, COUNT(pno)
+
+FROM supplier s
+', 8, 'EXECUTED'),
+	(220, 7, 0.00, '│ RAID    │ Blake │ Cog   │ 200 │
+│ RAID    │ Blake │ Cog   │ 100 │
+│ RAID    │ Blake │ Cog   │ 100 │
+│ RAID    │ Blake │ Cog   │ 300 │
+│ RAID    │ Blake │ Cog   │ 400 │
+│ RAID    │ Blake │ Cog   │ 200 │
+│ RAID    │ Blake │ Cog   │ 200 │
+│ RAID    │ Blake │ Cog   │ 300 │
+│ RAID    │ Blake │ Cog   │ 400 │
+│ EDS     │ Blake │ Cog   │ 300 │
+│ EDS     │ Blake │ Cog   │ 200 │
+│ EDS     │ Blake │ Cog   │ 400 │
+│ EDS     │ Blake │ Cog   │ 200 │
+│ EDS     │ Blake │ Cog   │ 100 │
+│ EDS     │ Blake │ Cog   │ 100 │
+│ EDS     │ Blake │ Cog   │ 300 │
+│ EDS     │ Blake │ Cog   │ 400 │
+│ EDS     │ Blake │ Cog   │ 200 │
+│ EDS     │ Blake │ Cog   │ 200 │
+│ EDS     │ Blake │ Cog   │ 300 │
+│ EDS     │ Blake │ Cog   │ 400 │
+│ Tape    │ Blake │ Cog   │ 300 │
+│ Tape    │ Blake │ Cog   │ 200 │
+│ Tape    │ Blake │ Cog   │ 400 │
+│ Tape    │ Blake │ Cog   │ 200 │
+│ Tape    │ Blake │ Cog   │ 100 │
+│ Tape    │ Blake │ Cog   │ 100 │
+│ Tape    │ Blake │ Cog   │ 300 │
+│ Tape    │ Blake │ Cog   │ 400 │
+│ Tape    │ Blake │ Cog   │ 200 │
+│ Tape    │ Blake │ Cog   │ 200 │
+│ Tape    │ Blake │ Cog   │ 300 │
+│ Tape    │ Blake │ Cog   │ 400 │
+│ Sorter  │ Clark │ Nut   │ 300 │
+│ Sorter  │ Clark │ Nut   │ 200 │
+│ Sorter  │ Clark │ Nut   │ 400 │
+│ Sorter  │ Clark │ Nut   │ 200 │
+│ Sorter  │ Clark │ Nut   │ 100 │
+│ Sorter  │ Clark │ Nut   │ 100 │
+│ Sorter  │ Clark │ Nut   │ 300 │
+│ Sorter  │ Clark │ Nut   │ 400 │
+│ Sorter  │ Clark │ Nut   │ 200 │
+│ Sorter  │ Clark │ Nut   │ 200 │
+│ Sorter  │ Clark │ Nut   │ 300 │
+│ Sorter  │ Clark │ Nut   │ 400 │
+│ Display │ Clark │ Nut   │ 300 │
+│ Display │ Clark │ Nut   │ 200 │
+│ Display │ Clark │ Nut   │ 400 │
+│ Display │ Clark │ Nut   │ 200 │
+│ Display │ Clark │ Nut   │ 100 │
+│ Display │ Clark │ Nut   │ 100 │
+│ Display │ Clark │ Nut   │ 300 │
+│ Display │ Clark │ Nut   │ 400 │
+│ Display │ Clark │ Nut   │ 200 │
+│ Display │ Clark │ Nut   │ 200 │
+│ Display │ Clark │ Nut   │ 300 │
+│ Display │ Clark │ Nut   │ 400 │
+│ OCR     │ Clark │ Nut   │ 300 │
+│ OCR     │ Clark │ Nut   │ 200 │
+│ OCR     │ Clark │ Nut   │ 400 │
+│ OCR     │ Clark │ Nut   │ 200 │
+│ OCR     │ Clark │ Nut   │ 100 │
+│ OCR     │ Clark │ Nut   │ 100 │
+│ OCR     │ Clark │ Nut   │ 300 │
+│ OCR     │ Clark │ Nut   │ 400 │
+│ OCR     │ Clark │ Nut   │ 200 │
+│ OCR     │ Clark │ Nut   │ 200 │
+│ OCR     │ Clark │ Nut   │ 300 │
+│ OCR     │ Clark │ Nut   │ 400 │
+│ Console │ Clark │ Nut   │ 300 │
+│ Console │ Clark │ Nut   │ 200 │
+│ Console │ Clark │ Nut   │ 400 │
+│ Console │ Clark │ Nut   │ 200 │
+│ Console │ Clark │ Nut   │ 100 │
+│ Console │ Clark │ Nut   │ 100 │
+│ Console │ Clark │ Nut   │ 300 │
+│ Console │ Clark │ Nut   │ 400 │
+│ Console │ Clark │ Nut   │ 200 │
+│ Console │ Clark │ Nut   │ 200 │
+│ Console │ Clark │ Nut   │ 300 │
+│ Console │ Clark │ Nut   │ 400 │
+│ RAID    │ Clark │ Nut   │ 300 │
+│ RAID    │ Clark │ Nut   │ 200 │
+│ RAID    │ Clark │ Nut   │ 400 │
+│ RAID    │ Clark │ Nut   │ 200 │
+│ RAID    │ Clark │ Nut   │ 100 │
+│ RAID    │ Clark │ Nut   │ 100 │
+│ RAID    │ Clark │ Nut   │ 300 │
+│ RAID    │ Clark │ Nut   │ 400 │
+│ RAID    │ Clark │ Nut   │ 200 │
+│ RAID    │ Clark │ Nut   │ 200 │
+│ RAID    │ Clark │ Nut   │ 300 │
+│ RAID    │ Clark │ Nut   │ 400 │
+│ EDS     │ Clark │ Nut   │ 300 │
+│ EDS     │ Clark │ Nut   │ 200 │
+│ EDS     │ Clark │ Nut   │ 400 │
+│ EDS     │ Clark │ Nut   │ 200 │
+│ EDS     │ Clark │ Nut   │ 100 │
+│ EDS     │ Clark │ Nut   │ 100 │
+│ EDS     │ Clark │ Nut   │ 300 │
+│ EDS     │ Clark │ Nut   │ 400 │
+│ EDS     │ Clark │ Nut   │ 200 │
+│ EDS     │ Clark │ Nut   │ 200 │
+│ EDS     │ Clark │ Nut   │ 300 │
+│ EDS     │ Clark │ Nut   │ 400 │
+│ Tape    │ Clark │ Nut   │ 300 │
+│ Tape    │ Clark │ Nut   │ 200 │
+│ Tape    │ Clark │ Nut   │ 400 │
+│ Tape    │ Clark │ Nut   │ 200 │
+│ Tape    │ Clark │ Nut   │ 100 │
+│ Tape    │ Clark │ Nut   │ 100 │
+│ Tape    │ Clark │ Nut   │ 300 │
+│ Tape    │ Clark │ Nut   │ 400 │
+│ Tape    │ Clark │ Nut   │ 200 │
+│ Tape    │ Clark │ Nut   │ 200 │
+│ Tape    │ Clark │ Nut   │ 300 │
+│ Tape    │ Clark │ Nut   │ 400 │
+│ Sorter  │ Clark │ Bolt  │ 300 │
+│ Sorter  │ Clark │ Bolt  │ 200 │
+│ Sorter  │ Clark │ Bolt  │ 400 │
+│ Sorter  │ Clark │ Bolt  │ 200 │
+│ Sorter  │ Clark │ Bolt  │ 100 │
+│ Sorter  │ Clark │ Bolt  │ 100 │
+│ Sorter  │ Clark │ Bolt  │ 300 │
+│ Sorter  │ Clark │ Bolt  │ 400 │
+│ Sorter  │ Clark │ Bolt  │ 200 │
+│ Sorter  │ Clark │ Bolt  │ 200 │
+│ Sorter  │ Clark │ Bolt  │ 300 │
+│ Sorter  │ Clark │ Bolt  │ 400 │
+│ Display │ Clark │ Bolt  │ 300 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Display │ Clark │ Bolt  │ 400 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Display │ Clark │ Bolt  │ 100 │
+│ Display │ Clark │ Bolt  │ 100 │
+│ Display │ Clark │ Bolt  │ 300 │
+│ Display │ Clark │ Bolt  │ 400 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Display │ Clark │ Bolt  │ 300 │
+│ Display │ Clark │ Bolt  │ 400 │
+│ OCR     │ Clark │ Bolt  │ 300 │
+│ OCR     │ Clark │ Bolt  │ 200 │
+│ OCR     │ Clark │ Bolt  │ 400 │
+│ OCR     │ Clark │ Bolt  │ 200 │
+│ OCR     │ Clark │ Bolt  │ 100 │
+│ OCR     │ Clark │ Bolt  │ 100 │
+│ OCR     │ Clark │ Bolt  │ 300 │
+│ OCR     │ Clark │ Bolt  │ 400 │
+│ OCR     │ Clark │ Bolt  │ 200 │
+│ OCR     │ Clark │ Bolt  │ 200 │
+│ OCR     │ Clark │ Bolt  │ 300 │
+│ OCR     │ Clark │ Bolt  │ 400 │
+│ Console │ Clark │ Bolt  │ 300 │
+│ Console │ Clark │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 400 │
+│ Console │ Clark │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 100 │
+│ Console │ Clark │ Bolt  │ 100 │
+│ Console │ Clark │ Bolt  │ 300 │
+│ Console │ Clark │ Bolt  │ 400 │
+│ Console │ Clark │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 300 │
+│ Console │ Clark │ Bolt  │ 400 │
+│ RAID    │ Clark │ Bolt  │ 300 │
+│ RAID    │ Clark │ Bolt  │ 200 │
+│ RAID    │ Clark │ Bolt  │ 400 │
+│ RAID    │ Clark │ Bolt  │ 200 │
+│ RAID    │ Clark │ Bolt  │ 100 │
+│ RAID    │ Clark │ Bolt  │ 100 │
+│ RAID    │ Clark │ Bolt  │ 300 │
+│ RAID    │ Clark │ Bolt  │ 400 │
+│ RAID    │ Clark │ Bolt  │ 200 │
+│ RAID    │ Clark │ Bolt  │ 200 │
+│ RAID    │ Clark │ Bolt  │ 300 │
+│ RAID    │ Clark │ Bolt  │ 400 │
+│ EDS     │ Clark │ Bolt  │ 300 │
+│ EDS     │ Clark │ Bolt  │ 200 │
+│ EDS     │ Clark │ Bolt  │ 400 │
+│ EDS     │ Clark │ Bolt  │ 200 │
+│ EDS     │ Clark │ Bolt  │ 100 │
+│ EDS     │ Clark │ Bolt  │ 100 │
+│ EDS     │ Clark │ Bolt  │ 300 │
+│ EDS     │ Clark │ Bolt  │ 400 │
+│ EDS     │ Clark │ Bolt  │ 200 │
+│ EDS     │ Clark │ Bolt  │ 200 │
+│ EDS     │ Clark │ Bolt  │ 300 │
+│ EDS     │ Clark │ Bolt  │ 400 │
+│ Tape    │ Clark │ Bolt  │ 300 │
+│ Tape    │ Clark │ Bolt  │ 200 │
+│ Tape    │ Clark │ Bolt  │ 400 │
+│ Tape    │ Clark │ Bolt  │ 200 │
+│ Tape    │ Clark │ Bolt  │ 100 │
+│ Tape    │ Clark │ Bolt  │ 100 │
+│ Tape    │ Clark │ Bolt  │ 300 │
+│ Tape    │ Clark │ Bolt  │ 400 │
+│ Tape    │ Clark │ Bolt  │ 200 │
+│ Tape    │ Clark │ Bolt  │ 200 │
+│ Tape    │ Clark │ Bolt  │ 300 │
+│ Tape    │ Clark │ Bolt  │ 400 │
+│ Sorter  │ Clark │ Screw │ 300 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 400 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 100 │
+│ Sorter  │ Clark │ Screw │ 100 │
+│ Sorter  │ Clark │ Screw │ 300 │
+│ Sorter  │ Clark │ Screw │ 400 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 300 │
+│ Sorter  │ Clark │ Screw │ 400 │
+│ Display │ Clark │ Screw │ 300 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 400 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 100 │
+│ Display │ Clark │ Screw │ 100 │
+│ Display │ Clark │ Screw │ 300 │
+│ Display │ Clark │ Screw │ 400 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 300 │
+│ Display │ Clark │ Screw │ 400 │
+│ OCR     │ Clark │ Screw │ 300 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 400 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 100 │
+│ OCR     │ Clark │ Screw │ 100 │
+│ OCR     │ Clark │ Screw │ 300 │
+│ OCR     │ Clark │ Screw │ 400 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 300 │
+│ OCR     │ Clark │ Screw │ 400 │
+│ Console │ Clark │ Screw │ 300 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 400 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 100 │
+│ Console │ Clark │ Screw │ 100 │
+│ Console │ Clark │ Screw │ 300 │
+│ Console │ Clark │ Screw │ 400 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 300 │
+│ Console │ Clark │ Screw │ 400 │
+│ RAID    │ Clark │ Screw │ 300 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 400 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 100 │
+│ RAID    │ Clark │ Screw │ 100 │
+│ RAID    │ Clark │ Screw │ 300 │
+│ RAID    │ Clark │ Screw │ 400 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 300 │
+│ RAID    │ Clark │ Screw │ 400 │
+│ EDS     │ Clark │ Screw │ 300 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 400 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 100 │
+│ EDS     │ Clark │ Screw │ 100 │
+│ EDS     │ Clark │ Screw │ 300 │
+│ EDS     │ Clark │ Screw │ 400 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 300 │
+│ EDS     │ Clark │ Screw │ 400 │
+│ Tape    │ Clark │ Screw │ 300 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 400 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 100 │
+│ Tape    │ Clark │ Screw │ 100 │
+│ Tape    │ Clark │ Screw │ 300 │
+│ Tape    │ Clark │ Screw │ 400 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 300 │
+│ Tape    │ Clark │ Screw │ 400 │
+│ Sorter  │ Clark │ Screw │ 300 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 400 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 100 │
+│ Sorter  │ Clark │ Screw │ 100 │
+│ Sorter  │ Clark │ Screw │ 300 │
+│ Sorter  │ Clark │ Screw │ 400 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 200 │
+│ Sorter  │ Clark │ Screw │ 300 │
+│ Sorter  │ Clark │ Screw │ 400 │
+│ Display │ Clark │ Screw │ 300 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 400 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 100 │
+│ Display │ Clark │ Screw │ 100 │
+│ Display │ Clark │ Screw │ 300 │
+│ Display │ Clark │ Screw │ 400 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 300 │
+│ Display │ Clark │ Screw │ 400 │
+│ OCR     │ Clark │ Screw │ 300 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 400 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 100 │
+│ OCR     │ Clark │ Screw │ 100 │
+│ OCR     │ Clark │ Screw │ 300 │
+│ OCR     │ Clark │ Screw │ 400 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 200 │
+│ OCR     │ Clark │ Screw │ 300 │
+│ OCR     │ Clark │ Screw │ 400 │
+│ Console │ Clark │ Screw │ 300 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 400 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 100 │
+│ Console │ Clark │ Screw │ 100 │
+│ Console │ Clark │ Screw │ 300 │
+│ Console │ Clark │ Screw │ 400 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 300 │
+│ Console │ Clark │ Screw │ 400 │
+│ RAID    │ Clark │ Screw │ 300 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 400 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 100 │
+│ RAID    │ Clark │ Screw │ 100 │
+│ RAID    │ Clark │ Screw │ 300 │
+│ RAID    │ Clark │ Screw │ 400 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 200 │
+│ RAID    │ Clark │ Screw │ 300 │
+│ RAID    │ Clark │ Screw │ 400 │
+│ EDS     │ Clark │ Screw │ 300 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 400 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 100 │
+│ EDS     │ Clark │ Screw │ 100 │
+│ EDS     │ Clark │ Screw │ 300 │
+│ EDS     │ Clark │ Screw │ 400 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 200 │
+│ EDS     │ Clark │ Screw │ 300 │
+│ EDS     │ Clark │ Screw │ 400 │
+│ Tape    │ Clark │ Screw │ 300 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 400 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 100 │
+│ Tape    │ Clark │ Screw │ 100 │
+│ Tape    │ Clark │ Screw │ 300 │
+│ Tape    │ Clark │ Screw │ 400 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 200 │
+│ Tape    │ Clark │ Screw │ 300 │
+│ Tape    │ Clark │ Screw │ 400 │
+│ Sorter  │ Clark │ Cam   │ 300 │
+│ Sorter  │ Clark │ Cam   │ 200 │
+│ Sorter  │ Clark │ Cam   │ 400 │
+│ Sorter  │ Clark │ Cam   │ 200 │
+│ Sorter  │ Clark │ Cam   │ 100 │
+│ Sorter  │ Clark │ Cam   │ 100 │
+│ Sorter  │ Clark │ Cam   │ 300 │
+│ Sorter  │ Clark │ Cam   │ 400 │
+│ Sorter  │ Clark │ Cam   │ 200 │
+│ Sorter  │ Clark │ Cam   │ 200 │
+│ Sorter  │ Clark │ Cam   │ 300 │
+│ Sorter  │ Clark │ Cam   │ 400 │
+│ Display │ Clark │ Cam   │ 300 │
+│ Display │ Clark │ Cam   │ 200 │
+│ Display │ Clark │ Cam   │ 400 │
+│ Display │ Clark │ Cam   │ 200 │
+│ Display │ Clark │ Cam   │ 100 │
+│ Display │ Clark │ Cam   │ 100 │
+│ Display │ Clark │ Cam   │ 300 │
+│ Display │ Clark │ Cam   │ 400 │
+│ Display │ Clark │ Cam   │ 200 │
+│ Display │ Clark │ Cam   │ 200 │
+│ Display │ Clark │ Cam   │ 300 │
+│ Display │ Clark │ Cam   │ 400 │
+│ OCR     │ Clark │ Cam   │ 300 │
+│ OCR     │ Clark │ Cam   │ 200 │
+│ OCR     │ Clark │ Cam   │ 400 │
+│ OCR     │ Clark │ Cam   │ 200 │
+│ OCR     │ Clark │ Cam   │ 100 │
+│ OCR     │ Clark │ Cam   │ 100 │
+│ OCR     │ Clark │ Cam   │ 300 │
+│ OCR     │ Clark │ Cam   │ 400 │
+│ OCR     │ Clark │ Cam   │ 200 │
+│ OCR     │ Clark │ Cam   │ 200 │
+│ OCR     │ Clark │ Cam   │ 300 │
+│ OCR     │ Clark │ Cam   │ 400 │
+│ Console │ Clark │ Cam   │ 300 │
+│ Console │ Clark │ Cam   │ 200 │
+│ Console │ Clark │ Cam   │ 400 │
+│ Console │ Clark │ Cam   │ 200 │
+│ Console │ Clark │ Cam   │ 100 │
+│ Console │ Clark │ Cam   │ 100 │
+│ Console │ Clark │ Cam   │ 300 │
+│ Console │ Clark │ Cam   │ 400 │
+│ Console │ Clark │ Cam   │ 200 │
+│ Console │ Clark │ Cam   │ 200 │
+│ Console │ Clark │ Cam   │ 300 │
+│ Console │ Clark │ Cam   │ 400 │
+│ RAID    │ Clark │ Cam   │ 300 │
+│ RAID    │ Clark │ Cam   │ 200 │
+│ RAID    │ Clark │ Cam   │ 400 │
+│ RAID    │ Clark │ Cam   │ 200 │
+│ RAID    │ Clark │ Cam   │ 100 │
+│ RAID    │ Clark │ Cam   │ 100 │
+│ RAID    │ Clark │ Cam   │ 300 │
+│ RAID    │ Clark │ Cam   │ 400 │
+│ RAID    │ Clark │ Cam   │ 200 │
+│ RAID    │ Clark │ Cam   │ 200 │
+│ RAID    │ Clark │ Cam   │ 300 │
+│ RAID    │ Clark │ Cam   │ 400 │
+│ EDS     │ Clark │ Cam   │ 300 │
+│ EDS     │ Clark │ Cam   │ 200 │
+│ EDS     │ Clark │ Cam   │ 400 │
+│ EDS     │ Clark │ Cam   │ 200 │
+│ EDS     │ Clark │ Cam   │ 100 │
+│ EDS     │ Clark │ Cam   │ 100 │
+│ EDS     │ Clark │ Cam   │ 300 │
+│ EDS     │ Clark │ Cam   │ 400 │
+│ EDS     │ Clark │ Cam   │ 200 │
+│ EDS     │ Clark │ Cam   │ 200 │
+│ EDS     │ Clark │ Cam   │ 300 │
+│ EDS     │ Clark │ Cam   │ 400 │
+│ Tape    │ Clark │ Cam   │ 300 │
+│ Tape    │ Clark │ Cam   │ 200 │
+│ Tape    │ Clark │ Cam   │ 400 │
+│ Tape    │ Clark │ Cam   │ 200 │
+│ Tape    │ Clark │ Cam   │ 100 │
+│ Tape    │ Clark │ Cam   │ 100 │
+│ Tape    │ Clark │ Cam   │ 300 │
+│ Tape    │ Clark │ Cam   │ 400 │
+│ Tape    │ Clark │ Cam   │ 200 │
+│ Tape    │ Clark │ Cam   │ 200 │
+│ Tape    │ Clark │ Cam   │ 300 │
+│ Tape    │ Clark │ Cam   │ 400 │
+│ Sorter  │ Clark │ Cog   │ 300 │
+│ Sorter  │ Clark │ Cog   │ 200 │
+│ Sorter  │ Clark │ Cog   │ 400 │
+│ Sorter  │ Clark │ Cog   │ 200 │
+│ Sorter  │ Clark │ Cog   │ 100 │
+│ Sorter  │ Clark │ Cog   │ 100 │
+│ Sorter  │ Clark │ Cog   │ 300 │
+│ Sorter  │ Clark │ Cog   │ 400 │
+│ Sorter  │ Clark │ Cog   │ 200 │
+│ Sorter  │ Clark │ Cog   │ 200 │
+│ Sorter  │ Clark │ Cog   │ 300 │
+│ Sorter  │ Clark │ Cog   │ 400 │
+│ Display │ Clark │ Cog   │ 300 │
+│ Display │ Clark │ Cog   │ 200 │
+│ Display │ Clark │ Cog   │ 400 │
+│ Display │ Clark │ Cog   │ 200 │
+│ Display │ Clark │ Cog   │ 100 │
+│ Display │ Clark │ Cog   │ 100 │
+│ Display │ Clark │ Cog   │ 300 │
+│ Display │ Clark │ Cog   │ 400 │
+│ Display │ Clark │ Cog   │ 200 │
+│ Display │ Clark │ Cog   │ 200 │
+│ Display │ Clark │ Cog   │ 300 │
+│ Display │ Clark │ Cog   │ 400 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ OCR     │ Clark │ Cog   │ 200 │
+│ OCR     │ Clark │ Cog   │ 400 │
+│ OCR     │ Clark │ Cog   │ 200 │
+│ OCR     │ Clark │ Cog   │ 100 │
+│ OCR     │ Clark │ Cog   │ 100 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ OCR     │ Clark │ Cog   │ 400 │
+│ OCR     │ Clark │ Cog   │ 200 │
+│ OCR     │ Clark │ Cog   │ 200 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ OCR     │ Clark │ Cog   │ 400 │
+│ Console │ Clark │ Cog   │ 300 │
+│ Console │ Clark │ Cog   │ 200 │
+│ Console │ Clark │ Cog   │ 400 │
+│ Console │ Clark │ Cog   │ 200 │
+│ Console │ Clark │ Cog   │ 100 │
+│ Console │ Clark │ Cog   │ 100 │
+│ Console │ Clark │ Cog   │ 300 │
+│ Console │ Clark │ Cog   │ 400 │
+│ Console │ Clark │ Cog   │ 200 │
+│ Console │ Clark │ Cog   │ 200 │
+│ Console │ Clark │ Cog   │ 300 │
+│ Console │ Clark │ Cog   │ 400 │
+│ RAID    │ Clark │ Cog   │ 300 │
+│ RAID    │ Clark │ Cog   │ 200 │
+│ RAID    │ Clark │ Cog   │ 400 │
+│ RAID    │ Clark │ Cog   │ 200 │
+│ RAID    │ Clark │ Cog   │ 100 │
+│ RAID    │ Clark │ Cog   │ 100 │
+│ RAID    │ Clark │ Cog   │ 300 │
+│ RAID    │ Clark │ Cog   │ 400 │
+│ RAID    │ Clark │ Cog   │ 200 │
+│ RAID    │ Clark │ Cog   │ 200 │
+│ RAID    │ Clark │ Cog   │ 300 │
+│ RAID    │ Clark │ Cog   │ 400 │
+│ EDS     │ Clark │ Cog   │ 300 │
+│ EDS     │ Clark │ Cog   │ 200 │
+│ EDS     │ Clark │ Cog   │ 400 │
+│ EDS     │ Clark │ Cog   │ 200 │
+│ EDS     │ Clark │ Cog   │ 100 │
+│ EDS     │ Clark │ Cog   │ 100 │
+│ EDS     │ Clark │ Cog   │ 300 │
+│ EDS     │ Clark │ Cog   │ 400 │
+│ EDS     │ Clark │ Cog   │ 200 │
+│ EDS     │ Clark │ Cog   │ 200 │
+│ EDS     │ Clark │ Cog   │ 300 │
+│ EDS     │ Clark │ Cog   │ 400 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 200 │
+│ Tape    │ Clark │ Cog   │ 400 │
+│ Tape    │ Clark │ Cog   │ 200 │
+│ Tape    │ Clark │ Cog   │ 100 │
+│ Tape    │ Clark │ Cog   │ 100 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 400 │
+│ Tape    │ Clark │ Cog   │ 200 │
+│ Tape    │ Clark │ Cog   │ 200 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 400 │
+│ Sorter  │ Adams │ Nut   │ 300 │
+│ Sorter  │ Adams │ Nut   │ 200 │
+│ Sorter  │ Adams │ Nut   │ 400 │
+│ Sorter  │ Adams │ Nut   │ 200 │
+│ Sorter  │ Adams │ Nut   │ 100 │
+│ Sorter  │ Adams │ Nut   │ 100 │
+│ Sorter  │ Adams │ Nut   │ 300 │
+│ Sorter  │ Adams │ Nut   │ 400 │
+│ Sorter  │ Adams │ Nut   │ 200 │
+│ Sorter  │ Adams │ Nut   │ 200 │
+│ Sorter  │ Adams │ Nut   │ 300 │
+│ Sorter  │ Adams │ Nut   │ 400 │
+│ Display │ Adams │ Nut   │ 300 │
+│ Display │ Adams │ Nut   │ 200 │
+│ Display │ Adams │ Nut   │ 400 │
+│ Display │ Adams │ Nut   │ 200 │
+│ Display │ Adams │ Nut   │ 100 │
+│ Display │ Adams │ Nut   │ 100 │
+│ Display │ Adams │ Nut   │ 300 │
+│ Display │ Adams │ Nut   │ 400 │
+│ Display │ Adams │ Nut   │ 200 │
+│ Display │ Adams │ Nut   │ 200 │
+│ Display │ Adams │ Nut   │ 300 │
+│ Display │ Adams │ Nut   │ 400 │
+│ OCR     │ Adams │ Nut   │ 300 │
+│ OCR     │ Adams │ Nut   │ 200 │
+│ OCR     │ Adams │ Nut   │ 400 │
+│ OCR     │ Adams │ Nut   │ 200 │
+│ OCR     │ Adams │ Nut   │ 100 │
+│ OCR     │ Adams │ Nut   │ 100 │
+│ OCR     │ Adams │ Nut   │ 300 │
+│ OCR     │ Adams │ Nut   │ 400 │
+│ OCR     │ Adams │ Nut   │ 200 │
+│ OCR     │ Adams │ Nut   │ 200 │
+│ OCR     │ Adams │ Nut   │ 300 │
+│ OCR     │ Adams │ Nut   │ 400 │
+│ Console │ Adams │ Nut   │ 300 │
+│ Console │ Adams │ Nut   │ 200 │
+│ Console │ Adams │ Nut   │ 400 │
+│ Console │ Adams │ Nut   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Nut   │ 300 │
+│ Console │ Adams │ Nut   │ 400 │
+│ Console │ Adams │ Nut   │ 200 │
+│ Console │ Adams │ Nut   │ 200 │
+│ Console │ Adams │ Nut   │ 300 │
+│ Console │ Adams │ Nut   │ 400 │
+│ RAID    │ Adams │ Nut   │ 300 │
+│ RAID    │ Adams │ Nut   │ 200 │
+│ RAID    │ Adams │ Nut   │ 400 │
+│ RAID    │ Adams │ Nut   │ 200 │
+│ RAID    │ Adams │ Nut   │ 100 │
+│ RAID    │ Adams │ Nut   │ 100 │
+│ RAID    │ Adams │ Nut   │ 300 │
+│ RAID    │ Adams │ Nut   │ 400 │
+│ RAID    │ Adams │ Nut   │ 200 │
+│ RAID    │ Adams │ Nut   │ 200 │
+│ RAID    │ Adams │ Nut   │ 300 │
+│ RAID    │ Adams │ Nut   │ 400 │
+│ EDS     │ Adams │ Nut   │ 300 │
+│ EDS     │ Adams │ Nut   │ 200 │
+│ EDS     │ Adams │ Nut   │ 400 │
+│ EDS     │ Adams │ Nut   │ 200 │
+│ EDS     │ Adams │ Nut   │ 100 │
+│ EDS     │ Adams │ Nut   │ 100 │
+│ EDS     │ Adams │ Nut   │ 300 │
+│ EDS     │ Adams │ Nut   │ 400 │
+│ EDS     │ Adams │ Nut   │ 200 │
+│ EDS     │ Adams │ Nut   │ 200 │
+│ EDS     │ Adams │ Nut   │ 300 │
+│ EDS     │ Adams │ Nut   │ 400 │
+│ Tape    │ Adams │ Nut   │ 300 │
+│ Tape    │ Adams │ Nut   │ 200 │
+│ Tape    │ Adams │ Nut   │ 400 │
+│ Tape    │ Adams │ Nut   │ 200 │
+│ Tape    │ Adams │ Nut   │ 100 │
+│ Tape    │ Adams │ Nut   │ 100 │
+│ Tape    │ Adams │ Nut   │ 300 │
+│ Tape    │ Adams │ Nut   │ 400 │
+│ Tape    │ Adams │ Nut   │ 200 │
+│ Tape    │ Adams │ Nut   │ 200 │
+│ Tape    │ Adams │ Nut   │ 300 │
+│ Tape    │ Adams │ Nut   │ 400 │
+│ Sorter  │ Adams │ Bolt  │ 300 │
+│ Sorter  │ Adams │ Bolt  │ 200 │
+│ Sorter  │ Adams │ Bolt  │ 400 │
+│ Sorter  │ Adams │ Bolt  │ 200 │
+│ Sorter  │ Adams │ Bolt  │ 100 │
+│ Sorter  │ Adams │ Bolt  │ 100 │
+│ Sorter  │ Adams │ Bolt  │ 300 │
+│ Sorter  │ Adams │ Bolt  │ 400 │
+│ Sorter  │ Adams │ Bolt  │ 200 │
+│ Sorter  │ Adams │ Bolt  │ 200 │
+│ Sorter  │ Adams │ Bolt  │ 300 │
+│ Sorter  │ Adams │ Bolt  │ 400 │
+│ Display │ Adams │ Bolt  │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Display │ Adams │ Bolt  │ 400 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Display │ Adams │ Bolt  │ 100 │
+│ Display │ Adams │ Bolt  │ 100 │
+│ Display │ Adams │ Bolt  │ 300 │
+│ Display │ Adams │ Bolt  │ 400 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Display │ Adams │ Bolt  │ 300 │
+│ Display │ Adams │ Bolt  │ 400 │
+│ OCR     │ Adams │ Bolt  │ 300 │
+│ OCR     │ Adams │ Bolt  │ 200 │
+│ OCR     │ Adams │ Bolt  │ 400 │
+│ OCR     │ Adams │ Bolt  │ 200 │
+│ OCR     │ Adams │ Bolt  │ 100 │
+│ OCR     │ Adams │ Bolt  │ 100 │
+│ OCR     │ Adams │ Bolt  │ 300 │
+│ OCR     │ Adams │ Bolt  │ 400 │
+│ OCR     │ Adams │ Bolt  │ 200 │
+│ OCR     │ Adams │ Bolt  │ 200 │
+│ OCR     │ Adams │ Bolt  │ 300 │
+│ OCR     │ Adams │ Bolt  │ 400 │
+│ Console │ Adams │ Bolt  │ 300 │
+│ Console │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 400 │
+│ Console │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ Console │ Adams │ Bolt  │ 300 │
+│ Console │ Adams │ Bolt  │ 400 │
+│ Console │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 300 │
+│ Console │ Adams │ Bolt  │ 400 │
+│ RAID    │ Adams │ Bolt  │ 300 │
+│ RAID    │ Adams │ Bolt  │ 200 │
+│ RAID    │ Adams │ Bolt  │ 400 │
+│ RAID    │ Adams │ Bolt  │ 200 │
+│ RAID    │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Bolt  │ 300 │
+│ RAID    │ Adams │ Bolt  │ 400 │
+│ RAID    │ Adams │ Bolt  │ 200 │
+│ RAID    │ Adams │ Bolt  │ 200 │
+│ RAID    │ Adams │ Bolt  │ 300 │
+│ RAID    │ Adams │ Bolt  │ 400 │
+│ EDS     │ Adams │ Bolt  │ 300 │
+│ EDS     │ Adams │ Bolt  │ 200 │
+│ EDS     │ Adams │ Bolt  │ 400 │
+│ EDS     │ Adams │ Bolt  │ 200 │
+│ EDS     │ Adams │ Bolt  │ 100 │
+│ EDS     │ Adams │ Bolt  │ 100 │
+│ EDS     │ Adams │ Bolt  │ 300 │
+│ EDS     │ Adams │ Bolt  │ 400 │
+│ EDS     │ Adams │ Bolt  │ 200 │
+│ EDS     │ Adams │ Bolt  │ 200 │
+│ EDS     │ Adams │ Bolt  │ 300 │
+│ EDS     │ Adams │ Bolt  │ 400 │
+│ Tape    │ Adams │ Bolt  │ 300 │
+│ Tape    │ Adams │ Bolt  │ 200 │
+│ Tape    │ Adams │ Bolt  │ 400 │
+│ Tape    │ Adams │ Bolt  │ 200 │
+│ Tape    │ Adams │ Bolt  │ 100 │
+│ Tape    │ Adams │ Bolt  │ 100 │
+│ Tape    │ Adams │ Bolt  │ 300 │
+│ Tape    │ Adams │ Bolt  │ 400 │
+│ Tape    │ Adams │ Bolt  │ 200 │
+│ Tape    │ Adams │ Bolt  │ 200 │
+│ Tape    │ Adams │ Bolt  │ 300 │
+│ Tape    │ Adams │ Bolt  │ 400 │
+│ Sorter  │ Adams │ Screw │ 300 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 400 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 100 │
+│ Sorter  │ Adams │ Screw │ 100 │
+│ Sorter  │ Adams │ Screw │ 300 │
+│ Sorter  │ Adams │ Screw │ 400 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 300 │
+│ Sorter  │ Adams │ Screw │ 400 │
+│ Display │ Adams │ Screw │ 300 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 400 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 100 │
+│ Display │ Adams │ Screw │ 100 │
+│ Display │ Adams │ Screw │ 300 │
+│ Display │ Adams │ Screw │ 400 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 300 │
+│ Display │ Adams │ Screw │ 400 │
+│ OCR     │ Adams │ Screw │ 300 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 400 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 100 │
+│ OCR     │ Adams │ Screw │ 100 │
+│ OCR     │ Adams │ Screw │ 300 │
+│ OCR     │ Adams │ Screw │ 400 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 300 │
+│ OCR     │ Adams │ Screw │ 400 │
+│ Console │ Adams │ Screw │ 300 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 400 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 100 │
+│ Console │ Adams │ Screw │ 100 │
+│ Console │ Adams │ Screw │ 300 │
+│ Console │ Adams │ Screw │ 400 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 300 │
+│ Console │ Adams │ Screw │ 400 │
+│ RAID    │ Adams │ Screw │ 300 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 400 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 100 │
+│ RAID    │ Adams │ Screw │ 100 │
+│ RAID    │ Adams │ Screw │ 300 │
+│ RAID    │ Adams │ Screw │ 400 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 300 │
+│ RAID    │ Adams │ Screw │ 400 │
+│ EDS     │ Adams │ Screw │ 300 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 400 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 100 │
+│ EDS     │ Adams │ Screw │ 100 │
+│ EDS     │ Adams │ Screw │ 300 │
+│ EDS     │ Adams │ Screw │ 400 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 300 │
+│ EDS     │ Adams │ Screw │ 400 │
+│ Tape    │ Adams │ Screw │ 300 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 400 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 100 │
+│ Tape    │ Adams │ Screw │ 100 │
+│ Tape    │ Adams │ Screw │ 300 │
+│ Tape    │ Adams │ Screw │ 400 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 300 │
+│ Tape    │ Adams │ Screw │ 400 │
+│ Sorter  │ Adams │ Screw │ 300 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 400 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 100 │
+│ Sorter  │ Adams │ Screw │ 100 │
+│ Sorter  │ Adams │ Screw │ 300 │
+│ Sorter  │ Adams │ Screw │ 400 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 200 │
+│ Sorter  │ Adams │ Screw │ 300 │
+│ Sorter  │ Adams │ Screw │ 400 │
+│ Display │ Adams │ Screw │ 300 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 400 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 100 │
+│ Display │ Adams │ Screw │ 100 │
+│ Display │ Adams │ Screw │ 300 │
+│ Display │ Adams │ Screw │ 400 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 200 │
+│ Display │ Adams │ Screw │ 300 │
+│ Display │ Adams │ Screw │ 400 │
+│ OCR     │ Adams │ Screw │ 300 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 400 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 100 │
+│ OCR     │ Adams │ Screw │ 100 │
+│ OCR     │ Adams │ Screw │ 300 │
+│ OCR     │ Adams │ Screw │ 400 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 200 │
+│ OCR     │ Adams │ Screw │ 300 │
+│ OCR     │ Adams │ Screw │ 400 │
+│ Console │ Adams │ Screw │ 300 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 400 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 100 │
+│ Console │ Adams │ Screw │ 100 │
+│ Console │ Adams │ Screw │ 300 │
+│ Console │ Adams │ Screw │ 400 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 300 │
+│ Console │ Adams │ Screw │ 400 │
+│ RAID    │ Adams │ Screw │ 300 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 400 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 100 │
+│ RAID    │ Adams │ Screw │ 100 │
+│ RAID    │ Adams │ Screw │ 300 │
+│ RAID    │ Adams │ Screw │ 400 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 200 │
+│ RAID    │ Adams │ Screw │ 300 │
+│ RAID    │ Adams │ Screw │ 400 │
+│ EDS     │ Adams │ Screw │ 300 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 400 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 100 │
+│ EDS     │ Adams │ Screw │ 100 │
+│ EDS     │ Adams │ Screw │ 300 │
+│ EDS     │ Adams │ Screw │ 400 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 200 │
+│ EDS     │ Adams │ Screw │ 300 │
+│ EDS     │ Adams │ Screw │ 400 │
+│ Tape    │ Adams │ Screw │ 300 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 400 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 100 │
+│ Tape    │ Adams │ Screw │ 100 │
+│ Tape    │ Adams │ Screw │ 300 │
+│ Tape    │ Adams │ Screw │ 400 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 200 │
+│ Tape    │ Adams │ Screw │ 300 │
+│ Tape    │ Adams │ Screw │ 400 │
+│ Sorter  │ Adams │ Cam   │ 300 │
+│ Sorter  │ Adams │ Cam   │ 200 │
+│ Sorter  │ Adams │ Cam   │ 400 │
+│ Sorter  │ Adams │ Cam   │ 200 │
+│ Sorter  │ Adams │ Cam   │ 100 │
+│ Sorter  │ Adams │ Cam   │ 100 │
+│ Sorter  │ Adams │ Cam   │ 300 │
+│ Sorter  │ Adams │ Cam   │ 400 │
+│ Sorter  │ Adams │ Cam   │ 200 │
+│ Sorter  │ Adams │ Cam   │ 200 │
+│ Sorter  │ Adams │ Cam   │ 300 │
+│ Sorter  │ Adams │ Cam   │ 400 │
+│ Display │ Adams │ Cam   │ 300 │
+│ Display │ Adams │ Cam   │ 200 │
+│ Display │ Adams │ Cam   │ 400 │
+│ Display │ Adams │ Cam   │ 200 │
+│ Display │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cam   │ 300 │
+│ Display │ Adams │ Cam   │ 400 │
+│ Display │ Adams │ Cam   │ 200 │
+│ Display │ Adams │ Cam   │ 200 │
+│ Display │ Adams │ Cam   │ 300 │
+│ Display │ Adams │ Cam   │ 400 │
+│ OCR     │ Adams │ Cam   │ 300 │
+│ OCR     │ Adams │ Cam   │ 200 │
+│ OCR     │ Adams │ Cam   │ 400 │
+│ OCR     │ Adams │ Cam   │ 200 │
+│ OCR     │ Adams │ Cam   │ 100 │
+│ OCR     │ Adams │ Cam   │ 100 │
+│ OCR     │ Adams │ Cam   │ 300 │
+│ OCR     │ Adams │ Cam   │ 400 │
+│ OCR     │ Adams │ Cam   │ 200 │
+│ OCR     │ Adams │ Cam   │ 200 │
+│ OCR     │ Adams │ Cam   │ 300 │
+│ OCR     │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cam   │ 300 │
+│ Console │ Adams │ Cam   │ 200 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cam   │ 200 │
+│ Console │ Adams │ Cam   │ 100 │
+│ Console │ Adams │ Cam   │ 100 │
+│ Console │ Adams │ Cam   │ 300 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cam   │ 200 │
+│ Console │ Adams │ Cam   │ 200 │
+│ Console │ Adams │ Cam   │ 300 │
+│ Console │ Adams │ Cam   │ 400 │
+│ RAID    │ Adams │ Cam   │ 300 │
+│ RAID    │ Adams │ Cam   │ 200 │
+│ RAID    │ Adams │ Cam   │ 400 │
+│ RAID    │ Adams │ Cam   │ 200 │
+│ RAID    │ Adams │ Cam   │ 100 │
+│ RAID    │ Adams │ Cam   │ 100 │
+│ RAID    │ Adams │ Cam   │ 300 │
+│ RAID    │ Adams │ Cam   │ 400 │
+│ RAID    │ Adams │ Cam   │ 200 │
+│ RAID    │ Adams │ Cam   │ 200 │
+│ RAID    │ Adams │ Cam   │ 300 │
+│ RAID    │ Adams │ Cam   │ 400 │
+│ EDS     │ Adams │ Cam   │ 300 │
+│ EDS     │ Adams │ Cam   │ 200 │
+│ EDS     │ Adams │ Cam   │ 400 │
+│ EDS     │ Adams │ Cam   │ 200 │
+│ EDS     │ Adams │ Cam   │ 100 │
+│ EDS     │ Adams │ Cam   │ 100 │
+│ EDS     │ Adams │ Cam   │ 300 │
+│ EDS     │ Adams │ Cam   │ 400 │
+│ EDS     │ Adams │ Cam   │ 200 │
+│ EDS     │ Adams │ Cam   │ 200 │
+│ EDS     │ Adams │ Cam   │ 300 │
+│ EDS     │ Adams │ Cam   │ 400 │
+│ Tape    │ Adams │ Cam   │ 300 │
+│ Tape    │ Adams │ Cam   │ 200 │
+│ Tape    │ Adams │ Cam   │ 400 │
+│ Tape    │ Adams │ Cam   │ 200 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Tape    │ Adams │ Cam   │ 300 │
+│ Tape    │ Adams │ Cam   │ 400 │
+│ Tape    │ Adams │ Cam   │ 200 │
+│ Tape    │ Adams │ Cam   │ 200 │
+│ Tape    │ Adams │ Cam   │ 300 │
+│ Tape    │ Adams │ Cam   │ 400 │
+│ Sorter  │ Adams │ Cog   │ 300 │
+│ Sorter  │ Adams │ Cog   │ 200 │
+│ Sorter  │ Adams │ Cog   │ 400 │
+│ Sorter  │ Adams │ Cog   │ 200 │
+│ Sorter  │ Adams │ Cog   │ 100 │
+│ Sorter  │ Adams │ Cog   │ 100 │
+│ Sorter  │ Adams │ Cog   │ 300 │
+│ Sorter  │ Adams │ Cog   │ 400 │
+│ Sorter  │ Adams │ Cog   │ 200 │
+│ Sorter  │ Adams │ Cog   │ 200 │
+│ Sorter  │ Adams │ Cog   │ 300 │
+│ Sorter  │ Adams │ Cog   │ 400 │
+│ Display │ Adams │ Cog   │ 300 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Display │ Adams │ Cog   │ 400 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Display │ Adams │ Cog   │ 100 │
+│ Display │ Adams │ Cog   │ 100 │
+│ Display │ Adams │ Cog   │ 300 │
+│ Display │ Adams │ Cog   │ 400 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Display │ Adams │ Cog   │ 300 │
+│ Display │ Adams │ Cog   │ 400 │
+│ OCR     │ Adams │ Cog   │ 300 │
+│ OCR     │ Adams │ Cog   │ 200 │
+│ OCR     │ Adams │ Cog   │ 400 │
+│ OCR     │ Adams │ Cog   │ 200 │
+│ OCR     │ Adams │ Cog   │ 100 │
+│ OCR     │ Adams │ Cog   │ 100 │
+│ OCR     │ Adams │ Cog   │ 300 │
+│ OCR     │ Adams │ Cog   │ 400 │
+│ OCR     │ Adams │ Cog   │ 200 │
+│ OCR     │ Adams │ Cog   │ 200 │
+│ OCR     │ Adams │ Cog   │ 300 │
+│ OCR     │ Adams │ Cog   │ 400 │
+│ Console │ Adams │ Cog   │ 300 │
+│ Console │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Cog   │ 400 │
+│ Console │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Cog   │ 100 │
+│ Console │ Adams │ Cog   │ 100 │
+│ Console │ Adams │ Cog   │ 300 │
+│ Console │ Adams │ Cog   │ 400 │
+│ Console │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Cog   │ 300 │
+│ Console │ Adams │ Cog   │ 400 │
+│ RAID    │ Adams │ Cog   │ 300 │
+│ RAID    │ Adams │ Cog   │ 200 │
+│ RAID    │ Adams │ Cog   │ 400 │
+│ RAID    │ Adams │ Cog   │ 200 │
+│ RAID    │ Adams │ Cog   │ 100 │
+│ RAID    │ Adams │ Cog   │ 100 │
+│ RAID    │ Adams │ Cog   │ 300 │
+│ RAID    │ Adams │ Cog   │ 400 │
+│ RAID    │ Adams │ Cog   │ 200 │
+│ RAID    │ Adams │ Cog   │ 200 │
+│ RAID    │ Adams │ Cog   │ 300 │
+│ RAID    │ Adams │ Cog   │ 400 │
+│ EDS     │ Adams │ Cog   │ 300 │
+│ EDS     │ Adams │ Cog   │ 200 │
+│ EDS     │ Adams │ Cog   │ 400 │
+│ EDS     │ Adams │ Cog   │ 200 │
+│ EDS     │ Adams │ Cog   │ 100 │
+│ EDS     │ Adams │ Cog   │ 100 │
+│ EDS     │ Adams │ Cog   │ 300 │
+│ EDS     │ Adams │ Cog   │ 400 │
+│ EDS     │ Adams │ Cog   │ 200 │
+│ EDS     │ Adams │ Cog   │ 200 │
+│ EDS     │ Adams │ Cog   │ 300 │
+│ EDS     │ Adams │ Cog   │ 400 │
+│ Tape    │ Adams │ Cog   │ 300 │
+│ Tape    │ Adams │ Cog   │ 200 │
+│ Tape    │ Adams │ Cog   │ 400 │
+│ Tape    │ Adams │ Cog   │ 200 │
+│ Tape    │ Adams │ Cog   │ 100 │
+│ Tape    │ Adams │ Cog   │ 100 │
+│ Tape    │ Adams │ Cog   │ 300 │
+│ Tape    │ Adams │ Cog   │ 400 │
+│ Tape    │ Adams │ Cog   │ 200 │
+│ Tape    │ Adams │ Cog   │ 200 │
+│ Tape    │ Adams │ Cog   │ 300 │
+│ Tape    │ Adams │ Cog   │ 400 │
+└─────────┴───────┴───────┴─────┘
+(2520 rows)
+
+', 5, 'EXECUTED'),
+	(34, 6, 0.00, 'SELECT s.sname, p.pname,sp.qty FROM supplier s join supplier_part sp ON s.sno=sp.sno JOIN part p ON s.pno=sp.pno
+ GROUP BY s.sname, p.pname,sp.qty;
+ERROR:  column s.pno does not exist
+LINE 1: ...n supplier_part sp ON s.sno=sp.sno JOIN part p ON s.pno=sp.p...
+                                                             ^
+', 4, 'EXECUTED'),
+	(1423, 19, 0.00, 'SELECT FROM supplier and project;
+ERROR:  syntax error at or near "and"
+LINE 1: SELECT FROM supplier and project;
+                             ^
+', 8, 'EXECUTED'),
+	(1445, 5, 0.00, 'SELECT s.sname, COUNT(p.pname),  SUM(a.qty)
+
+AS "total Quantities"
+
+FROM supplier s 
+
+JOIN  supplier_part a ON 
+
+s.sno = a.sno
+
+JOIN part p ON a.pno =p.pno
+
+GROUP BY s.sname;
+┌───────┬───────┬──────────────────┐
+│ sname │ count │ total Quantities │
+├───────┼───────┼──────────────────┤
+│ Blake │     1 │              200 │
+│ Jones │     2 │              700 │
+│ Smith │     6 │             1300 │
+│ Clark │     3 │              900 │
+└───────┴───────┴──────────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(210, 24, 0.00, 'SELECT s.sname,p.pname,q.qty
+
+FROM supplier s
+
+JOIN spj q
+
+ON s.sno=q.sno
+
+JOIN part p 
+
+ON p.pno=q.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(1444, 24, 0.00, '\d
+              List of relations
+┌────────┬───────────────┬───────┬──────────┐
+│ Schema │     Name      │ Type  │  Owner   │
+├────────┼───────────────┼───────┼──────────┤
+│ public │ part          │ table │ postgres │
+│ public │ project       │ table │ postgres │
+│ public │ spj           │ table │ postgres │
+│ public │ supplier      │ table │ postgres │
+│ public │ supplier_part │ table │ postgres │
+└────────┴───────────────┴───────┴──────────┘
+(5 rows)
+
+
+SELECT sname,COUNT(pno)
+
+FROM supplier s
+', 8, 'EXECUTED'),
+	(1419, 3, 0.00, 'select supplier.sname, 
+
+COUNT(part.pname), 
+
+SUM(supplier_part.qty)
+
+FROM supplier
+
+JOIN supplier_part
+
+ON supplier.sno = supplier_part.sno
+
+JOIN part
+
+ON supplier_part.pno = part.pno
+
+GROUP BY supplier.sname;
+┌───────┬───────┬──────┐
+│ sname │ count │ sum  │
+├───────┼───────┼──────┤
+│ Blake │     1 │  200 │
+│ Jones │     2 │  700 │
+│ Smith │     6 │ 1300 │
+│ Clark │     3 │  900 │
+└───────┴───────┴──────┘
+(4 rows)
+
+', 8, 'EXECUTED'),
+	(395, 15, 0.00, 'SELECT j.jname , s.sname , p.pname , sp.qty 
+
+FROM Spj sp 
+
+ JOIN project j ON j.jno = sp.jno
+
+  JOIN supplier s ON s.sno = sp.sno 
+
+   JOIN part p ON p.pno = sp.pno ;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(35, 9, 0.00, 'SELECT j.jname, s.sname, p.pname, a.qty 
+
+FROM supplier s 
+
+JOIN spj a ON s.sno = a.sno 
+
+JOIN part p ON a.pno = p.pno 
+
+JOIN project j ON a.jno = j.jno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(590, 24, 0.00, 'SELECT j.jname,s.sname,p.pname,q.qty
+
+FROM project j
+
+JOIN spj q
+
+ON j.jno=q.jno
+
+JOIN part p
+
+ON q.pno=p.pno
+
+JOIN Supplier_part sp
+
+ON sp.pno=p.pno
+
+JOIN supplier s
+
+ON sp.sno=s.sno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Jones │ Nut   │ 200 │
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Jones │ Nut   │ 700 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Smith │ Screw │ 400 │
+│ Display │ Smith │ Screw │ 200 │
+│ OCR     │ Smith │ Screw │ 200 │
+│ Console │ Smith │ Screw │ 500 │
+│ RAID    │ Smith │ Screw │ 600 │
+│ EDS     │ Smith │ Screw │ 400 │
+│ Tape    │ Smith │ Screw │ 800 │
+│ Display │ Clark │ Cam   │ 100 │
+│ Display │ Smith │ Cam   │ 100 │
+│ Sorter  │ Smith │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 500 │
+│ Display │ Smith │ Screw │ 500 │
+│ OCR     │ Smith │ Cog   │ 300 │
+│ Tape    │ Smith │ Cog   │ 300 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Display │ Blake │ Bolt  │ 200 │
+│ Display │ Jones │ Bolt  │ 200 │
+│ Display │ Smith │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 100 │
+│ Console │ Blake │ Bolt  │ 100 │
+│ Console │ Jones │ Bolt  │ 100 │
+│ Console │ Smith │ Bolt  │ 100 │
+│ RAID    │ Clark │ Cam   │ 500 │
+│ RAID    │ Smith │ Cam   │ 500 │
+│ Tape    │ Clark │ Cam   │ 100 │
+│ Tape    │ Smith │ Cam   │ 100 │
+│ Display │ Smith │ Cog   │ 200 │
+│ Console │ Jones │ Nut   │ 100 │
+│ Console │ Smith │ Nut   │ 100 │
+│ Console │ Smith │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 800 │
+│ Console │ Smith │ Screw │ 800 │
+│ Console │ Clark │ Cam   │ 400 │
+│ Console │ Smith │ Cam   │ 400 │
+│ Console │ Smith │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(39 rows)
+
+', 5, 'EXECUTED'),
+	(38, 5, 0.00, 'SELECT  s.sname, p.pname, a.qty FROM supplier s JOIN spj a ON s.sno = a.sno JOIN 
+
+part p ON a.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(50, 13, 0.00, 'select * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+', 4, 'EXECUTED'),
+	(854, 22, 0.00, 'SELECT sname
+', 8, 'EXECUTED'),
+	(368, 10, 0.00, 'SELECT
+
+    sno,
+
+    COUNT(DISTINCT pno) AS total_parts,
+
+    SUM(qty) AS total_quantity
+
+FROM spj
+
+GROUP BY sno;
+┌─────┬─────────────┬────────────────┐
+│ sno │ total_parts │ total_quantity │
+├─────┼─────────────┼────────────────┤
+│ S1  │           1 │            900 │
+│ S2  │           2 │           3200 │
+│ S3  │           2 │            700 │
+│ S4  │           1 │            600 │
+│ S5  │           6 │           3100 │
+└─────┴─────────────┴────────────────┘
+(5 rows)
+
+', 7, 'EXECUTED'),
+	(150, 22, 0.00, 'SELECT pj.jname,s.sname,pname,spj.qty
+
+FROM project pj
+
+INNER JOIN spj 
+
+ON pj.jno=spj.jno
+
+INNER JOIN supplier_part sp
+
+ON spj.pno=sp.pno
+
+INNER JOIN supplier s
+
+ON sp.sno=s.sno
+
+INNER JOIN part p
+
+ON sp.pno=p.pno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Console │ Smith │ Nut   │ 100 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Bolt  │ 100 │
+│ Display │ Smith │ Bolt  │ 200 │
+│ Console │ Smith │ Screw │ 200 │
+│ Sorter  │ Smith │ Screw │ 200 │
+│ Tape    │ Smith │ Screw │ 800 │
+│ EDS     │ Smith │ Screw │ 400 │
+│ RAID    │ Smith │ Screw │ 600 │
+│ Console │ Smith │ Screw │ 500 │
+│ OCR     │ Smith │ Screw │ 200 │
+│ Display │ Smith │ Screw │ 200 │
+│ Sorter  │ Smith │ Screw │ 400 │
+│ Console │ Smith │ Screw │ 800 │
+│ Display │ Smith │ Screw │ 500 │
+│ Console │ Smith │ Cam   │ 400 │
+│ Tape    │ Smith │ Cam   │ 100 │
+│ RAID    │ Smith │ Cam   │ 500 │
+│ Display │ Smith │ Cam   │ 100 │
+│ Console │ Smith │ Cog   │ 500 │
+│ Display │ Smith │ Cog   │ 200 │
+│ Tape    │ Smith │ Cog   │ 300 │
+│ OCR     │ Smith │ Cog   │ 300 │
+│ Console │ Jones │ Nut   │ 100 │
+│ Console │ Jones │ Nut   │ 700 │
+│ Sorter  │ Jones │ Nut   │ 200 │
+│ Console │ Jones │ Bolt  │ 100 │
+│ Display │ Jones │ Bolt  │ 200 │
+│ Console │ Blake │ Bolt  │ 100 │
+│ Display │ Blake │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 100 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Console │ Clark │ Screw │ 800 │
+│ Display │ Clark │ Screw │ 500 │
+│ Console │ Clark │ Cam   │ 400 │
+│ Tape    │ Clark │ Cam   │ 100 │
+│ RAID    │ Clark │ Cam   │ 500 │
+│ Display │ Clark │ Cam   │ 100 │
+└─────────┴───────┴───────┴─────┘
+(39 rows)
+
+', 5, 'EXECUTED'),
+	(387, 4, 0.00, 'SELECT pj.jname, s.sname, p.pname, sp.qty 
+
+FROM supplier_part sp 
+
+JOIN part p ON sp.pno = p.pno 
+
+JOIN supplier s ON sp.sno = s.sno
+
+JOIN project pj ON pj.city = p.city AND pj.city = s.city;
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Nut   │ 300 │
+└────────┴───────┴───────┴─────┘
+(10 rows)
+
+', 5, 'EXECUTED'),
+	(486, 21, 0.00, 'SELECT s.sname,p.jname, pt.pname, sp.qty,s.city,p.city
+
+FROM project p 
+
+INNER JOIN spj m
+
+ON p.jno=m.jno
+
+INNER JOIN part pt
+
+ON m.pno=pt.pno
+
+INNER JOIN supplier_part sp
+
+ON pt.pno=sp.pno
+
+INNER JOIN supplier s
+
+ON sp.sno= s.sno
+
+where s.city!=p.city;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 300 │ London │ Paris  │
+│ Jones │ Console │ Nut   │ 300 │ Paris  │ Athens │
+│ Smith │ Console │ Nut   │ 300 │ London │ Athens │
+│ Smith │ Sorter  │ Screw │ 400 │ London │ Paris  │
+│ Smith │ Display │ Screw │ 400 │ London │ Rome   │
+│ Smith │ OCR     │ Screw │ 400 │ London │ Athens │
+│ Smith │ Console │ Screw │ 400 │ London │ Athens │
+│ Smith │ EDS     │ Screw │ 400 │ London │ Oslo   │
+│ Clark │ Display │ Cam   │ 400 │ London │ Rome   │
+│ Smith │ Display │ Cam   │ 100 │ London │ Rome   │
+│ Smith │ Sorter  │ Screw │ 400 │ London │ Paris  │
+│ Clark │ Display │ Screw │ 300 │ London │ Rome   │
+│ Smith │ Display │ Screw │ 200 │ London │ Rome   │
+│ Smith │ OCR     │ Cog   │ 100 │ London │ Athens │
+│ Clark │ Display │ Bolt  │ 200 │ London │ Rome   │
+│ Blake │ Display │ Bolt  │ 200 │ Paris  │ Rome   │
+│ Jones │ Display │ Bolt  │ 400 │ Paris  │ Rome   │
+│ Smith │ Display │ Bolt  │ 200 │ London │ Rome   │
+│ Clark │ Console │ Bolt  │ 200 │ London │ Athens │
+│ Blake │ Console │ Bolt  │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Bolt  │ 400 │ Paris  │ Athens │
+│ Smith │ Console │ Bolt  │ 200 │ London │ Athens │
+│ Smith │ Display │ Cog   │ 100 │ London │ Rome   │
+│ Jones │ Console │ Nut   │ 300 │ Paris  │ Athens │
+│ Smith │ Console │ Nut   │ 300 │ London │ Athens │
+│ Smith │ Console │ Screw │ 400 │ London │ Athens │
+│ Clark │ Console │ Screw │ 300 │ London │ Athens │
+│ Smith │ Console │ Screw │ 200 │ London │ Athens │
+│ Clark │ Console │ Cam   │ 400 │ London │ Athens │
+│ Smith │ Console │ Cam   │ 100 │ London │ Athens │
+│ Smith │ Console │ Cog   │ 100 │ London │ Athens │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(31 rows)
+
+', 6, 'EXECUTED'),
+	(619, 18, 0.00, 'SELECT s.supplier_name , 
+
+p.partname ,
+
+ pr.project_name ,
+
+ sp.Quantitysupplied 
+
+ FROM supplier s JOIN supplier sp on s.supplierID = sp.supplierID JOIN part p ON sp.partID = p.partID JOIN proje
+ct pr ON sp.projectID = prpr.projectID;
+ERROR:  column s.supplierid does not exist
+LINE 5:  FROM supplier s JOIN supplier sp on s.supplierID = sp.suppl...
+                                             ^
+', 5, 'EXECUTED'),
+	(445, 21, 0.00, 'SELECT p.jname,s.sname, pt.pname, sp.qty
+
+FROM project p 
+
+INNER JOIN spj m
+
+ON p.jno=m.jno
+
+INNER JOIN part pt
+
+ON m.pno=pt.pno
+
+INNER JOIN supplier_part sp
+
+ON pt.pno=sp.pno
+
+INNER JOIN supplier s
+
+ON sp.sno= s.sno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Jones │ Nut   │ 300 │
+│ Sorter  │ Smith │ Nut   │ 300 │
+│ Console │ Jones │ Nut   │ 300 │
+│ Console │ Smith │ Nut   │ 300 │
+│ Sorter  │ Smith │ Screw │ 400 │
+│ Display │ Smith │ Screw │ 400 │
+│ OCR     │ Smith │ Screw │ 400 │
+│ Console │ Smith │ Screw │ 400 │
+│ RAID    │ Smith │ Screw │ 400 │
+│ EDS     │ Smith │ Screw │ 400 │
+│ Tape    │ Smith │ Screw │ 400 │
+│ Display │ Clark │ Cam   │ 400 │
+│ Display │ Smith │ Cam   │ 100 │
+│ Sorter  │ Smith │ Screw │ 400 │
+│ Display │ Clark │ Screw │ 300 │
+│ Display │ Smith │ Screw │ 200 │
+│ OCR     │ Smith │ Cog   │ 100 │
+│ Tape    │ Smith │ Cog   │ 100 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Display │ Blake │ Bolt  │ 200 │
+│ Display │ Jones │ Bolt  │ 400 │
+│ Display │ Smith │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 200 │
+│ Console │ Blake │ Bolt  │ 200 │
+│ Console │ Jones │ Bolt  │ 400 │
+│ Console │ Smith │ Bolt  │ 200 │
+│ RAID    │ Clark │ Cam   │ 400 │
+│ RAID    │ Smith │ Cam   │ 100 │
+│ Tape    │ Clark │ Cam   │ 400 │
+│ Tape    │ Smith │ Cam   │ 100 │
+│ Display │ Smith │ Cog   │ 100 │
+│ Console │ Jones │ Nut   │ 300 │
+│ Console │ Smith │ Nut   │ 300 │
+│ Console │ Smith │ Screw │ 400 │
+│ Console │ Clark │ Screw │ 300 │
+│ Console │ Smith │ Screw │ 200 │
+│ Console │ Clark │ Cam   │ 400 │
+│ Console │ Smith │ Cam   │ 100 │
+│ Console │ Smith │ Cog   │ 100 │
+└─────────┴───────┴───────┴─────┘
+(39 rows)
+
+', 5, 'EXECUTED'),
+	(527, 27, NULL, NULL, NULL, 'STARTED'),
+	(528, 28, NULL, NULL, NULL, 'STARTED'),
+	(438, 12, 0.00, 'SELECT supplier, P_name, part_name, quantity, supplier_city, project_city from supplier where supplier_city != p
+roject_city;
+ERROR:  column "p_name" does not exist
+LINE 1: SELECT supplier, P_name, part_name, quantity, supplier_city,...
+                         ^
+HINT:  Perhaps you meant to reference the column "supplier.sname".
+', 6, 'EXECUTED'),
+	(896, 8, 0.00, 'SELECT j.jname, s.sname, p.pname, a.qty, s.city, j.city 
+
+FROM supplier s 
+
+JOIN spj a ON s.sno = a.sno 
+
+JOIN part p ON a.pno = p.pno
+
+JOIN project j ON a.jno = j.jno
+
+HAVING s.city NOT LIKE j.city;
+ERROR:  column "j.jname" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT j.jname, s.sname, p.pname, a.qty, s.city, j.city 
+               ^
+', 6, 'EXECUTED'),
+	(480, 11, 0.00, 'SELECT s.sname,j.jname,p.pname,sp.qty,s.city,p.city
+
+FROM supplier s JOIN supplier_part sp 
+
+ON s.sno=sp.sno JOIN part p 
+
+ON sp.pno=p.pno JOIN project j 
+
+
+
+WHERE s.city!=j.city;
+ERROR:  syntax error at or near "WHERE"
+LINE 5: WHERE s.city!=j.city;
+        ^
+', 6, 'EXECUTED'),
+	(861, 13, 0.00, 'select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+', 6, 'EXECUTED'),
+	(1487, 23, 0.00, 'SELECT s.sname,pj.jname 
+
+FROM supplier s INNER JOIN supplier_partsp ON s.sno=sp.sno INNER JOI
+N project pj on sp.jno=pj.jno
+
+Group BY s.sname,pj.jname HAVING COUNT(DISTINCT sp.pno)>1;
+ERROR:  relation "supplier_partsp" does not exist
+LINE 2: FROM supplier s INNER JOIN supplier_partsp ON s.sno=sp.sno I...
+                                   ^
+', 8, 'EXECUTED'),
+	(906, 27, 0.00, 'select project.jname,supplier.sname
+
+from project
+
+join supplier
+
+ON project.city=supplier.city;
+┌─────────┬───────┐
+│  jname  │ sname │
+├─────────┼───────┤
+│ Sorter  │ Blake │
+│ Sorter  │ Jones │
+│ OCR     │ Adams │
+│ Console │ Adams │
+│ RAID    │ Clark │
+│ RAID    │ Smith │
+│ Tape    │ Clark │
+│ Tape    │ Smith │
+└─────────┴───────┘
+(8 rows)
+
+', 5, 'EXECUTED'),
+	(1479, 17, 0.00, 'SELECT s.sname, j.jname 
+
+FROM supplier s JOIN 
+
+project j ON
+
+s.sno = j.jno;
+┌───────┬───────┐
+│ sname │ jname │
+├───────┼───────┤
+└───────┴───────┘
+(0 rows)
+
+', 7, 'EXECUTED'),
+	(900, 18, 0.00, 'select* from SUPPLIIER_PART;
+ERROR:  relation "suppliier_part" does not exist
+LINE 1: select* from SUPPLIIER_PART;
+                     ^
+', 6, 'EXECUTED'),
+	(517, 6, 0.00, 'SELECT j.jname, s.sname,p.pname,spp.qty FROM project p join  spj sp ON j.jno=sp.jno join supplier s ON s.sno=sp.
+sno join part p ON p.pno=sp.pno join supplier_part spp.qty=sp.qty;
+ERROR:  syntax error at or near "."
+LINE 1: ...join part p ON p.pno=sp.pno join supplier_part spp.qty=sp.qt...
+                                                             ^
+', 5, 'EXECUTED'),
+	(36, 8, 0.00, 'SELECT s.sname, p.pname, a.qty 
+
+FROM supplier s 
+
+JOIN spj a ON s.sno = a.sno 
+
+JOIN part p ON a.pno = p.pno;
+┌───────┬───────┬─────┐
+│ sname │ pname │ qty │
+├───────┼───────┼─────┤
+│ Smith │ Nut   │ 200 │
+│ Smith │ Nut   │ 700 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 200 │
+│ Jones │ Screw │ 500 │
+│ Jones │ Screw │ 600 │
+│ Jones │ Screw │ 400 │
+│ Jones │ Screw │ 800 │
+│ Jones │ Cam   │ 100 │
+│ Blake │ Screw │ 200 │
+│ Blake │ Screw │ 500 │
+│ Clark │ Cog   │ 300 │
+│ Clark │ Cog   │ 300 │
+│ Adams │ Bolt  │ 200 │
+│ Adams │ Bolt  │ 100 │
+│ Adams │ Cam   │ 500 │
+│ Adams │ Cam   │ 100 │
+│ Adams │ Cog   │ 200 │
+│ Adams │ Nut   │ 100 │
+│ Adams │ Screw │ 200 │
+│ Adams │ Screw │ 800 │
+│ Adams │ Cam   │ 400 │
+│ Adams │ Cog   │ 500 │
+└───────┴───────┴─────┘
+(24 rows)
+
+', 4, 'EXECUTED'),
+	(837, 22, 0.00, 'SELECT sname,COUNT(sp.pno) as total_part ,SUM(sp.qty) as total_quantity
+
+FROM supplier s
+
+INNER JOIN supplier_part sp
+
+ON s.sno=sp.sno
+
+GROUP BY sname;
+┌───────┬────────────┬────────────────┐
+│ sname │ total_part │ total_quantity │
+├───────┼────────────┼────────────────┤
+│ Blake │          1 │            200 │
+│ Jones │          2 │            700 │
+│ Smith │          6 │           1300 │
+│ Clark │          3 │            900 │
+└───────┴────────────┴────────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(554, 28, 0.00, 'SELECT supplier.sname,supplier_part.pno,supplier_part.qty
+
+FROM supplier 
+
+JOIN supplier_part 
+
+ON supplier.sno=supplier_part.sno;
+┌───────┬─────┬─────┐
+│ sname │ pno │ qty │
+├───────┼─────┼─────┤
+│ Smith │ P1  │ 300 │
+│ Smith │ P2  │ 200 │
+│ Smith │ P3  │ 400 │
+│ Smith │ P4  │ 200 │
+│ Smith │ P5  │ 100 │
+│ Smith │ P6  │ 100 │
+│ Jones │ P1  │ 300 │
+│ Jones │ P2  │ 400 │
+│ Blake │ P2  │ 200 │
+│ Clark │ P2  │ 200 │
+│ Clark │ P4  │ 300 │
+│ Clark │ P5  │ 400 │
+└───────┴─────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(1243, 16, 0.00, 'SELECT s.sno ,s.sname, COUNT (distinct p.pno) AS total_parts, SUM(sp.qty) AS total_quantity 
+
+FROM supplier s 
+
+JOIN spj sp 
+
+ON sp.sno=s.sno 
+
+JOIN part p 
+
+ON  sp.pno=p.pno 
+
+GROUP BY s.sno,s.sname;
+┌─────┬───────┬─────────────┬────────────────┐
+│ sno │ sname │ total_parts │ total_quantity │
+├─────┼───────┼─────────────┼────────────────┤
+│ S1  │ Smith │           1 │            900 │
+│ S2  │ Jones │           2 │           3200 │
+│ S3  │ Blake │           2 │            700 │
+│ S4  │ Clark │           1 │            600 │
+│ S5  │ Adams │           6 │           3100 │
+└─────┴───────┴─────────────┴────────────────┘
+(5 rows)
+
+', 7, 'EXECUTED'),
+	(586, 20, 0.00, 'select * from supplier_part;
+ERROR:  syntax error at or near "select"
+LINE 7: select * from supplier_part;
+        ^
+
+
+
+\d
+              List of relations
+┌────────┬───────────────┬───────┬──────────┐
+│ Schema │     Name      │ Type  │  Owner   │
+├────────┼───────────────┼───────┼──────────┤
+│ public │ part          │ table │ postgres │
+│ public │ project       │ table │ postgres │
+│ public │ spj           │ table │ postgres │
+│ public │ supplier      │ table │ postgres │
+│ public │ supplier_part │ table │ postgres │
+└────────┴───────────────┴───────┴──────────┘
+(5 rows)
+
+
+SELECT * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+SELECT j.jname,s.sname,p.pname,q.qty
+
+FROM project j
+
+JOIN spj q
+
+ON j.jno=q.jno
+
+JOIN part p
+
+ON q.pno=p.pno
+
+JOIN Supplier_part sp
+
+ON sp.pno=p.pno
+
+JOIN supplier s 
+
+ON sp.sno=s.sno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Jones │ Nut   │ 200 │
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Jones │ Nut   │ 700 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Smith │ Screw │ 400 │
+│ Display │ Smith │ Screw │ 200 │
+│ OCR     │ Smith │ Screw │ 200 │
+│ Console │ Smith │ Screw │ 500 │
+│ RAID    │ Smith │ Screw │ 600 │
+│ EDS     │ Smith │ Screw │ 400 │
+│ Tape    │ Smith │ Screw │ 800 │
+│ Display │ Clark │ Cam   │ 100 │
+│ Display │ Smith │ Cam   │ 100 │
+│ Sorter  │ Smith │ Screw │ 200 │
+│ Display │ Clark │ Screw │ 500 │
+│ Display │ Smith │ Screw │ 500 │
+│ OCR     │ Smith │ Cog   │ 300 │
+│ Tape    │ Smith │ Cog   │ 300 │
+│ Display │ Clark │ Bolt  │ 200 │
+│ Display │ Blake │ Bolt  │ 200 │
+│ Display │ Jones │ Bolt  │ 200 │
+│ Display │ Smith │ Bolt  │ 200 │
+│ Console │ Clark │ Bolt  │ 100 │
+│ Console │ Blake │ Bolt  │ 100 │
+│ Console │ Jones │ Bolt  │ 100 │
+│ Console │ Smith │ Bolt  │ 100 │
+│ RAID    │ Clark │ Cam   │ 500 │
+│ RAID    │ Smith │ Cam   │ 500 │
+│ Tape    │ Clark │ Cam   │ 100 │
+│ Tape    │ Smith │ Cam   │ 100 │
+│ Display │ Smith │ Cog   │ 200 │
+│ Console │ Jones │ Nut   │ 100 │
+│ Console │ Smith │ Nut   │ 100 │
+│ Console │ Smith │ Screw │ 200 │
+│ Console │ Clark │ Screw │ 800 │
+│ Console │ Smith │ Screw │ 800 │
+│ Console │ Clark │ Cam   │ 400 │
+│ Console │ Smith │ Cam   │ 400 │
+│ Console │ Smith │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(39 rows)
+
+', 5, 'EXECUTED'),
+	(640, 13, 0.00, 'select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+', 5, 'EXECUTED'),
+	(556, 27, 0.00, 'select supplier.sname,supplier_part.pno,supplier_part.qty
+
+from supplier
+
+join supplier_part 
+
+on supplier.sno=supplier_part.sno;
+┌───────┬─────┬─────┐
+│ sname │ pno │ qty │
+├───────┼─────┼─────┤
+│ Smith │ P1  │ 300 │
+│ Smith │ P2  │ 200 │
+│ Smith │ P3  │ 400 │
+│ Smith │ P4  │ 200 │
+│ Smith │ P5  │ 100 │
+│ Smith │ P6  │ 100 │
+│ Jones │ P1  │ 300 │
+│ Jones │ P2  │ 400 │
+│ Blake │ P2  │ 200 │
+│ Clark │ P2  │ 200 │
+│ Clark │ P4  │ 300 │
+│ Clark │ P5  │ 400 │
+└───────┴─────┴─────┘
+(12 rows)
+
+', 4, 'EXECUTED'),
+	(870, 14, 0.00, 'SELECT
+
+  supplier.sname,
+
+  COUNT(part.pno),
+
+  SUM(supplier_part.qty)
+
+FROM supplier_part
+
+JOIN supplier ON (supplier_part.sno=supplier.sno)
+
+JOIN part ON (supplier_part.pno=part.pno)
+
+GROUP BY supplier.sname;
+┌───────┬───────┬──────┐
+│ sname │ count │ sum  │
+├───────┼───────┼──────┤
+│ Blake │     1 │  200 │
+│ Jones │     2 │  700 │
+│ Smith │     6 │ 1300 │
+│ Clark │     3 │  900 │
+└───────┴───────┴──────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(934, 21, 0.00, 'SELECT s.sname, COUNT(p.pno=pj.jno) as "project pairs"
+
+FROM supplier s
+
+INNER JOIN
+', 8, 'EXECUTED'),
+	(935, 9, 0.00, 'SELECT s.sname, j.jname, p.pname, a.qty, s.city, j.city 
+
+FROM supplier s 
+
+JOIN spj a ON s.sno = a.sno 
+
+JOIN part p ON a.pno = p.pno 
+
+JOIN project j ON a.jno = j.jno;
+┌───────┬─────────┬───────┬─────┬────────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │  city  │
+├───────┼─────────┼───────┼─────┼────────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ London │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ London │ Athens │
+│ Jones │ Sorter  │ Screw │ 400 │ Paris  │ Paris  │
+│ Jones │ Display │ Screw │ 200 │ Paris  │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Paris  │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Paris  │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ Paris  │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Paris  │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ Paris  │ London │
+│ Jones │ Display │ Cam   │ 100 │ Paris  │ Rome   │
+│ Blake │ Sorter  │ Screw │ 200 │ Paris  │ Paris  │
+│ Blake │ Display │ Screw │ 500 │ Paris  │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ London │ Athens │
+│ Clark │ Tape    │ Cog   │ 300 │ London │ London │
+│ Adams │ Display │ Bolt  │ 200 │ Athens │ Rome   │
+│ Adams │ Console │ Bolt  │ 100 │ Athens │ Athens │
+│ Adams │ RAID    │ Cam   │ 500 │ Athens │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ Athens │ London │
+│ Adams │ Display │ Cog   │ 200 │ Athens │ Rome   │
+│ Adams │ Console │ Nut   │ 100 │ Athens │ Athens │
+│ Adams │ Console │ Screw │ 200 │ Athens │ Athens │
+│ Adams │ Console │ Screw │ 800 │ Athens │ Athens │
+│ Adams │ Console │ Cam   │ 400 │ Athens │ Athens │
+│ Adams │ Console │ Cog   │ 500 │ Athens │ Athens │
+└───────┴─────────┴───────┴─────┴────────┴────────┘
+(24 rows)
+
+', 6, 'EXECUTED'),
+	(1285, 15, 0.00, 'SELECT
+
+s.sname , p.pname , s.status 
+
+FROM  spj sp join supplier s on s.sno = spj.sno ;
+ERROR:  invalid reference to FROM-clause entry for table "spj"
+LINE 3: FROM  spj sp join supplier s on s.sno = spj.sno ;
+                                                ^
+HINT:  Perhaps you meant to reference the table alias "sp".
+', 8, 'EXECUTED'),
+	(1091, 12, 0.00, 'SELECT s.name, j.name, p.name,sp.QTY,s.city, as supplier_city, j.city as project_city from supplier_part sp join
+ supplier s on s.no =
+', 8, 'EXECUTED'),
+	(948, 5, 0.00, 'SELECT supplier.sname, project.jname, part.pname, 
+
+supplier_part.qty, supplier.city AS Supply_city
+
+project.city AS proj_city
+
+FROM supplier 
+
+JOIN project 
+
+ON supplier.sno = supplier_part.sno
+
+JOIN part
+
+ON supplier_part.pno = part.pno WHERE
+
+supplier.city = project.city ORDER BY supplier.sname;
+ERROR:  syntax error at or near "project"
+LINE 3: project.city AS proj_city
+        ^
+', 6, 'EXECUTED'),
+	(372, 3, 0.00, 'SELECT project.jname, supplier.sname, supplier_part.qty, part.pname 
+
+FROM supplier 
+
+JOIN project
+
+ON supplier.city = project.city
+
+JOIN supplier_part 
+
+ON supplier.sno = supplier_part.sno
+
+JOIN part 
+
+ON supplier_part.pno = part.pno
+
+ORDER BY project.jname;
+┌────────┬───────┬─────┬───────┐
+│ jname  │ sname │ qty │ pname │
+├────────┼───────┼─────┼───────┤
+│ RAID   │ Smith │ 100 │ Cog   │
+│ RAID   │ Clark │ 400 │ Cam   │
+│ RAID   │ Smith │ 100 │ Cam   │
+│ RAID   │ Smith │ 400 │ Screw │
+│ RAID   │ Smith │ 200 │ Bolt  │
+│ RAID   │ Clark │ 200 │ Bolt  │
+│ RAID   │ Smith │ 200 │ Screw │
+│ RAID   │ Clark │ 300 │ Screw │
+│ RAID   │ Smith │ 300 │ Nut   │
+│ Sorter │ Jones │ 400 │ Bolt  │
+│ Sorter │ Blake │ 200 │ Bolt  │
+│ Sorter │ Jones │ 300 │ Nut   │
+│ Tape   │ Smith │ 100 │ Cog   │
+│ Tape   │ Smith │ 200 │ Bolt  │
+│ Tape   │ Smith │ 400 │ Screw │
+│ Tape   │ Smith │ 200 │ Screw │
+│ Tape   │ Smith │ 100 │ Cam   │
+│ Tape   │ Smith │ 300 │ Nut   │
+│ Tape   │ Clark │ 200 │ Bolt  │
+│ Tape   │ Clark │ 300 │ Screw │
+│ Tape   │ Clark │ 400 │ Cam   │
+└────────┴───────┴─────┴───────┘
+(21 rows)
+
+', 5, 'EXECUTED'),
+	(873, 3, 0.00, 'SELECT supplier.sname, project.jname, part.pname, supplier_part.qty, supplier.city AS Sup_City, project.city AS 
+Proj_City
+
+FROM supplier 
+
+JOIN project
+
+ON supplier.city = project.city
+
+JOIN supplier_part 
+
+ON supplier.sno = supplier_part.sno
+
+JOIN part 
+
+ON supplier_part.pno = part.pno
+
+WHERE supplier.city = project.city
+
+ORDER BY supplier.sname;
+┌───────┬────────┬───────┬─────┬──────────┬───────────┐
+│ sname │ jname  │ pname │ qty │ sup_city │ proj_city │
+├───────┼────────┼───────┼─────┼──────────┼───────────┤
+│ Blake │ Sorter │ Bolt  │ 200 │ Paris    │ Paris     │
+│ Clark │ RAID   │ Cam   │ 400 │ London   │ London    │
+│ Clark │ RAID   │ Screw │ 300 │ London   │ London    │
+│ Clark │ Tape   │ Cam   │ 400 │ London   │ London    │
+│ Clark │ Tape   │ Bolt  │ 200 │ London   │ London    │
+│ Clark │ RAID   │ Bolt  │ 200 │ London   │ London    │
+│ Clark │ Tape   │ Screw │ 300 │ London   │ London    │
+│ Jones │ Sorter │ Bolt  │ 400 │ Paris    │ Paris     │
+│ Jones │ Sorter │ Nut   │ 300 │ Paris    │ Paris     │
+│ Smith │ RAID   │ Cam   │ 100 │ London   │ London    │
+│ Smith │ Tape   │ Nut   │ 300 │ London   │ London    │
+│ Smith │ RAID   │ Cog   │ 100 │ London   │ London    │
+│ Smith │ Tape   │ Cog   │ 100 │ London   │ London    │
+│ Smith │ RAID   │ Nut   │ 300 │ London   │ London    │
+│ Smith │ Tape   │ Bolt  │ 200 │ London   │ London    │
+│ Smith │ RAID   │ Bolt  │ 200 │ London   │ London    │
+│ Smith │ Tape   │ Screw │ 400 │ London   │ London    │
+│ Smith │ RAID   │ Screw │ 400 │ London   │ London    │
+│ Smith │ Tape   │ Screw │ 200 │ London   │ London    │
+│ Smith │ RAID   │ Screw │ 200 │ London   │ London    │
+│ Smith │ Tape   │ Cam   │ 100 │ London   │ London    │
+└───────┴────────┴───────┴─────┴──────────┴───────────┘
+(21 rows)
+
+', 6, 'EXECUTED'),
+	(688, 14, 0.00, 'SELECT
+
+  supplier.sname,
+
+  project.jname,
+
+  part.pname,
+
+  supplier_part.qty,
+
+  supplier.city,
+
+  project.city  
+
+FROM supplier_part
+
+JOIN supplier ON (supplier_part.sno=supplier.sno)
+
+JOIN part ON (supplier_part.pno=part.pno)
+
+JOIN project ON (supplier.city=project.city)
+
+WHERE supplier.city!=project.city;
+┌───────┬───────┬───────┬─────┬──────┬──────┐
+│ sname │ jname │ pname │ qty │ city │ city │
+├───────┼───────┼───────┼─────┼──────┼──────┤
+└───────┴───────┴───────┴─────┴──────┴──────┘
+(0 rows)
+
+', 6, 'EXECUTED'),
+	(1114, 6, 0.00, 'SELECT j.city, s.city,spp.qty FROM project p join  spj sp ON j.jno=sp.jno join supplier s ON s.sno=sp.sno join 
+supplier_part spp.qty=sp.qty WHERE j.city, s.city;
+ERROR:  syntax error at or near "."
+LINE 1: ... supplier s ON s.sno=sp.sno join supplier_part spp.qty=sp.qt...
+                                                             ^
+', 6, 'EXECUTED'),
+	(1127, 4, 0.00, 'SELECT s.sname, pj.jname
+
+FROM project pj 
+
+JOIN supplier s ON pj.city = s.city
+
+WHERE s.city > pj.city;
+┌───────┬───────┐
+│ sname │ jname │
+├───────┼───────┤
+└───────┴───────┘
+(0 rows)
+
+', 8, 'EXECUTED'),
+	(546, 23, 0.00, 'SELECT s.name,pj.name,pname,sp,qty,s.city AS supplier_city, pj.city 
+AS project_city FROM suppliers INNER JOIN supplier_part sp ON s.sno=sp.sno
+  INNER JOIN project pj ON sp.jno=pj.jno
+
+INNER JOIN part p on sp.pno=p.pno where s.city<>pj.city;
+ERROR:  syntax error at or near "a"
+LINE 1: SELECT * a.sname,p.name,ap.qty
+                 ^
+', 6, 'EXECUTED'),
+	(1498, 9, 0.00, 'SELECT s.sname, j.jname FROM supplier s JOIN project j ON j.jname = s.jname JOIN spj j ON ;
+ERROR:  syntax error at or near ";"
+LINE 1: ...pplier s JOIN project j ON j.jname = s.jname JOIN spj j ON ;
+                                                                      ^
+', 8, 'EXECUTED'),
+	(1501, 27, 0.00, 'select supplier.status,supplier_part.qty
+
+from supplier
+
+join supplier_part
+
+on supplier.sno=supplier_part.sno;
+┌────────┬─────┐
+│ status │ qty │
+├────────┼─────┤
+│     20 │ 300 │
+│     20 │ 200 │
+│     20 │ 400 │
+│     20 │ 200 │
+│     20 │ 100 │
+│     20 │ 100 │
+│     10 │ 300 │
+│     10 │ 400 │
+│     30 │ 200 │
+│     20 │ 200 │
+│     20 │ 300 │
+│     20 │ 400 │
+└────────┴─────┘
+(12 rows)
+
+', 7, 'EXECUTED'),
+	(1153, 17, 0.00, 'SELECT COUNT(*) FROM supplier;
+┌───────┐
+│ count │
+├───────┤
+│     5 │
+└───────┘
+(1 row)
+
+', 6, 'EXECUTED'),
+	(644, 5, 0.00, 'SELECT j.jname, s.sname, p.pname, a.qty FROM
+
+supplier s JOIN spj a ON s.sno = a.sno 
+
+JOIN part p ON a.pno = p.pno 
+
+JOIN project j ON a.jno = j.jno;
+┌─────────┬───────┬───────┬─────┐
+│  jname  │ sname │ pname │ qty │
+├─────────┼───────┼───────┼─────┤
+│ Sorter  │ Smith │ Nut   │ 200 │
+│ Console │ Smith │ Nut   │ 700 │
+│ Sorter  │ Jones │ Screw │ 400 │
+│ Display │ Jones │ Screw │ 200 │
+│ OCR     │ Jones │ Screw │ 200 │
+│ Console │ Jones │ Screw │ 500 │
+│ RAID    │ Jones │ Screw │ 600 │
+│ EDS     │ Jones │ Screw │ 400 │
+│ Tape    │ Jones │ Screw │ 800 │
+│ Display │ Jones │ Cam   │ 100 │
+│ Sorter  │ Blake │ Screw │ 200 │
+│ Display │ Blake │ Screw │ 500 │
+│ OCR     │ Clark │ Cog   │ 300 │
+│ Tape    │ Clark │ Cog   │ 300 │
+│ Display │ Adams │ Bolt  │ 200 │
+│ Console │ Adams │ Bolt  │ 100 │
+│ RAID    │ Adams │ Cam   │ 500 │
+│ Tape    │ Adams │ Cam   │ 100 │
+│ Display │ Adams │ Cog   │ 200 │
+│ Console │ Adams │ Nut   │ 100 │
+│ Console │ Adams │ Screw │ 200 │
+│ Console │ Adams │ Screw │ 800 │
+│ Console │ Adams │ Cam   │ 400 │
+│ Console │ Adams │ Cog   │ 500 │
+└─────────┴───────┴───────┴─────┘
+(24 rows)
+
+', 5, 'EXECUTED'),
+	(914, 4, 0.00, 'SELECT s.sname, COUNT(p.pno), COUNT(sp.qty) 
+
+FROM supplier_part sp 
+
+JOIN part p ON sp.pno = p.pno 
+
+JOIN supplier s ON sp.sno = s.sno
+
+GROUP BY s.sname;
+┌───────┬───────┬───────┐
+│ sname │ count │ count │
+├───────┼───────┼───────┤
+│ Blake │     1 │     1 │
+│ Jones │     2 │     2 │
+│ Smith │     6 │     6 │
+│ Clark │     3 │     3 │
+└───────┴───────┴───────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(913, 19, 0.00, 'SELECT * FROM part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+', 6, 'EXECUTED'),
+	(1514, 28, 0.00, 'SELECT * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+
+SELECT * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+SELECT * from spj;
+┌─────┬─────┬─────┬─────┐
+│ sno │ pno │ jno │ qty │
+├─────┼─────┼─────┼─────┤
+│ S1  │ P1  │ J1  │ 200 │
+│ S1  │ P1  │ J4  │ 700 │
+│ S2  │ P3  │ J1  │ 400 │
+│ S2  │ P3  │ J2  │ 200 │
+│ S2  │ P3  │ J3  │ 200 │
+│ S2  │ P3  │ J4  │ 500 │
+│ S2  │ P3  │ J5  │ 600 │
+│ S2  │ P3  │ J6  │ 400 │
+│ S2  │ P3  │ J7  │ 800 │
+│ S2  │ P5  │ J2  │ 100 │
+│ S3  │ P3  │ J1  │ 200 │
+│ S3  │ P4  │ J2  │ 500 │
+│ S4  │ P6  │ J3  │ 300 │
+│ S4  │ P6  │ J7  │ 300 │
+│ S5  │ P2  │ J2  │ 200 │
+│ S5  │ P2  │ J4  │ 100 │
+│ S5  │ P5  │ J5  │ 500 │
+│ S5  │ P5  │ J7  │ 100 │
+│ S5  │ P6  │ J2  │ 200 │
+│ S5  │ P1  │ J4  │ 100 │
+│ S5  │ P3  │ J4  │ 200 │
+│ S5  │ P4  │ J4  │ 800 │
+│ S5  │ P5  │ J4  │ 400 │
+│ S5  │ P6  │ J4  │ 500 │
+└─────┴─────┴─────┴─────┘
+(24 rows)
+
+
+SELECT * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+SELECT * from supplier_part;
+┌─────┬─────┬─────┐
+│ sno │ pno │ qty │
+├─────┼─────┼─────┤
+│ S1  │ P1  │ 300 │
+│ S1  │ P2  │ 200 │
+│ S1  │ P3  │ 400 │
+│ S1  │ P4  │ 200 │
+│ S1  │ P5  │ 100 │
+│ S1  │ P6  │ 100 │
+│ S2  │ P1  │ 300 │
+│ S2  │ P2  │ 400 │
+│ S3  │ P2  │ 200 │
+│ S4  │ P2  │ 200 │
+│ S4  │ P4  │ 300 │
+│ S4  │ P5  │ 400 │
+└─────┴─────┴─────┘
+(12 rows)
+
+
+
+
+SELECT supplier.sname,project.jname,part.pname,supplier_part.qty,supplier.city,project.city
+
+FROM spj 
+
+join project.jno=spj.jno
+
+ON supplier.sno=spj.sno
+
+ON supplier_part.sno=spj.sno
+
+ON part.pno=spj.pno;
+ERROR:  syntax error at or near "="
+LINE 3: join project.jno=spj.jno
+                        ^
+', 7, 'EXECUTED'),
+	(744, 28, 0.00, 'SELECT project.jname,supplier.sname,part.pname,supplier_part.qty,spj.jno
+
+FROM spj 
+
+JOIN project.jno=spj.jno
+
+ON supplier.sno=spj.sno
+
+ON supplier_part.sno=spj.sno
+
+ON part.pno=spj.pno;
+ERROR:  syntax error at or near "="
+LINE 3: JOIN project.jno=spj.jno
+                        ^
+', 5, 'EXECUTED'),
+	(213, 10, 0.00, 'SELECT s.sname,
+
+       j.jname,
+
+       p.pname,
+
+       spj.qty,
+
+       s.city AS Supplier_City,
+
+       j.city AS Project_City
+
+FROM spj
+
+JOIN supplier s ON s.sno = spj.sno
+
+JOIN part p ON p.pno = spj.pno
+
+JOIN project j ON j.jno = spj.jno
+
+WHERE s.city = j.city;
+┌───────┬─────────┬───────┬─────┬───────────────┬──────────────┐
+│ sname │  jname  │ pname │ qty │ supplier_city │ project_city │
+├───────┼─────────┼───────┼─────┼───────────────┼──────────────┤
+│ Jones │ Sorter  │ Screw │ 400 │ Paris         │ Paris        │
+│ Blake │ Sorter  │ Screw │ 200 │ Paris         │ Paris        │
+│ Clark │ Tape    │ Cog   │ 300 │ London        │ London       │
+│ Adams │ Console │ Bolt  │ 100 │ Athens        │ Athens       │
+│ Adams │ Console │ Nut   │ 100 │ Athens        │ Athens       │
+│ Adams │ Console │ Screw │ 200 │ Athens        │ Athens       │
+│ Adams │ Console │ Screw │ 800 │ Athens        │ Athens       │
+│ Adams │ Console │ Cam   │ 400 │ Athens        │ Athens       │
+│ Adams │ Console │ Cog   │ 500 │ Athens        │ Athens       │
+└───────┴─────────┴───────┴─────┴───────────────┴──────────────┘
+(9 rows)
+
+', 6, 'EXECUTED'),
+	(1140, 6, 0.00, 'SELECT * FROM  s.sname, COUNT(DISTINCT p.pname), COUNT(pno) FROM part p join  supplier s ON p.pno=s.pno GROUP B
+Y sname;
+ERROR:  syntax error at or near "FROM"
+LINE 1: ...ROM  s.sname, COUNT(DISTINCT p.pname), COUNT(pno) FROM part ...
+                                                             ^
+', 7, 'EXECUTED'),
+	(379, 14, 0.00, 'SELECT 
+
+  project.jname,
+
+  supplier.sname,
+
+  part.pname,
+
+  supplier_part.qty  
+
+FROM supplier_part
+
+JOIN supplier ON (supplier_part.sno=supplier.sno)
+
+JOIN part ON (supplier_part.pno=part.pno)
+
+JOIN project ON (supplier.city=project.city);
+┌────────┬───────┬───────┬─────┐
+│ jname  │ sname │ pname │ qty │
+├────────┼───────┼───────┼─────┤
+│ Tape   │ Smith │ Nut   │ 300 │
+│ RAID   │ Smith │ Nut   │ 300 │
+│ Tape   │ Smith │ Bolt  │ 200 │
+│ RAID   │ Smith │ Bolt  │ 200 │
+│ Tape   │ Smith │ Screw │ 400 │
+│ RAID   │ Smith │ Screw │ 400 │
+│ Tape   │ Smith │ Screw │ 200 │
+│ RAID   │ Smith │ Screw │ 200 │
+│ Tape   │ Smith │ Cam   │ 100 │
+│ RAID   │ Smith │ Cam   │ 100 │
+│ Tape   │ Smith │ Cog   │ 100 │
+│ RAID   │ Smith │ Cog   │ 100 │
+│ Sorter │ Jones │ Nut   │ 300 │
+│ Sorter │ Jones │ Bolt  │ 400 │
+│ Sorter │ Blake │ Bolt  │ 200 │
+│ Tape   │ Clark │ Bolt  │ 200 │
+│ RAID   │ Clark │ Bolt  │ 200 │
+│ Tape   │ Clark │ Screw │ 300 │
+│ RAID   │ Clark │ Screw │ 300 │
+│ Tape   │ Clark │ Cam   │ 400 │
+│ RAID   │ Clark │ Cam   │ 400 │
+└────────┴───────┴───────┴─────┘
+(21 rows)
+
+', 5, 'EXECUTED'),
+	(1257, 27, 0.00, '\dt;
+               List of tables
+┌────────┬───────────────┬───────┬──────────┐
+│ Schema │     Name      │ Type  │  Owner   │
+├────────┼───────────────┼───────┼──────────┤
+│ public │ part          │ table │ postgres │
+│ public │ project       │ table │ postgres │
+│ public │ spj           │ table │ postgres │
+│ public │ supplier      │ table │ postgres │
+│ public │ supplier_part │ table │ postgres │
+└────────┴───────────────┴───────┴──────────┘
+(5 rows)
+
+
+select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+select * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+
+select * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+select * from supplier_part;
+┌─────┬─────┬─────┐
+│ sno │ pno │ qty │
+├─────┼─────┼─────┤
+│ S1  │ P1  │ 300 │
+│ S1  │ P2  │ 200 │
+│ S1  │ P3  │ 400 │
+│ S1  │ P4  │ 200 │
+│ S1  │ P5  │ 100 │
+│ S1  │ P6  │ 100 │
+│ S2  │ P1  │ 300 │
+│ S2  │ P2  │ 400 │
+│ S3  │ P2  │ 200 │
+│ S4  │ P2  │ 200 │
+│ S4  │ P4  │ 300 │
+│ S4  │ P5  │ 400 │
+└─────┴─────┴─────┘
+(12 rows)
+
+
+select * from spj;
+┌─────┬─────┬─────┬─────┐
+│ sno │ pno │ jno │ qty │
+├─────┼─────┼─────┼─────┤
+│ S1  │ P1  │ J1  │ 200 │
+│ S1  │ P1  │ J4  │ 700 │
+│ S2  │ P3  │ J1  │ 400 │
+│ S2  │ P3  │ J2  │ 200 │
+│ S2  │ P3  │ J3  │ 200 │
+│ S2  │ P3  │ J4  │ 500 │
+│ S2  │ P3  │ J5  │ 600 │
+│ S2  │ P3  │ J6  │ 400 │
+│ S2  │ P3  │ J7  │ 800 │
+│ S2  │ P5  │ J2  │ 100 │
+│ S3  │ P3  │ J1  │ 200 │
+│ S3  │ P4  │ J2  │ 500 │
+│ S4  │ P6  │ J3  │ 300 │
+│ S4  │ P6  │ J7  │ 300 │
+│ S5  │ P2  │ J2  │ 200 │
+│ S5  │ P2  │ J4  │ 100 │
+│ S5  │ P5  │ J5  │ 500 │
+│ S5  │ P5  │ J7  │ 100 │
+│ S5  │ P6  │ J2  │ 200 │
+│ S5  │ P1  │ J4  │ 100 │
+│ S5  │ P3  │ J4  │ 200 │
+│ S5  │ P4  │ J4  │ 800 │
+│ S5  │ P5  │ J4  │ 400 │
+│ S5  │ P6  │ J4  │ 500 │
+└─────┴─────┴─────┴─────┘
+(24 rows)
+
+', 8, 'EXECUTED'),
+	(1205, 24, 0.00, 'SELECT s.sname,p.jname,pt.pname,sp.qty,s.city,p.city
+
+FROM project p 
+
+JOIN spj m
+
+ON p.jno=m.jno
+
+JOIN part pt 
+
+ON m.pno=pt.pno
+
+JOIN Supplier_part sp
+
+ON pt.pno=sp.pno
+
+JOIN supplier s
+
+ON sp.sno=s.sno
+
+WHERE s.city=p.city;
+┌───────┬────────┬───────┬─────┬────────┬────────┐
+│ sname │ jname  │ pname │ qty │  city  │  city  │
+├───────┼────────┼───────┼─────┼────────┼────────┤
+│ Jones │ Sorter │ Nut   │ 300 │ Paris  │ Paris  │
+│ Smith │ RAID   │ Screw │ 400 │ London │ London │
+│ Smith │ Tape   │ Screw │ 400 │ London │ London │
+│ Smith │ Tape   │ Cog   │ 100 │ London │ London │
+│ Clark │ RAID   │ Cam   │ 400 │ London │ London │
+│ Smith │ RAID   │ Cam   │ 100 │ London │ London │
+│ Clark │ Tape   │ Cam   │ 400 │ London │ London │
+│ Smith │ Tape   │ Cam   │ 100 │ London │ London │
+└───────┴────────┴───────┴─────┴────────┴────────┘
+(8 rows)
+
+', 6, 'EXECUTED'),
+	(393, 7, 0.00, 'SELECT * FROM  part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+', 6, 'EXECUTED'),
+	(1037, 15, 0.00, 'select s.sname , count(p.pno) as total_part  , count(sp.qty) as total_quantity 
+
+FROM Spj  sp join supplier s ON  s.sno = sp.sno  join part p on p.pno = sp.pno  group by s.sname ;
+┌───────┬────────────┬────────────────┐
+│ sname │ total_part │ total_quantity │
+├───────┼────────────┼────────────────┤
+│ Blake │          2 │              2 │
+│ Jones │          8 │              8 │
+│ Smith │          2 │              2 │
+│ Clark │          2 │              2 │
+│ Adams │         10 │             10 │
+└───────┴────────────┴────────────────┘
+(5 rows)
+
+', 7, 'EXECUTED'),
+	(1268, 26, 0.00, 'SELECT s.sname, p.jname , pt.pname , sp.qty,s.city,
+
+p.city
+
+FROM project p
+
+JOIN spj m 
+
+ON p.jno=m.jno 
+
+JOIN part pt 
+
+ON m.pno=pt.pno
+
+JOIN supplier_part sp
+
+ON pt.pno=sp.pno 
+
+JOIN supplier s 
+
+ON sp.sno=s.sno 
+
+WHERE s.city=p.city;
+┌───────┬────────┬───────┬─────┬────────┬────────┐
+│ sname │ jname  │ pname │ qty │  city  │  city  │
+├───────┼────────┼───────┼─────┼────────┼────────┤
+│ Jones │ Sorter │ Nut   │ 300 │ Paris  │ Paris  │
+│ Smith │ RAID   │ Screw │ 400 │ London │ London │
+│ Smith │ Tape   │ Screw │ 400 │ London │ London │
+│ Smith │ Tape   │ Cog   │ 100 │ London │ London │
+│ Clark │ RAID   │ Cam   │ 400 │ London │ London │
+│ Smith │ RAID   │ Cam   │ 100 │ London │ London │
+│ Clark │ Tape   │ Cam   │ 400 │ London │ London │
+│ Smith │ Tape   │ Cam   │ 100 │ London │ London │
+└───────┴────────┴───────┴─────┴────────┴────────┘
+(8 rows)
+
+', 6, 'EXECUTED'),
+	(593, 15, 0.00, 'SELECT s.sname , j.jname , p.pname , sp.qty , j.city FROM Spj sp join supplier s on s.sno = sp.sno join project 
+j on j.jno = sp.jno join part p on p.pno = sp.pno;
+┌───────┬─────────┬───────┬─────┬────────┐
+│ sname │  jname  │ pname │ qty │  city  │
+├───────┼─────────┼───────┼─────┼────────┤
+│ Smith │ Sorter  │ Nut   │ 200 │ Paris  │
+│ Smith │ Console │ Nut   │ 700 │ Athens │
+│ Jones │ Sorter  │ Screw │ 400 │ Paris  │
+│ Jones │ Display │ Screw │ 200 │ Rome   │
+│ Jones │ OCR     │ Screw │ 200 │ Athens │
+│ Jones │ Console │ Screw │ 500 │ Athens │
+│ Jones │ RAID    │ Screw │ 600 │ London │
+│ Jones │ EDS     │ Screw │ 400 │ Oslo   │
+│ Jones │ Tape    │ Screw │ 800 │ London │
+│ Jones │ Display │ Cam   │ 100 │ Rome   │
+│ Blake │ Sorter  │ Screw │ 200 │ Paris  │
+│ Blake │ Display │ Screw │ 500 │ Rome   │
+│ Clark │ OCR     │ Cog   │ 300 │ Athens │
+│ Clark │ Tape    │ Cog   │ 300 │ London │
+│ Adams │ Display │ Bolt  │ 200 │ Rome   │
+│ Adams │ Console │ Bolt  │ 100 │ Athens │
+│ Adams │ RAID    │ Cam   │ 500 │ London │
+│ Adams │ Tape    │ Cam   │ 100 │ London │
+│ Adams │ Display │ Cog   │ 200 │ Rome   │
+│ Adams │ Console │ Nut   │ 100 │ Athens │
+│ Adams │ Console │ Screw │ 200 │ Athens │
+│ Adams │ Console │ Screw │ 800 │ Athens │
+│ Adams │ Console │ Cam   │ 400 │ Athens │
+│ Adams │ Console │ Cog   │ 500 │ Athens │
+└───────┴─────────┴───────┴─────┴────────┘
+(24 rows)
+
+', 6, 'EXECUTED'),
+	(1169, 3, 0.00, 'select supplier.sname, 
+
+COUNT(part.pname), 
+
+SUM(supplier_part.qty)
+
+FROM supplier
+
+JOIN supplier_part
+
+ON supplier.sno = supplier_part.sno
+
+JOIN part
+
+ON supplier_part.pno = part.pno
+
+GROUP BY supplier.sname;
+┌───────┬───────┬──────┐
+│ sname │ count │ sum  │
+├───────┼───────┼──────┤
+│ Blake │     1 │  200 │
+│ Jones │     2 │  700 │
+│ Smith │     6 │ 1300 │
+│ Clark │     3 │  900 │
+└───────┴───────┴──────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(1187, 14, 0.00, 'SELECT
+
+  supplier.sno,
+
+  supplier.sname,
+
+  project.jname
+
+FROM supplier
+
+NATURAL JOIN project
+
+JOIN supplier_part ON (supplier.sno=supplier_part.sno)
+
+GROUP BY project.jname, supplier.sname, supplier.sno
+
+HAVING COUNT(project.jno) > 1;
+┌─────┬───────┬────────┐
+│ sno │ sname │ jname  │
+├─────┼───────┼────────┤
+│ S1  │ Smith │ Tape   │
+│ S1  │ Smith │ RAID   │
+│ S4  │ Clark │ RAID   │
+│ S2  │ Jones │ Sorter │
+│ S4  │ Clark │ Tape   │
+└─────┴───────┴────────┘
+(5 rows)
+
+', 8, 'EXECUTED'),
+	(1142, 11, 0.00, 'SELECT * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+select * from supplier_part;
+┌─────┬─────┬─────┐
+│ sno │ pno │ qty │
+├─────┼─────┼─────┤
+│ S1  │ P1  │ 300 │
+│ S1  │ P2  │ 200 │
+│ S1  │ P3  │ 400 │
+│ S1  │ P4  │ 200 │
+│ S1  │ P5  │ 100 │
+│ S1  │ P6  │ 100 │
+│ S2  │ P1  │ 300 │
+│ S2  │ P2  │ 400 │
+│ S3  │ P2  │ 200 │
+│ S4  │ P2  │ 200 │
+│ S4  │ P4  │ 300 │
+│ S4  │ P5  │ 400 │
+└─────┴─────┴─────┘
+(12 rows)
+
+
+select * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+
+SELECT s.sname,COUNT(p.pno),SUM(sp.qty) 
+
+FROM supplier s join supplier_part sp 
+
+ON s.sno=sp.sno join part p 
+
+ON p.pno=sp.pno
+
+GROUP BY s.sname,p.pname;
+┌───────┬───────┬─────┐
+│ sname │ count │ sum │
+├───────┼───────┼─────┤
+│ Clark │     1 │ 200 │
+│ Smith │     1 │ 100 │
+│ Jones │     1 │ 400 │
+│ Blake │     1 │ 200 │
+│ Clark │     1 │ 300 │
+│ Jones │     1 │ 300 │
+│ Smith │     1 │ 300 │
+│ Smith │     2 │ 600 │
+│ Smith │     1 │ 200 │
+│ Clark │     1 │ 400 │
+│ Smith │     1 │ 100 │
+└───────┴───────┴─────┘
+(11 rows)
+
+', 7, 'EXECUTED'),
+	(1288, 20, 0.00, 'SELECT sname, COUNT(DISTINCT pt.pno),SUM(sp.qty)
+
+FROM supplier s
+
+JOIN Supplier_part sp
+
+ON sp.sno=s.sno
+
+JOIN part pt
+
+ON pt.pno=sp.pno
+
+GROUP BY sname;
+┌───────┬───────┬──────┐
+│ sname │ count │ sum  │
+├───────┼───────┼──────┤
+│ Blake │     1 │  200 │
+│ Clark │     3 │  900 │
+│ Jones │     2 │  700 │
+│ Smith │     6 │ 1300 │
+└───────┴───────┴──────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(830, 21, 0.00, 'SELECT s.sname, COUNT(DISTINCT pt.pno) as "Different parts supplied", SUM(sp.qty) as "Total Quantity Supllied"
+
+FROM supplier s
+
+INNER JOIN supplier_part sp
+
+ON s.sno=sp.sno
+
+INNER JOIN part pt
+
+ON sp.pno=pt.pno
+
+GROUP BY sname;
+┌───────┬──────────────────────────┬─────────────────────────┐
+│ sname │ Different parts supplied │ Total Quantity Supllied │
+├───────┼──────────────────────────┼─────────────────────────┤
+│ Blake │                        1 │                     200 │
+│ Clark │                        3 │                     900 │
+│ Jones │                        2 │                     700 │
+│ Smith │                        6 │                    1300 │
+└───────┴──────────────────────────┴─────────────────────────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(1516, 28, 0.00, 'SELECT * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+
+SELECT * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+SELECT * from spj;
+┌─────┬─────┬─────┬─────┐
+│ sno │ pno │ jno │ qty │
+├─────┼─────┼─────┼─────┤
+│ S1  │ P1  │ J1  │ 200 │
+│ S1  │ P1  │ J4  │ 700 │
+│ S2  │ P3  │ J1  │ 400 │
+│ S2  │ P3  │ J2  │ 200 │
+│ S2  │ P3  │ J3  │ 200 │
+│ S2  │ P3  │ J4  │ 500 │
+│ S2  │ P3  │ J5  │ 600 │
+│ S2  │ P3  │ J6  │ 400 │
+│ S2  │ P3  │ J7  │ 800 │
+│ S2  │ P5  │ J2  │ 100 │
+│ S3  │ P3  │ J1  │ 200 │
+│ S3  │ P4  │ J2  │ 500 │
+│ S4  │ P6  │ J3  │ 300 │
+│ S4  │ P6  │ J7  │ 300 │
+│ S5  │ P2  │ J2  │ 200 │
+│ S5  │ P2  │ J4  │ 100 │
+│ S5  │ P5  │ J5  │ 500 │
+│ S5  │ P5  │ J7  │ 100 │
+│ S5  │ P6  │ J2  │ 200 │
+│ S5  │ P1  │ J4  │ 100 │
+│ S5  │ P3  │ J4  │ 200 │
+│ S5  │ P4  │ J4  │ 800 │
+│ S5  │ P5  │ J4  │ 400 │
+│ S5  │ P6  │ J4  │ 500 │
+└─────┴─────┴─────┴─────┘
+(24 rows)
+
+
+SELECT * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+SELECT * from supplier_part;
+┌─────┬─────┬─────┐
+│ sno │ pno │ qty │
+├─────┼─────┼─────┤
+│ S1  │ P1  │ 300 │
+│ S1  │ P2  │ 200 │
+│ S1  │ P3  │ 400 │
+│ S1  │ P4  │ 200 │
+│ S1  │ P5  │ 100 │
+│ S1  │ P6  │ 100 │
+│ S2  │ P1  │ 300 │
+│ S2  │ P2  │ 400 │
+│ S3  │ P2  │ 200 │
+│ S4  │ P2  │ 200 │
+│ S4  │ P4  │ 300 │
+│ S4  │ P5  │ 400 │
+└─────┴─────┴─────┘
+(12 rows)
+
+
+
+
+SELECT supplier.sname,project.jname,part.pname,supplier_part.qty,supplier.city,project.city
+
+FROM spj 
+
+join project.jno=spj.jno
+
+ON supplier.sno=spj.sno
+
+ON supplier_part.sno=spj.sno
+
+ON part.pno=spj.pno;
+ERROR:  syntax error at or near "="
+LINE 3: join project.jno=spj.jno
+                        ^
+', 8, 'EXECUTED'),
+	(1289, 24, 0.00, 'SELECT sname,COUNT(DISTINCT pt.pno),SUM(sp.qty)
+
+FROM supplier s
+
+JOIN Supplier_part sp
+
+ON sp.sno=s.sno
+
+JOIN part pt 
+
+ON pt.pno=sp.pno
+
+GROUP BY sname;
+┌───────┬───────┬──────┐
+│ sname │ count │ sum  │
+├───────┼───────┼──────┤
+│ Blake │     1 │  200 │
+│ Clark │     3 │  900 │
+│ Jones │     2 │  700 │
+│ Smith │     6 │ 1300 │
+└───────┴───────┴──────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(1041, 9, 0.00, 'SELECT s.sname, j.jname FROM supplier s JOIN project j ON j.jname = s.jname JOIN spj j ON ;
+ERROR:  syntax error at or near ";"
+LINE 1: ...pplier s JOIN project j ON j.jname = s.jname JOIN spj j ON ;
+                                                                      ^
+', 7, 'EXECUTED'),
+	(1358, 26, 0.00, 'SELECT sname , COUNT(DISTINCT pt.pno) , SUM(sp.qty) 
+
+FROM supplier s 
+
+JOIN Supplier_part sp 
+
+ON sp.sno=s.sno 
+
+JOIN part pt 
+
+ON pt.pno=sp.pno 
+
+GROUP BY sname;
+┌───────┬───────┬──────┐
+│ sname │ count │ sum  │
+├───────┼───────┼──────┤
+│ Blake │     1 │  200 │
+│ Clark │     3 │  900 │
+│ Jones │     2 │  700 │
+│ Smith │     6 │ 1300 │
+└───────┴───────┴──────┘
+(4 rows)
+
+', 7, 'EXECUTED'),
+	(1287, 28, 0.00, 'SELECT * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+
+SELECT * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+SELECT * from spj;
+┌─────┬─────┬─────┬─────┐
+│ sno │ pno │ jno │ qty │
+├─────┼─────┼─────┼─────┤
+│ S1  │ P1  │ J1  │ 200 │
+│ S1  │ P1  │ J4  │ 700 │
+│ S2  │ P3  │ J1  │ 400 │
+│ S2  │ P3  │ J2  │ 200 │
+│ S2  │ P3  │ J3  │ 200 │
+│ S2  │ P3  │ J4  │ 500 │
+│ S2  │ P3  │ J5  │ 600 │
+│ S2  │ P3  │ J6  │ 400 │
+│ S2  │ P3  │ J7  │ 800 │
+│ S2  │ P5  │ J2  │ 100 │
+│ S3  │ P3  │ J1  │ 200 │
+│ S3  │ P4  │ J2  │ 500 │
+│ S4  │ P6  │ J3  │ 300 │
+│ S4  │ P6  │ J7  │ 300 │
+│ S5  │ P2  │ J2  │ 200 │
+│ S5  │ P2  │ J4  │ 100 │
+│ S5  │ P5  │ J5  │ 500 │
+│ S5  │ P5  │ J7  │ 100 │
+│ S5  │ P6  │ J2  │ 200 │
+│ S5  │ P1  │ J4  │ 100 │
+│ S5  │ P3  │ J4  │ 200 │
+│ S5  │ P4  │ J4  │ 800 │
+│ S5  │ P5  │ J4  │ 400 │
+│ S5  │ P6  │ J4  │ 500 │
+└─────┴─────┴─────┴─────┘
+(24 rows)
+
+
+SELECT * from supplier;
+┌─────┬───────┬────────┬────────┐
+│ sno │ sname │ status │  city  │
+├─────┼───────┼────────┼────────┤
+│ S1  │ Smith │     20 │ London │
+│ S2  │ Jones │     10 │ Paris  │
+│ S3  │ Blake │     30 │ Paris  │
+│ S4  │ Clark │     20 │ London │
+│ S5  │ Adams │     30 │ Athens │
+└─────┴───────┴────────┴────────┘
+(5 rows)
+
+
+SELECT * from supplier_part;
+┌─────┬─────┬─────┐
+│ sno │ pno │ qty │
+├─────┼─────┼─────┤
+│ S1  │ P1  │ 300 │
+│ S1  │ P2  │ 200 │
+│ S1  │ P3  │ 400 │
+│ S1  │ P4  │ 200 │
+│ S1  │ P5  │ 100 │
+│ S1  │ P6  │ 100 │
+│ S2  │ P1  │ 300 │
+│ S2  │ P2  │ 400 │
+│ S3  │ P2  │ 200 │
+│ S4  │ P2  │ 200 │
+│ S4  │ P4  │ 300 │
+│ S4  │ P5  │ 400 │
+└─────┴─────┴─────┘
+(12 rows)
+
+
+
+
+SELECT supplier.sname,project.jname,part.pname,supplier_part.qty,supplier.city,project.city
+
+FROM spj 
+
+join project.jno=spj.jno
+
+ON supplier.sno=spj.sno
+
+ON supplier_part.sno=spj.sno
+
+ON part.pno=spj.pno;
+ERROR:  syntax error at or near "="
+LINE 3: join project.jno=spj.jno
+                        ^
+', 6, 'EXECUTED'),
+	(1344, 11, 0.00, 'SELECT * from supplier;
+ERROR:  syntax error at or near "*"
+LINE 2: SELECT * from supplier;
+               ^
+
+select * from part;
+┌─────┬───────┬───────┬────────┬────────┐
+│ pno │ pname │ color │ weight │  city  │
+├─────┼───────┼───────┼────────┼────────┤
+│ P1  │ Nut   │ Red   │   12.0 │ London │
+│ P2  │ Bolt  │ Green │   17.0 │ Paris  │
+│ P3  │ Screw │ Blue  │   17.0 │ Oslo   │
+│ P4  │ Screw │ Red   │   14.0 │ London │
+│ P5  │ Cam   │ Blue  │   12.0 │ Paris  │
+│ P6  │ Cog   │ Red   │   19.0 │ London │
+└─────┴───────┴───────┴────────┴────────┘
+(6 rows)
+
+
+select * from project;
+┌─────┬─────────┬────────┐
+│ jno │  jname  │  city  │
+├─────┼─────────┼────────┤
+│ J1  │ Sorter  │ Paris  │
+│ J2  │ Display │ Rome   │
+│ J3  │ OCR     │ Athens │
+│ J4  │ Console │ Athens │
+│ J5  │ RAID    │ London │
+│ J6  │ EDS     │ Oslo   │
+│ J7  │ Tape    │ London │
+└─────┴─────────┴────────┘
+(7 rows)
+
+
+select * from spj;
+┌─────┬─────┬─────┬─────┐
+│ sno │ pno │ jno │ qty │
+├─────┼─────┼─────┼─────┤
+│ S1  │ P1  │ J1  │ 200 │
+│ S1  │ P1  │ J4  │ 700 │
+│ S2  │ P3  │ J1  │ 400 │
+│ S2  │ P3  │ J2  │ 200 │
+│ S2  │ P3  │ J3  │ 200 │
+│ S2  │ P3  │ J4  │ 500 │
+│ S2  │ P3  │ J5  │ 600 │
+│ S2  │ P3  │ J6  │ 400 │
+│ S2  │ P3  │ J7  │ 800 │
+│ S2  │ P5  │ J2  │ 100 │
+│ S3  │ P3  │ J1  │ 200 │
+│ S3  │ P4  │ J2  │ 500 │
+│ S4  │ P6  │ J3  │ 300 │
+│ S4  │ P6  │ J7  │ 300 │
+│ S5  │ P2  │ J2  │ 200 │
+│ S5  │ P2  │ J4  │ 100 │
+│ S5  │ P5  │ J5  │ 500 │
+│ S5  │ P5  │ J7  │ 100 │
+│ S5  │ P6  │ J2  │ 200 │
+│ S5  │ P1  │ J4  │ 100 │
+│ S5  │ P3  │ J4  │ 200 │
+│ S5  │ P4  │ J4  │ 800 │
+│ S5  │ P5  │ J4  │ 400 │
+│ S5  │ P6  │ J4  │ 500 │
+└─────┴─────┴─────┴─────┘
+(24 rows)
+
+
+
+
+SELECT s.sname
 ', 8, 'EXECUTED');
 
 
@@ -2043,7 +7203,9 @@ INSERT INTO public.student VALUES
 	('2512506', 'Ushna Waseem Ul Haq Mirza'),
 	('2512507', 'Vaneesh Kumar'),
 	('2512508', 'Versha Lohana'),
-	('2512509', 'Vikash Kumar');
+	('2512509', 'Vikash Kumar'),
+	('2312410', 'Abdul Rehman'),
+	('2312412', 'Hamza Khan');
 
 
 --
@@ -2058,7 +7220,7 @@ INSERT INTO public.test VALUES
 -- Name: attempt_attid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.attempt_attid_seq', 2, true);
+SELECT pg_catalog.setval('public.attempt_attid_seq', 28, true);
 
 
 --
@@ -2079,7 +7241,7 @@ SELECT pg_catalog.setval('public.query_qid_seq', 8, true);
 -- Name: result_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.result_rid_seq', 9, true);
+SELECT pg_catalog.setval('public.result_rid_seq', 1538, true);
 
 
 --
@@ -2197,5 +7359,5 @@ ALTER TABLE ONLY public.result
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Pu9ZHAdjxpDzjeVs6viTRafOU64xnKShjzCrCo4Fu6s45VgC66ysR8mWeOZluwt
+\unrestrict J2YGJ74ZXIQWlKsEUtwbUQGpuuCXagfati3COyYyftXXEMAcdW2D2XEX4DF0TsA
 
