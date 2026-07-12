@@ -15,7 +15,7 @@ const __dirname = dirname(__filename);
 
 import { db } from './db.js';
 
-// Ensure the schema is updated with the new columns and unique constraints
+// Ensure the schema is updated with the new columns and unique constraints (triggered schema update)
 (async () => {
     const runMigration = async (queryStr) => {
         try {
@@ -352,7 +352,7 @@ wss.on('connection', (ws) => {
     console.log('Client connected');
 
     // Create terminal with larger initial size - spawns a pg18-client container
-    const ptyProcess = pty.spawn('docker', ['run', '-it', '--rm', '--add-host=host.docker.internal:host-gateway', '-e', 'PGPASSWORD=Po@995886', 'pg18-client', 'psql', '-h', 'host.docker.internal', '-U', 'postgres', '-d', 'spj', '-P', 'pager=off'], {
+    const ptyProcess = pty.spawn('docker', ['run', '-it', '--rm', '--add-host=host.docker.internal:host-gateway', '-e', 'PGPASSWORD=Aa20195@1', 'pg18-client', 'psql', '-h', 'host.docker.internal', '-U', 'postgres', '-d', 'spj', '-P', 'pager=off'], {
         name: 'xterm-256color',
         cols: 120,
         rows: 40,
@@ -360,7 +360,7 @@ wss.on('connection', (ws) => {
         env: {
             ...process.env,
             TERM: 'xterm-256color',
-            PGPASSWORD: 'Po@995886'
+            PGPASSWORD: 'Aa20195@1'
         }
     });
 
